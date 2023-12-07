@@ -1,9 +1,124 @@
-import React from 'react'
+import React from "react";
+import './components/css/Contact.css'
+const Contact = (props) => {
 
-const Contact = () => {
+  const contactBanner = () => {
+    if (window.innerWidth < 500) {
+      return "./images/contactUs_phone_bg.png";
+    } else {
+      return "./images/contactUs_bg.png";
+    }
+  };
+  const contactformButton = () => {
+    if (props.mode === "light") {
+      return {
+        
+      };
+    } else {
+      return {
+        color:"white"
+      };
+    }
+  };
+
   return (
-    <div>Contact</div>
-  )
-}
+    <>
+      <div className={`text-${props.mode === "light" ? "dark" : "light"}`}>
 
-export default Contact
+        <div id="contactPageBanner">
+          <img
+            src={contactBanner()}
+            width="100%"
+            alt=""
+            id="laptopContactBanner"
+          />
+        </div>
+
+        <div className="row m-5">
+          <div id="contactDetails" className="col-md-6 py-5 px-2">
+            <span>GET IN TOUCH</span>
+            <h2>Visit our agency location or contact us today.</h2>
+            <h5>Head Office</h5>
+            <ul>
+              <li>
+                <i className="fa fa-map"></i>
+                <span>MPSTME, Vile Parle (W), Mumbai</span>
+              </li>
+              <li>
+                <i className="fa fa-envelope"></i>
+                <span>aadityarmall@gmail.com</span>
+              </li>
+              <li>
+                <i className="fa fa-phone"></i>
+                <span>9326430750</span>
+              </li>
+              <li>
+                <i className="fa fa-clock-o"></i>
+                <span>9:00 - 20:00 Monday- Friday</span>
+              </li>
+            </ul>
+          </div>
+
+          <div id="map" className="col-md-6 px-2">
+            <iframe title="myFrame"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3769.9449786834048!2d72.83544851437728!3d19.110069555867852!2m
+            3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c9b888ae67fd%3A0xe0b9538d623ac5d2!2sMukesh%20Patel%20School%20Of%20Technolo
+            gy%20Management%20%26%20Engineering!5e0!3m2!1sen!2sin!4v1667165494830!5m2!1sen!2sin"
+              width="100%"
+              height="100%"
+              loading="lazy"
+            ></iframe>
+          </div>
+        </div>
+
+        <div id="contactTable" className="container mb-4">
+          <div className="row m-3 p-4">
+            <div className="col-md-12 p-0">
+              <span>LEAVE A MESSAGE</span>
+              <h2>We love your feedbacks!</h2>
+            </div>
+            <div className="col p-0 mt-4">
+              <div className="row">
+                <div className="col-md-8">
+                  <form action="" id="contactForm" className="adjust-flex">
+                    <input type="text" placeholder="Your Name" id="" required />
+                    <input type="email" placeholder="Email Id" id="" required />
+                    <input type="text" placeholder="Subject" />
+                    <textarea
+                      name=""
+                      id=""
+                      cols="30"
+                      rows="10"
+                      placeholder="Your Message"
+                      required
+                    ></textarea>
+                    <button value="submit" style={contactformButton()}>SUBMIT</button>
+                  </form>
+                </div>
+                <div className="col-md-4">
+                  <div className="adjust-flex">
+                    <div className="people-details">
+                      <img
+                        src="../images/aaditya_profile.jpeg"
+                        alt="aadityarmall"
+                      />
+                      <p>
+                        <span>Name :</span> Aaditya Mall <br />{" "}
+                        <span>Roll Number :</span> C002
+                        <br />
+                        <span>Phone :</span> 9326430750 <br />
+                        <span>Email :</span> aadityarmall@gmail.com
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default Contact;

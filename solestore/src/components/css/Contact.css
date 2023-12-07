@@ -1,0 +1,81 @@
+#contactDetails h1{
+	font-weight: bolder;
+}
+
+#contactDetails h5{
+	font-weight: bolder;
+	margin-top: 20px;
+}
+
+#contactDetails li{
+	list-style: none;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0px;
+}
+
+#contactDetails i{
+	padding-right: 10px;
+}
+
+#contactDetails ul{
+	padding-left: 0px;
+	margin-top: -0.5rem;
+}
+
+#contactTable{
+	border: 2px solid #899194;
+  width: 100%;
+}
+
+.adjust-flex{
+  display: flex;
+  flex-direction: column;
+}
+
+
+#contactForm input , #contactForm textarea{
+  width: 100%;
+  padding: 15px 15px;
+  outline: none;
+  margin-bottom: 20px;
+  border: 1px solid #899194;
+}
+
+#contactForm button{
+  width: 100%;
+  padding: 10px 10px;
+  outline: none;
+  margin-bottom: 20px;
+  border: 1px solid #899194;
+  background-color: transparent;
+  transition: 0.3s ease-in-out;
+  font-weight: bolder;
+}
+
+#contactForm button:hover{
+  background-color: #899194;
+  font-weight: bolder;
+  color: white;
+}
+
+.people-details{
+  display: flex;
+  justify-content:space-evenly;
+  border: 2px solid #899194;
+  padding: 10px;
+  align-items: center;
+	flex-wrap: wrap;
+	vertical-align: middle;
+}
+
+.people-details img{
+	width: 17vw;
+  max-width: 175px;
+  border-radius: 50%;
+  min-width: 100px;
+}
+
+.people-details p{
+	margin-bottom: 0px;
+}

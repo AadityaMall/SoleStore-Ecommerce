@@ -43,7 +43,7 @@ function App() {
           <Route path='/about' element={<About mode = {mode}/>} />
           <Route path='/user' element={<User/>} />
           <Route path='/shop' element={<Shop/>} />
-          <Route path='/contact' element={<Contact/>} />
+          <Route path='/contact' element={<Contact mode = {mode}  />} />
           <Route path='/cart' element={<Cart/>} />
           <Route path='/wishlist' element={<Wishlist/>} />
           <Route path='/*' element={<Error404/>} />
