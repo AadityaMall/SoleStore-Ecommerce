@@ -24,7 +24,7 @@ function App() {
   const toggleMode = () => {
     if (mode==='light'){
       setMode('dark');
-      document.body.style.backgroundColor = 'gray';
+      document.body.style.backgroundColor = 'rgb(58, 56, 56)';
     }
     else{
       setMode('light');
@@ -40,7 +40,7 @@ function App() {
           <Route path='/' element={<Home/>} />
           <Route path='' element={<Home/>} /> 
           <Route path='/home' element={<Home/>} />
-          <Route path='/about' element={<About/>} />
+          <Route path='/about' element={<About mode = {mode}/>} />
           <Route path='/user' element={<User/>} />
           <Route path='/shop' element={<Shop/>} />
           <Route path='/contact' element={<Contact/>} />

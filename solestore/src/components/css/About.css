@@ -1,0 +1,60 @@
+.align-img{
+    display: flex;
+    align-items: center;
+}
+
+.adjust-padding{
+    padding: 0px;
+}
+
+.adjust-img{
+    width: 100%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.prof-img{
+    border-radius: 50%;
+    max-width: 15vw;
+    min-width: 200px;
+}
+
+.about-logo{
+    max-width: 17vw;
+    min-width: 200px;
+}
+
+
+#mainContentHeader{
+    text-align: center;
+    padding: 30px 0px;
+}
+
+.align-data{
+    align-items: center;
+}
+
+.align-img{
+    text-align: center;
+}
+
+.format-socials-icons a{
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.format-socials-icons a:hover{
+    font-weight: bolder;
+}
+
+.format-hr{
+    width: 60%;
+    margin-left: 20%;
+}
+
+@media screen and (max-width: 500px){
+    .creatorMainBox{
+        text-align: center;
+    }
+}
