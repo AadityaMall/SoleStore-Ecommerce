@@ -1,5 +1,4 @@
 import { useState } from 'react';
-
 import './components/css/App.css';
 import Navbar from './components/Navbar';
 import User from './User.js'
@@ -16,6 +15,7 @@ import {
   Route,
   Routes
 } from "react-router-dom";
+import Footer from './components/Footer.js';
 
 function App() {
 
@@ -48,6 +48,7 @@ function App() {
           <Route path='/wishlist' element={<Wishlist/>} />
           <Route path='/*' element={<Error404/>} />
         </Routes>
+        <Footer mode = {mode}/>
       </Router>
       
     </>
