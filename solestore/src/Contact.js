@@ -80,12 +80,12 @@ const Contact = (props) => {
             <div className="col p-0 mt-4">
               <div className="row">
                 <div className="col-md-8">
-                  <form action="" id="contactForm" className="adjust-flex">
-                    <input type="text" placeholder="Your Name" id="" required />
-                    <input type="email" placeholder="Email Id" id="" required />
-                    <input type="text" placeholder="Subject" />
+                  <form action="https://formspree.io/f/xvojerbo" id="contactForm" className="adjust-flex" method="POST">
+                    <input type="text" placeholder="Your Name" id="" required autofill="off" name="Name"/>
+                    <input type="email" placeholder="Email Id" id="" required autofill="off" name="Email"/>
+                    <input type="text" placeholder="Subject" name="Subject"/>
                     <textarea
-                      name=""
+                      name="message"
                       id=""
                       cols="30"
                       rows="10"
