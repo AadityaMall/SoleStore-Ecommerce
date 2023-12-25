@@ -4,6 +4,9 @@ const asyncError = require('../middleware/asyncError');
 const ApiFeatures = require('../utils/apiFeatures');
 //Create Product -- Admin only
 exports.createProduct = asyncError( async (req,res,next) => {
+
+    req.body.user = req.user.id
+
     const product =  await Product.create(req.body);
     res.status(201).json({
         success:true,
@@ -15,7 +18,7 @@ exports.createProduct = asyncError( async (req,res,next) => {
 exports.getAllProducts = asyncError(async (req,res) => {
 
     const prodCount = await Product.countDocuments();
-    const resultPerPge = 10;
+    const resultPerPge = 15;
     const apiFeature = new ApiFeatures(Product.find(),req.query)
     .search()
     .filter()
