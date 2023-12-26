@@ -37,14 +37,13 @@ exports.loginUser = asyncError(async (req, res, next) => {
   }
 
   const isPasswordMatched = user.comparePassword(password);
-  
-  isPasswordMatched.then(function(result){
+
+  isPasswordMatched.then(function (result) {
     if (!result) {
       return next(new ErrorHandler("Invalid Email or Password", 401));
     }
     sendToken(user, 200, res);
-  })
-
+  });
 });
 
 //Logout User -->
@@ -114,18 +113,72 @@ exports.resetPassword = asyncError(async (req, res, next) => {
   });
 
   if (!user) {
-    return next(new ErrorHandler("Reset Password Token invalid or has been expired", 400));
+    return next(
+      new ErrorHandler("Reset Password Token invalid or has been expired", 400)
+    );
   }
 
-  if(req.body.password !== req.body.confirmPassword){
+  if (req.body.password !== req.body.confirmPassword) {
     return next(new ErrorHandler("Passwords dont match", 400));
   }
 
-  user.password = req.body.password ;
+  user.password = req.body.password;
   user.resetPasswordToken = undefined;
   user.resetPasswordExpire = undefined;
 
   await user.save();
 
-  sendToken(user,201,res);
+  sendToken(user, 201, res);
+});
+
+// Get user Details
+
+exports.getUserDetail = asyncError(async (req, res, next) => {
+  const user = await User.findById(req.user.id);
+  res.status(200).json({
+    success: true,
+    user,
+  });
+});
+
+//Update User Password
+exports.updatePassword = asyncError(async (req, res, next) => {
+  const user = await User.findById(req.user.id).select("+password");
+
+  const isPasswordMatched = user.comparePassword(req.body.oldPassword);
+
+  isPasswordMatched.then(async function (result) {
+    if (!result) {
+      return next(new ErrorHandler("old password is not correct", 400));
+    }
+    if (req.body.newPassword !== req.body.confirmPassword) {
+      return next(new ErrorHandler("Password Doesnt Match", 400));
+    }
+
+    user.password = req.body.newPassword;
+
+    await user.save();
+
+    sendToken(user, 200, res);
+  });
+});
+
+// Update user Profile
+exports.updateProfile = asyncError(async (req, res, next) => {
+  const newUserData = {
+    name: req.body.name,
+    email: req.body.email,
+  };
+
+  //Will add cloudinary avatar later
+
+  const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
+    new: true,
+    runValidators: true,
+    userFindAndModify: false,
+  });
+
+  res.status(200).json({
+    success: true,
+  });
 });
