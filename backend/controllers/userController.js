@@ -182,3 +182,65 @@ exports.updateProfile = asyncError(async (req, res, next) => {
     success: true,
   });
 });
+
+exports.getAllUser = asyncError(async (req, res, next) => {
+  const users = await User.find();
+  res.status(200).json({
+    success: true,
+    users,
+  });
+});
+
+//Admin single user Details
+exports.getSingleDetails = asyncError(async (req, res, next) => {
+  const user = await User.findById(req.params.id);
+
+  if (!user) {
+    return next(
+      new ErrorHandler(`User does not exist with id: ${req.params.id}`)
+    );
+  }
+
+  res.status(200).json({
+    success: true,
+    user,
+  });
+});
+
+
+//Updating user Role -- Admin
+exports.updateUserRole = asyncError(async (req, res, next) => {
+  const newUserData = {
+    name: req.body.name,
+    email: req.body.email,
+    role: req.body.role,
+  };
+
+  const user = await User.findByIdAndUpdate(req.params.id, newUserData, {
+    new: true,
+    runValidators: true,
+    userFindAndModify: false,
+  });
+
+  res.status(200).json({
+    success: true,
+  });
+});
+
+//Deleting USer profile -- Admin
+exports.deleteUser = asyncError(async (req, res, next) => {
+
+  const user = await User.findById(req.params.id);
+
+  if (!user) {
+    return next(
+      new ErrorHandler(`User does not exist with id: ${req.params.id}`)
+    );
+  }
+
+  await user.deleteOne();
+
+  res.status(200).json({
+    success: true,
+  });
+});
