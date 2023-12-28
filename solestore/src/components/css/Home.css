@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Alata&display=swap');
+
+.category-shop-button-dark:hover{
+	box-shadow: 0px 5px 10px black;
+	border-radius: 50%;
+}
+.category-shop-button-light:hover{
+	box-shadow: 0px 5px 10px white;
+	border-radius: 50%;
+}
+#shopByCategoryHead{
+	font-family: 'Alata', sans-serif;
+}
+
+.best-sellers{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}

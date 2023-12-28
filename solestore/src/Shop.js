@@ -1,9 +1,12 @@
-import React from 'react'
-
+import React from "react";
+import { useEffect } from "react";
 const Shop = () => {
-  return (
-    <div>Shop</div>
-  )
-}
+  //every time page loads, scroll to top
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  });
 
-export default Shop
+  return <div>Shop</div>;
+};
+
+export default Shop;
