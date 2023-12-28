@@ -1,22 +1,16 @@
-.prod-box-dark span,.prod-box-light span{
-    text-decoration: none;
-    color: rgb(53, 50, 50);
-    font-weight: 600;
-    font-size: 17px;
-}
-.prod-box-dark .product-name,.prod-box-light .product-name{
+.prod-name{
     text-decoration: none;
     font-weight: 700;
-    font-size: 20px;
+    font-size: 18px;
 }
-.prod-box-dark .prod-price,.prod-box-light .prod-price{
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 20px;
+.col-light{
+    color: black;
+}
+.col-dark{
+    color: white;
 }
 
-
-.prod-box-dark{
+.prod-box{
     color: transparent;
     max-width: 350px;
     width: 350px;
@@ -28,40 +22,21 @@
     align-items: center;
     margin: 20px;
     transition: .3s ease-in-out;
-    box-shadow: 0px 5px 10px black;
 }
-.prod-box-dark img{
+.prod-box img{
     max-width: 330px ;
     margin-bottom: 10px;
 }
-.prod-box-dark:hover{
+.prod-box:hover{
     cursor: pointer;
     scale: 1.1;
 }
-
-.prod-box-light{
-    color: transparent;
-    max-width: 350px;
-    width: 350px;
-    box-shadow: 0px 5px 10px white;
-    padding: 10px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    margin: 20px;
-    transition: .3s ease-in-out;
+.prod-boxShadow-light{
+    box-shadow: 0px 5px 10px rgb(255, 255, 255);
 }
-.prod-box-light img{
-    max-width: 330px ;
-    margin-bottom: 10px;
+.prod-boxShadow-dark{
+    box-shadow: 0px 5px 10px rgb(0, 0, 0);
 }
-.prod-box-light:hover{
-    cursor: pointer;
-    scale: 1.1;
-}
-
 .rating-review-prodBox{
     display: flex;
     align-items: center;

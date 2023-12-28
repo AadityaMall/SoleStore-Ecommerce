@@ -1,24 +1,30 @@
 import React from "react";
 import { useEffect } from "react";
-import './Layout/css/Home.css'
-import Product from "./Layout/Product.js"
+import "./Layout/css/Home.css";
+import Product from "./Layout/Product.js";
 import { Link } from "react-router-dom";
+import MetaData from "./Layout/MetaData.js";
+import { getProduct } from "../actions/productAction.js";
+import { useSelector, useDispatch } from "react-redux";
 
 const Home = (props) => {
+  const dispatch = useDispatch();
+  const { loading, error, products, productsCount } = useSelector(
+    (state) => state.products
+  );
+  useEffect(() => {
+    dispatch(getProduct());
+  }, [dispatch]);
+
   //every time page loads, scroll to top
   useEffect(() => {
     window.scrollTo(0, 0);
   });
-  
-  const product = {
-    name:"Adidas Air Force 1",
-    price:"₹10000",
-    _id:"Prod Id",
-    images:[{url:"https://i.ibb.co/VqHSSvH/image1.jpg"}]
-  };
 
   return (
     <>
+      <MetaData title="SoleStore : Home" />
+
       {/* Carusel Code Start */}
       <div id="homeCarousel" className="carousel slide" data-bs-ride="carousel">
         <div className="carousel-indicators">
@@ -113,25 +119,31 @@ const Home = (props) => {
             <h1 id="shopByCategoryHead">Shop By Category</h1>
           </div>
           <div className="row text-center mb-5 mt-3">
-            <Link className="col-md-4 mb-5" >
+            <Link className="col-md-4 mb-5">
               <img
                 src="../images/sneakers_circle.png"
                 alt=""
-                className={`images category-shop-button-${props.mode === "light" ? "dark" : "light"}`}
+                className={`images category-shop-button-${
+                  props.mode === "light" ? "dark" : "light"
+                }`}
               />
             </Link>
-            <Link className="col-md-4 mb-5" >
+            <Link className="col-md-4 mb-5">
               <img
                 src="../images/formal_circle.png"
                 alt=""
-                className={`images category-shop-button-${props.mode === "light" ? "dark" : "light"}`}
+                className={`images category-shop-button-${
+                  props.mode === "light" ? "dark" : "light"
+                }`}
               />
             </Link>
-            <Link className="col-md-4 mb-5" >
+            <Link className="col-md-4 mb-5">
               <img
                 src="../images/sports_circle.png"
                 alt=""
-                className={`images category-shop-button-${props.mode === "light" ? "dark" : "light"}`}
+                className={`images category-shop-button-${
+                  props.mode === "light" ? "dark" : "light"
+                }`}
               />
             </Link>
           </div>
@@ -141,11 +153,15 @@ const Home = (props) => {
               <h1 id="bestSellingProductsHead">Our Featured Products!</h1>
             </div>
           </div>
+
           <div className="best-sellers" id="bestSeller">
-            <Product product = {product} modeProd = {props.mode}/>
-            <Product product = {product} modeProd = {props.mode}/>
-            <Product product = {product} modeProd = {props.mode}/>
-            
+            {products &&
+              products.slice(0,3).map((product) => (
+                <Product
+                  product={product}
+                  modeProd={props.mode}
+                />
+              ))}
           </div>
         </div>
       </div>
