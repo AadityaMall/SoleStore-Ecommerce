@@ -1,5 +1,5 @@
 import React from "react";
-import "./components/css/About.css";
+import "./Layout/css/About.css";
 const About = (props) => {
   const darkLogo = "./images/darkmode_logo.png";
   const lightLogo = "./images/lightmode_logo.png";

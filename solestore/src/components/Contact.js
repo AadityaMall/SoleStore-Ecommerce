@@ -1,5 +1,5 @@
 import React from "react";
-import './components/css/Contact.css'
+import "./Layout/css/Contact.css";
 const Contact = (props) => {
 
   const contactBanner = () => {

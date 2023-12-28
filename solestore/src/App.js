@@ -1,17 +1,17 @@
 import {useState } from "react";
-import "./components/css/App.css";
-import Navbar from "./components/Navbar";
-import User from "./User.js";
-import About from "./About.js";
-import Home from "./Home.js";
-import Shop from "./Shop.js";
-import Contact from "./Contact.js";
-import Cart from "./Cart.js";
-import Wishlist from "./Wishlist.js";
-import Error404 from "./Error404.js";
+import "./components/Layout/css/App.css";
+import Navbar from "./components/Layout/Navbar.js";
+import User from "./components/User.js";
+import About from "./components/About.js";
+import Home from "./components/Home.js";
+import Shop from "./components/Shop.js";
+import Contact from "./components/Contact.js";
+import Cart from "./components/Cart.js";
+import Wishlist from "./components/Wishlist.js";
+import Error404 from "./components/Error404.js";
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Footer from "./components/Footer.js";
+import Footer from "./components/Layout/Footer.js";
 
 function App() {
   const [mode, setMode] = useState("light");

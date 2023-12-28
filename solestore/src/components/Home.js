@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
-import './components/css/Home.css'
-import Product from "./components/Product.js"
+import './Layout/css/Home.css'
+import Product from "./Layout/Product.js"
 import { Link } from "react-router-dom";
 
 const Home = (props) => {

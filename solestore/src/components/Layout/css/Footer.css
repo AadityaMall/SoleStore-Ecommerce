@@ -21,7 +21,7 @@ footer .copyright {
 
 
 .newsLetter{
-    background-image: url(../../../public/images/newsletter_bg.png);
+    background-image: url(../../../../public/images/newsletter_bg.png);
     height: auto;
     background-size: cover;
     width: 100%;
