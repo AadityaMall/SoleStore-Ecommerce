@@ -15,7 +15,7 @@ exports.createProduct = asyncError(async (req, res, next) => {
 });
 
 // Get all Products
-exports.getAllProducts = asyncError(async (req, res) => {
+exports.getAllProducts = asyncError(async (req, res, next) => {
   const prodCount = await Product.countDocuments();
   const resultPerPge = 15;
   const apiFeature = new ApiFeatures(Product.find(), req.query)

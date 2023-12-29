@@ -12,6 +12,8 @@ import Error404 from "./components/Error404.js";
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Footer from "./components/Layout/Footer.js";
+import ProductPage from "./components/ProductPage.js";
+
 
 function App() {
   const [mode, setMode] = useState("light");
@@ -46,6 +48,8 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/*" element={<Error404 />} />
+          <Route path="/product/:id" element={<ProductPage mode={mode}/>} />
+
         </Routes>
         <Footer mode={mode} />
       </Router>

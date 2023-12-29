@@ -18,7 +18,7 @@ const Product = (props) => {
         className={`prod-box prod-boxShadow-${
           props.modeProd === "light" ? "dark" : "light"
         }`}
-        to={props.product._id}
+        to={`/product/${props.product._id}`}
       >
         <img src={props.product.images[0].url} alt={props.product.name} />
         <span
