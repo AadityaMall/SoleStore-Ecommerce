@@ -2,8 +2,8 @@ import React from "react";
 import "./css/Footer.css";
 import { Link } from "react-router-dom";
 const Footer = (props) => {
-  const darkLogo = "./images/darkmode_logo.png";
-  const lightLogo = "./images/lightmode_logo.png"
+  const darkLogo = "https://i.ibb.co/qYRd6qN/darkmode-logo.png";
+  const lightLogo = "https://i.ibb.co/0MyCLvg/lightmode-logo.png"
   return (
     <>
 

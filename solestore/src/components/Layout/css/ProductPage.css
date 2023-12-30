@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit&display=swap');
+.prod-carouselShadow-dark{
+    box-shadow: 0px 5px 10px black;
+    padding-top: 10px;
+}
+.prod-carouselShadow-light{
+    box-shadow: 0px 5px 10px rgb(255, 255, 255);
+    padding-top: 10px;
+}
+.carousel .thumbs-wrapper{
+    margin: 5px!important;
+} 
+.page-title{
+    background-color: rgba(143, 126, 126, 0.329);
+    height: 50px;
+    display: flex;
+    align-items: center;
+    font-size: 25px;
+    font-weight: 600;
+    
+}
+.page-title span{
+    margin-left: 3vw;
+}
+.details{
+    padding-left: 30px;
+    margin-top: 10px;
+}
+.detailSection-1{
+    font-family: 'Alata', sans-serif;
+}
+
+.detailSection-2{
+    display: flex;
+    align-items: center;
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
+    justify-content: center;
+    margin-top: 50px;
+}
+.detailSection-2 span{
+    margin-left: 10px;
+}
+
+.detailSection-3{
+    font-size: 30px;
+    font-family: 'Alata',sans-serif;
+    margin-top: 20px;
+}

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import "./css/Product.css";
 
 const Product = (props) => {
+  
   const options = {
     edit: false,
     activeColor: props.modeProd === "light" ? "black" : "white",
