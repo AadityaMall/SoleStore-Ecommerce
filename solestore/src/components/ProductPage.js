@@ -9,8 +9,8 @@ import ReactStars from "react-rating-stars-component";
 import Loader from "./Layout/Loader";
 import { useAlert } from "react-alert";
 
-const ProductPage = (props,{}) => {
-  const alert = useAlert() // Alert for error 
+const ProductPage = (props, { p }) => {
+  const alert = useAlert(); // Alert for error
   const { id } = useParams();
   const dispatch = useDispatch();
   const { product, loading, error } = useSelector(
@@ -18,11 +18,11 @@ const ProductPage = (props,{}) => {
   );
 
   useEffect(() => {
-    if(error){
-      return alert.error(error)
+    if (error) {
+      return alert.error(error);
     }
     dispatch(getProductDetails(id));
-  }, [dispatch, id,error,alert]);
+  }, [dispatch, id, error, alert]);
 
   //every time page loads, scroll to top
   useEffect(() => {
@@ -34,47 +34,75 @@ const ProductPage = (props,{}) => {
     activeColor: props.modeProd === "light" ? "black" : "white",
     value: product.ratings,
     isHalf: true,
-    size: 35,
+    size: 40,
   };
 
   return (
     <>
-    {loading ? (
-        <Loader/>
+      {loading ? (
+        <Loader />
       ) : (
-      <>
-        <div className={`text-${props.mode === "light" ? "dark" : "light"}`}>
-          <div className="page-title">
-            <span>{`Products > ${product.name} >`}</span>
-          </div>
-          <div className="container p-4">
-            <div className="row">
-              <div className={`col-md-6 mt-2 prod-carouselShadow-${props.mode === "light" ? "dark" : "light"}`}>
-                <Carousel autoPlay={true} infiniteLoop={true}>
-                  {product.images &&
-                    product.images.map((item, i) => (
-                      <div>
-                        <img key={item.url} src={item.url} alt={`Slide ${i}`} />
-                      </div>
-                    ))}
-                </Carousel>
-              </div>
-              <div className="col-md-6 details">
-                <div className="detailSection-1">
-                  <h1>{product.name}</h1>
-                  <p>{`Product # ${product._id}`}</p>
+        <>
+          <div className={`text-${props.mode === "light" ? "dark" : "light"}`}>
+            <div className="page-title">
+              <span>{`Products > ${product.name} >`}</span>
+            </div>
+            <div
+              className={`container p-4 prod-carouselShadow-${
+                props.mode === "light" ? "dark" : "light"
+              } mt-4 mb-5`}
+            >
+              <div className="row">
+                <div className={`col-md-6 mt-2`}>
+                  <Carousel autoPlay={true} infiniteLoop={true}>
+                    {product.images &&
+                      product.images.map((item, i) => (
+                        <div>
+                          <img
+                            key={item.url}
+                            src={item.url}
+                            alt={`Slide ${i}`}
+                          />
+                        </div>
+                      ))}
+                  </Carousel>
                 </div>
-                <div className="detailSection-2">
-                  <ReactStars {...options} />
-                  <span>{`(${product.numberOfReview} Reviews)`}</span>
+                <div className="col-md-6 details">
+                  <div className="detailSection-1">
+                    <h1>{product.name}</h1>
+                    <p>{`Product # ${product._id}`}</p>
+                  </div>
+                  <div className="detailSection-2">
+                    <ReactStars {...options} />
+                    <span>{`(${product.numberOfReview} Reviews)`}</span>
+                  </div>
+                  <div className="detailSection-3">
+                    <span>{`₹${product.price}`}</span>
+                    <b
+                      className={`stock-status ${
+                        product.stock < 1 ? "text-danger" : "text-success"
+                      }`}
+                    >
+                      ({product.stock<1?"Out of Stock":"In Stock"})
+                    </b>
+                  </div>
+                  <div className="detailSection-4">
+                    <p>{product.description}</p>
+                  </div>
+                  <div className="detailSection-5">
+                    <div className="detailSection-5-1">
+                      <button>-</button>
+                      <input type="number" value={1} />
+                      <button>+</button>
+                    </div>
+                    <button>Add to Cart</button>
+                  </div>
                 </div>
-                <span>{`₹${product.price}`}</span>
               </div>
             </div>
           </div>
-        </div>
-      </>
-    )}
+        </>
+      )}
     </>
   );
 };

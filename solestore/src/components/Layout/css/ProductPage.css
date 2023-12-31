@@ -25,9 +25,13 @@
 .details{
     padding-left: 30px;
     margin-top: 10px;
+
 }
 .detailSection-1{
     font-family: 'Alata', sans-serif;
+}
+.detailSection-1 p{
+    font-weight: lighter;
 }
 
 .detailSection-2{
@@ -35,15 +39,31 @@
     align-items: center;
     border-top: 1px solid gray;
     border-bottom: 1px solid gray;
-    justify-content: center;
-    margin-top: 50px;
+    justify-content: flex-start;
+    margin-top: 20px;
 }
 .detailSection-2 span{
-    margin-left: 10px;
+    margin-left: 2.4vw;
 }
 
 .detailSection-3{
-    font-size: 30px;
     font-family: 'Alata',sans-serif;
     margin-top: 20px;
+    display: flex;
+    align-items: center;
 }
+.detailSection-3 span{
+    font-size: 30px;
+}
+.detailSection-3 .stock-status{
+    font-size: 16px;
+    margin-left: 1vw;
+}
+@media screen and (max-width: 768px) {
+    .details{
+        text-align: center;
+    }
+    .detailSection-2,.detailSection-3{
+        justify-content: center;
+    }
+  }
