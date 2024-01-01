@@ -4,14 +4,13 @@ import "./Layout/css/Home.css";
 import Product from "./Layout/Product.js";
 import { Link } from "react-router-dom";
 import MetaData from "./Layout/MetaData.js";
-import { getProduct } from "../actions/productAction.js";
+import { clearErrors, getProduct } from "../actions/productAction.js";
 import { useSelector, useDispatch } from "react-redux";
-import Loader from './Layout/Loader.js'
+import Loader from "./Layout/Loader.js";
 import { useAlert } from "react-alert";
 
 const Home = (props) => {
-
-  const alert = useAlert() // Alert for error 
+  const alert = useAlert(); // Alert for error
 
   const dispatch = useDispatch();
   const { loading, error, products, productsCount } = useSelector(
@@ -19,11 +18,12 @@ const Home = (props) => {
   );
 
   useEffect(() => {
-    if(error){
-      return alert.error(error)
+    if (error) {
+      alert.error(error);
+      dispatch(clearErrors());
     }
     dispatch(getProduct());
-  }, [dispatch,error,alert]);
+  }, [dispatch, error, alert]);
 
   //every time page loads, scroll to top
   useEffect(() => {
@@ -33,7 +33,7 @@ const Home = (props) => {
   return (
     <>
       {loading ? (
-        <Loader/>
+        <Loader />
       ) : (
         <>
           <MetaData title="SoleStore : Home" />
@@ -175,8 +175,12 @@ const Home = (props) => {
                 {products &&
                   products
                     .slice(0, 3)
-                    .map((product,index) => (
-                      <Product key={index} product={product} modeProd={props.mode} />
+                    .map((product, index) => (
+                      <Product
+                        key={index}
+                        product={product}
+                        modeProd={props.mode}
+                      />
                     ))}
               </div>
             </div>

@@ -1,15 +1,23 @@
 import "./Layout/css/ProductPage.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getProductDetails } from "../actions/productAction";
+import { clearErrors, getProductDetails } from "../actions/productAction";
 import { useParams } from "react-router-dom";
 import ReactStars from "react-rating-stars-component";
 import Loader from "./Layout/Loader";
 import { useAlert } from "react-alert";
+import "react-responsive-modal/styles.css";
+import { Modal } from "react-responsive-modal";
+import ReviewBox from "./Layout/ReviewBox";
 
 const ProductPage = (props, { p }) => {
+  //Modal Setup
+  const [open, setOpen] = useState(false);
+  const onOpenModal = () => setOpen(true);
+  const onCloseModal = () => setOpen(false);
+
   const alert = useAlert(); // Alert for error
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -19,7 +27,8 @@ const ProductPage = (props, { p }) => {
 
   useEffect(() => {
     if (error) {
-      return alert.error(error);
+      alert.error(error);
+      dispatch(clearErrors());
     }
     dispatch(getProductDetails(id));
   }, [dispatch, id, error, alert]);
@@ -31,11 +40,17 @@ const ProductPage = (props, { p }) => {
 
   const options = {
     edit: false,
-    activeColor: props.modeProd === "light" ? "black" : "white",
+    activeColor: "black",
     value: product.ratings,
     isHalf: true,
     size: 40,
   };
+
+  const submitOptions = {
+    activeColor: "black",
+    isHalf: true,
+    size: 40,
+  }
 
   return (
     <>
@@ -48,7 +63,7 @@ const ProductPage = (props, { p }) => {
               <span>{`Products > ${product.name} >`}</span>
             </div>
             <div
-              className={`container p-4 prod-carouselShadow-${
+              className={`container p-4 prod-detsShadow-${
                 props.mode === "light" ? "dark" : "light"
               } mt-4 mb-5`}
             >
@@ -57,12 +72,8 @@ const ProductPage = (props, { p }) => {
                   <Carousel autoPlay={true} infiniteLoop={true}>
                     {product.images &&
                       product.images.map((item, i) => (
-                        <div>
-                          <img
-                            key={item.url}
-                            src={item.url}
-                            alt={`Slide ${i}`}
-                          />
+                        <div key={i}>
+                          <img src={item.url} alt={`Slide`} />
                         </div>
                       ))}
                   </Carousel>
@@ -83,24 +94,125 @@ const ProductPage = (props, { p }) => {
                         product.stock < 1 ? "text-danger" : "text-success"
                       }`}
                     >
-                      ({product.stock<1?"Out of Stock":"In Stock"})
+                      ({product.stock < 1 ? "Out of Stock" : "In Stock"})
                     </b>
                   </div>
                   <div className="detailSection-4">
                     <p>{product.description}</p>
                   </div>
                   <div className="detailSection-5">
-                    <div className="detailSection-5-1">
-                      <button>-</button>
-                      <input type="number" value={1} />
-                      <button>+</button>
+                    <div className={`detailSection-5-1`}>
+                      <select
+                        name="size"
+                        id="size"
+                        className={`color-${
+                          props.mode === "light" ? "dark" : "light"
+                        }`}
+                        defaultValue={"DEFAULT"}
+                      >
+                        <option value="DEFAULT" disabled>
+                          SIZE
+                        </option>
+                        <option value="1">3 UK</option>
+                        <option value="2">4 UK</option>
+                        <option value="3">5 UK</option>
+                        <option value="4">6 UK</option>
+                        <option value="5">7 UK</option>
+                        <option value="6">8 UK</option>
+                        <option value="7">9 UK</option>
+                        <option value="8">10 UK</option>
+                        <option value="9">11 UK</option>
+                      </select>
                     </div>
-                    <button>Add to Cart</button>
+                    <div className="detailSection-5-2">
+                      <p onClick={onOpenModal}>
+                        Size Guide <i className="fa fa-arrow-right"></i>
+                      </p>
+                    </div>
+                  </div>
+                  <div className="detailSection-6">
+                    <div className={`detailSection-6-1`}>
+                      <button
+                        className={`mode-${
+                          props.mode === "light" ? "dark" : "light"
+                        }`}
+                      >
+                        -
+                      </button>
+                      <input type="number" defaultValue={1} />
+                      <button
+                        className={`mode-${
+                          props.mode === "light" ? "dark" : "light"
+                        }`}
+                      >
+                        +
+                      </button>
+                    </div>
+                    <button
+                      id="addToCart"
+                      className={`mode-${
+                        props.mode === "light" ? "dark" : "light"
+                      }`}
+                    >
+                      Add to Cart
+                    </button>
                   </div>
                 </div>
               </div>
+              <hr />
+              <div>
+                <center>
+                  <h1>Reviews</h1>
+                </center>
+                <div className="personal-review-submit">
+                  <div id="personDetsSection">
+                    <img
+                      src="../images/defaultProfile.jpg"
+                      alt="Profile"
+                      className="user_profileImage"
+                    />
+                    <span id="user_profileEmail">example@gmail.com</span>
+                  </div>
+                  <div>
+                    <ReactStars {...submitOptions} />
+                  </div>
+                  <div className="reviewForm">
+                    <textarea
+                      name=""
+                      id=""
+                      cols="30"
+                      rows="5"
+                      placeholder="Your Message"
+                      required
+                    ></textarea>
+                    <button
+                      value="submit"
+                      className={`mode-${
+                        props.mode === "light" ? "dark" : "light"
+                      }`}
+                    >
+                      SUBMIT
+                    </button>
+                  </div>
+                </div>
+                <hr />
+                {product.reviews && product.reviews[0] ? (
+                  <div className="otherReviews">
+                    {product.reviews && product.reviews.map((review,index) =>
+                      <ReviewBox review = {review} key={index}/>
+                    )}
+                  </div>
+                ):(
+                  <p id="noReviewText">There are no reviews yet</p>
+                )}
+              </div>
             </div>
           </div>
+          <Modal open={open} onClose={onCloseModal} center id="sizeModal">
+            <h4>Size Chart</h4>
+            <hr />
+            <img src="../images/sizeChart.png" alt="" />
+          </Modal>
         </>
       )}
     </>

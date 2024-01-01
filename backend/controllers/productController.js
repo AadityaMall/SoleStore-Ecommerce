@@ -86,6 +86,8 @@ exports.createProductReview = asyncError(async (req, res, next) => {
   const review = {
     user: req.user.id,
     name: req.user.name,
+    email:req.user.email,
+    avatar:req.user.avatar,
     rating: Number(rating),
     comment,
   };
