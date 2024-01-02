@@ -1,0 +1,28 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit&display=swap");
+.page-header {
+  font-family: "Alata", sans-serif;
+  text-align: center;
+}
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.pagination {
+  display: flex;
+  justify-content: center;
+}
+.my-slider-price {
+  display: flex;
+  width: 300px;
+  justify-content: space-evenly;
+  align-items: center;
+}
+#priceRangeLabel {
+  margin-right: 1vw;
+  width: 150px;
+}
+
+@media screen and (max-width: 768px) {
+
+}

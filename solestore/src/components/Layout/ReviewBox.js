@@ -14,11 +14,11 @@ const ReviewBox = (props) => {
       <div className="review-card">
         <div id="userDetsSection">
           <img
-            src="../images/aaditya_profile.jpeg"
+            src={props.review.avatar.url}
             alt="Profile"
             className="user_profileImage"
           />
-          <span id="user_profileEmail">{`${props.review.name}`}</span>
+          <span id="user_profileEmail">{`${props.review.email}`}</span>
         </div>
         <hr />
 

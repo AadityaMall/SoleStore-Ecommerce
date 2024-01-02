@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Alata&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Outfit&display=swap');
 
-.navbar{
-    z-index:110;
+.navbar-main{
+    z-index:999;
     box-shadow: 10px 0px 5px black;
     position: sticky;
     top: 0;
@@ -45,7 +45,7 @@
     .nav-items li i{
         margin-left: 0vw;
     }
-    .nav-item{
+    .nav-item-main{
         border-bottom: 1px solid  rgba(0, 0, 0, 0.45);
     }
 }

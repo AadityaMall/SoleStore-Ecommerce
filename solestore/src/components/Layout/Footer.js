@@ -89,7 +89,7 @@ const Footer = (props) => {
                   </Link>
                 </p>
                 <p>
-                  <Link to="/shop" className="text-reset">
+                  <Link to="/products" className="text-reset">
                     Shop
                   </Link>
                 </p>

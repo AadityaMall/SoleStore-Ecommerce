@@ -123,12 +123,13 @@ select option {
 .detailSection-6-1 button:last-child {
   border-radius: 0rem 5rem 5rem 0rem;
 }
-#addToCart {
+#addToCart , #addToWishList{
   padding: 0px 30px;
   height: 5vh;
   width: 200px;
   border-radius: 0.5rem;
   transition: 0.1s ease-in;
+  margin-left: 10px;
 }
 .mode-dark {
   color: white;
@@ -194,6 +195,12 @@ select option {
   .detailSection-6 {
     justify-content: center;
     margin-top: 3vw;
+  }
+  .detailSection-6{
+    flex-direction: column;
+  }
+  .detailSection-6 button{
+    margin-bottom: 2vw;
   }
   .personal-review-submit{
     width: 100%;

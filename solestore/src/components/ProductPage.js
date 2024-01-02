@@ -156,6 +156,14 @@ const ProductPage = (props, { p }) => {
                     >
                       Add to Cart
                     </button>
+                    <button
+                      id="addToWishList"
+                      className={`mode-${
+                        props.mode === "light" ? "dark" : "light"
+                      }`}
+                    >
+                      Add to WishList <i className="fa fa-heart"></i>
+                    </button>
                   </div>
                 </div>
               </div>

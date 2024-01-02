@@ -8,7 +8,7 @@ const Navbar = (props) => {
   }
   return (
     <>
-      <nav className={`navbar navbar-expand-lg navbar-${props.mode} bg-${props.mode}`}>
+      <nav className={`navbar navbar-main navbar-expand-lg navbar-${props.mode} bg-${props.mode}`}>
         <div className="container-fluid">
           <span className="navbar-brand brand" onClick={topFunction} >
             {props.mainTitle}<span className="brand-item-color">{props.brandTitle}</span>
@@ -28,22 +28,22 @@ const Navbar = (props) => {
 
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0 nav-items">
-              <li className="nav-item">
+              <li className="nav-item-main">
                 <NavLink className="nav-link" aria-current="page" to="">
                   HOME
                 </NavLink>
               </li>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/shop">
+              <li className="nav-item-main">
+                <NavLink className="nav-link" to="/products">
                   SHOP
                 </NavLink>
               </li>
-              <li className="nav-item">
+              <li className="nav-item-main">
                 <NavLink className="nav-link" to="/about">
                   ABOUT US
                 </NavLink>
               </li>
-              <li className="nav-item">
+              <li className="nav-item-main">
                 <NavLink className="nav-link" to="/contact">
                   CONTACT US
                 </NavLink>
