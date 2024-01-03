@@ -7,7 +7,7 @@ import { useAlert } from "react-alert";
 import Product from "./Layout/Product.js";
 import "./Layout/css/Shop.css";
 import Pagination from "@mui/material/Pagination";
-import { Slider } from "@mui/material";
+import { Slider, circularProgressClasses } from "@mui/material";
 const Shop = (props) => {
   //every time page loads, scroll to top
   useEffect(() => {
@@ -98,8 +98,7 @@ const Shop = (props) => {
           </div>
           {resultPerPage < productsCount && (
             <div className="pagination mt-5 mb-5">
-              {console.log(currentPage)}
-              <Pagination count={3} onChange={setCurrentPageNo} />
+              <Pagination count={Math.ceil(productsCount/resultPerPage)} onChange={setCurrentPageNo} />
             </div>
           )}
         </>
