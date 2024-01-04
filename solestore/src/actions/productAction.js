@@ -9,10 +9,10 @@ import {
   PRODUCT_DETAIL_SUCCESS,
 } from "../constants/productConstants";
 
-export const getProduct = (currentPage=1) => async (dispatch) => {
+export const getProduct = (currentPage=1,price=[0,30000]) => async (dispatch) => {
   try {
     dispatch({ type: ALL_PRODUCT_REQUEST });
-    const { data } = await axios.get(`/api/v1/products?page=${currentPage}`);
+    const { data } = await axios.get(`/api/v1/products?page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}`);
     dispatch({
       type: ALL_PRODUCT_SUCCESS,
       payload: data,

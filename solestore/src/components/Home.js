@@ -73,7 +73,7 @@ const Home = (props) => {
               ></button>
             </div>
             <div className="carousel-inner">
-              <Link className="carousel-item active" data-bs-interval="2000">
+              <Link className="carousel-item active" data-bs-interval="2000" to={`/products`}>
                 <img
                   src="./images/SoleStore_carousel.png"
                   className="d-block w-100"

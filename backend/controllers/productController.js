@@ -21,15 +21,21 @@ exports.getAllProducts = asyncError(async (req, res, next) => {
   const apiFeature = new ApiFeatures(Product.find(), req.query)
     .search()
     .filter()
-    .pagination(resultPerPage);
+  
+  let products = await apiFeature.query.clone();
 
-  const products = await apiFeature.query;
+  let filteredProductsCount = products.length
+
+  apiFeature.pagination(resultPerPage)
+
+  products = await apiFeature.query;
 
   res.status(200).json({
     success: true,
     products,
     prodCount,
-    resultPerPage
+    resultPerPage,
+    filteredProductsCount
   });
 });
 

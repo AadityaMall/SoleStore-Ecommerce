@@ -22,7 +22,29 @@
   margin-right: 1vw;
   width: 150px;
 }
+.shop-filters li {
+  margin-left: 6vw;
+}
+select {
+  border-radius: 5px;
+  width: 250px;
+  height: 30px;
+  text-align: center;
+  font-family: "Alata", sans-serif;
+  background-color: transparent;
+}
+select option {
+  color: black;
+}
+.color-dark {
+  color: black;
+}
 
-@media screen and (max-width: 768px) {
-
+@media screen and (max-width: 992px) {
+  .nav-item-shop {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.45);
+    display: flex;
+    justify-content: center;
+    padding: 10px 0px;
+  }
 }
