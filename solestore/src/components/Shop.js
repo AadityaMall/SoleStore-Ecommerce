@@ -24,7 +24,7 @@ const Shop = (props) => {
 
   const getFilterCategory = () => {
     let selectElement = document.querySelector('#filter');
-    console.log(selectElement.value)
+    setCategory(selectElement.value);
   }
 
   const alert = useAlert();
@@ -33,14 +33,17 @@ const Shop = (props) => {
     useSelector((state) => state.products);
   const [currentPage, setCurrentPage] = useState(1);
   const [price, setPrice] = useState([0, 30000]);
+  const [category,setCategory] =  useState("")
+  const [ratings,setRatings] =  useState(0)
+
 
   useEffect(() => {
     if (error) {
       alert.error(error);
       dispatch(clearErrors());
     }
-    dispatch(getProduct(currentPage,price));
-  }, [dispatch, alert, error, currentPage,price]);
+    dispatch(getProduct(currentPage,price,category,ratings));
+  }, [dispatch, alert, error, currentPage,price,category,ratings]);
 
   const setCurrentPageNo = (e, p) => {
     setCurrentPage(p);
@@ -120,8 +123,8 @@ const Shop = (props) => {
                         Filter : Category
                       </option>
                       <option value="Sneakers">Sneakers</option>
-                      <option value="Casuals">Casulas</option>
-                      <option value="Sports               ">Sports</option>
+                      <option value="Formals">Formals</option>
+                      <option value="Sport">Sports</option>
                     </select>
                   </li>
                   <li className="nav-item-shop">
@@ -135,8 +138,24 @@ const Shop = (props) => {
                     >
                       <option value="DEFAULT" disabled>Sort : Price Range</option>
                       <option value="1">Low to High</option>
-                      <option value="2">High to Low</option>
+                      <option value="-1">High to Low</option>
                     </select>
+                  </li>
+                  <li className="nav-item-shop">
+                    <div className="my-slider-price">
+                      <span id="priceRangeLabel">Rating :</span>
+                      <Slider
+                        value={ratings}
+                        onChangeCommitted={(e,newRating) =>{
+                          setRatings(newRating)
+                        }}
+                        valueLabelDisplay="on"
+                        aria-labelledby="continuous-slider"
+                        min={0}
+                        max={5}
+                        color="secondary"
+                      />
+                    </div>
                   </li>
                 </ul>
               </div>
