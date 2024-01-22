@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useEffect } from "react";
 import "./Layout/css/Home.css";
 import Product from "./Layout/Product.js";
@@ -8,7 +8,6 @@ import { clearErrors, getProduct } from "../actions/productAction.js";
 import { useSelector, useDispatch } from "react-redux";
 import Loader from "./Layout/Loader.js";
 import { useAlert } from "react-alert";
-import Shop from "./Shop.js";
 
 const Home = (props) => {
 
@@ -16,15 +15,6 @@ const Home = (props) => {
 
   const dispatch = useDispatch();
 
-  const [ isRendered , setisRendered ] =  useState(false)
-  const shopHandler = () =>{
-    if(isRendered){
-      setisRendered(false);
-    }
-    else{
-      setisRendered(true);
-    }
-  }
   const { loading, error, products } = useSelector(
     (state) => state.products
   );
@@ -148,7 +138,7 @@ const Home = (props) => {
                 <h1 id="shopByCategoryHead">Shop By Category</h1>
               </div>
               <div className="row text-center mb-5 mt-3">
-                <div className="col-md-4 mb-5" onClick={shopHandler}>
+                <Link className="col-md-4 mb-5" to={{pathname:'/products' , state:{homeFilter:'Sneakers'}}}>
                   <img
                     src="../images/sneakers_circle.png"
                     alt=""
@@ -156,9 +146,7 @@ const Home = (props) => {
                       props.mode === "light" ? "dark" : "light"
                     }`}
                   />
-                  {isRendered && (
-                  <Shop/>)}
-                </div>
+                </Link>
                 <Link className="col-md-4 mb-5">
                   <img
                     src="../images/formal_circle.png"
