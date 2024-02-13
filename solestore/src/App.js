@@ -13,6 +13,7 @@ import Error404 from "./components/Error404.js";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Footer from "./components/Layout/Footer.js";
 import ProductPage from "./components/ProductPage.js";
+import LoginSignup from "./components/Layout/LoginSignup.js";
 
 
 function App() {
@@ -48,6 +49,7 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/*" element={<Error404 />} />
+          <Route path="/login" element={<LoginSignup />} />
           <Route path="/product/:id" element={<ProductPage mode={mode}/>} />
 
         </Routes>

@@ -64,7 +64,7 @@ const Navbar = (props) => {
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link" to="/user">
+                <NavLink className="nav-link" to="/login">
                   <i className="fa fa-user" aria-hidden="true"></i>
                 </NavLink>
               </li>
