@@ -1,9 +1,54 @@
-import React from "react";
+import React, { useState } from "react";
 import "./css/LoginSignup.css";
 import $ from "jquery";
 import { Link } from "react-router-dom";
-import Loader from "./Loader";
+// import Loader from "./Loader";
+import { useDispatch, useSelector } from "react-redux";
+import { clearErrors, login } from "../../actions/userActions";
+
 const LoginSignup = () => {
+  const dispatch = useDispatch();
+
+  const [loginEmail, setLoginEmail] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
+  const [user, setUser] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+  const { name, email, password } = user;
+  const [avatar, setAvatar] = useState();
+  const [avatarPreview, setAvatarPreview] = useState(
+    "/images/defaultProfile.jpg"
+  );
+
+  const registerSubmit = (e) => {
+    e.preventDefault();
+    const myForm = new FormData();
+    myForm.set("name", name);
+    myForm.set("password", password);
+    myForm.set("avatar", avatar);
+    console.log("Signuo submit");
+  };
+
+  const registerDataChange = (e) => {
+    if (e.target.name === "avatar") {
+      const reader = new FileReader();
+      reader.onload = () => {
+        if (reader.readyState === 2) {
+          setAvatarPreview(reader.result);
+          setAvatar(reader.result);
+        }
+      };
+      reader.readAsDataURL(e.target.files[0]);
+    } else {
+      setUser({ ...user, [e.target.name]: e.target.value });
+    }
+  };
+
+  const loginSubmit = () => {
+    console.log("LOGIN");
+  };
 
   $(document).ready(function () {
     $(".signup-link").click(function () {
@@ -16,7 +61,7 @@ const LoginSignup = () => {
       $(".login-frame").show();
     });
   });
-  
+
   return (
     <>
       <div id="contentHolder" className="container-fluid">
@@ -35,7 +80,7 @@ const LoginSignup = () => {
                   <div className="mb-4">
                     <h3>LOGIN</h3>
                   </div>
-                  <form action="#">
+                  <form action="#" onSubmit={loginSubmit}>
                     <div className="form-group">
                       <input
                         type="email"
@@ -44,6 +89,8 @@ const LoginSignup = () => {
                         placeholder="Email ID"
                         required
                         autoComplete="on"
+                        value={loginEmail}
+                        onChange={(e) => setLoginEmail(e.target.value)}
                       />
                     </div>
                     <div className="form-group mb-4">
@@ -55,24 +102,22 @@ const LoginSignup = () => {
                         required
                         minLength="8"
                         autoComplete="on"
+                        value={loginPassword}
+                        onChange={(e) => setLoginPassword(e.target.value)}
                       />
                     </div>
 
                     <div className="d-flex mb-3 align-items-center forgot-link">
-                      <div>
-                        <input type="checkbox" />
-                        <label className="mb-0">
-                          <span className="caption">Remember me</span>
-                        </label>
-                      </div>
                       <span className="ml-auto">
-                        <Link className="forgot-pass">Forgot Password?</Link>
+                        <Link to={`/password/forgot`} className="forgot-pass">
+                          Forgot Password?
+                        </Link>
                       </span>
                     </div>
 
                     <input
                       type="submit"
-                      value="Log In"
+                      value="Login"
                       className="btn btn-block login-button"
                     />
 
@@ -104,35 +149,30 @@ const LoginSignup = () => {
                   <div className="mb-4">
                     <h3>SIGN UP</h3>
                   </div>
-                  <form action="#" method="post">
+                  <form
+                    action="#"
+                    method="post"
+                    encType="multipart/form-data"
+                    onSubmit={registerSubmit}
+                  >
                     <div className="form-group mb-4">
                       <input
                         autoComplete="on"
                         type="text"
                         className="form-control"
-                        id="fullName"
                         placeholder="Full Name"
+                        value={name}
+                        onChange={registerDataChange}
                         required
                       />
                       <span id="nameError"></span>
-                    </div>
-                    <div className="form-group  mb-4">
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="number"
-                        placeholder="Number"
-                        required
-                        minLength="10"
-                        autoComplete="on"
-                      />
-                      <span id="numberError"></span>
                     </div>
                     <div className="form-group mb-4">
                       <input
                         type="email"
                         className="form-control"
-                        id="email"
+                        value={email}
+                        onChange={registerDataChange}
                         placeholder="Email ID"
                         required
                       />
@@ -142,48 +182,32 @@ const LoginSignup = () => {
                       <input
                         type="password"
                         className="form-control"
-                        id="password"
+                        value={password}
+                        onChange={registerDataChange}
                         placeholder="Password"
                         minLength="8"
                         required
                         autoComplete="off"
                       />
                     </div>
-                    <div className="form-group mb-4">
+                    <div className="form-group mb-4 image-input">
+                      
+                      <img src={avatarPreview} alt="Avatar Preview" className="mb-2"/>
+
                       <input
-                        type="password"
+                        type="file"
                         className="form-control"
-                        id="confirmPassword"
-                        placeholder="Confirm Password"
-                        minLength="8"
-                        required
-                        autoComplete="off"
+                        name="avatar"
+                        accept="image/*"
+                        onChange={registerDataChange}
                       />
-                      <span id="confirmPasswordError"></span>
-                    </div>
-                    <div className="d-flex mb-3">
-                      <span>
-                        <input
-                          type="checkbox"
-                          name="terms-and-conditions"
-                          id="termsAndConditions"
-                        />
-                        <label htmlFor="termsAndConditions">
-                          <Link>
-                            <p id="terms-label">
-                              ACCEPT TERMS AND CONDITIONS{" "}
-                              <i className="fa fa-external-link"></i>
-                            </p>
-                          </Link>
-                        </label>
-                      </span>
                     </div>
                     <input
                       type="submit"
-                      value="Signup"
+                      value="register"
                       className="btn btn-block signup-button"
                       id="submit-btn"
-                      disabled
+                      // disabled={loading?true:false}
                     />
                     <span id="submitError"></span>
                     <div className="d-flex mt-4 justify-content-center">

@@ -3,11 +3,12 @@ import { configureStore } from "@reduxjs/toolkit";
 import {thunk} from "redux-thunk";
 import { composeWithDevTools } from "@redux-devtools/extension";
 import { productDetailReducer, productReducer } from "./reducers/productReducer";
+import { userReducer } from "./reducers/userReducer";
 
 const reducers = combineReducers({
   products:productReducer,
-  productDetails:productDetailReducer
-
+  productDetails:productDetailReducer,
+  user:userReducer,
 });
 
 let initialState = {};

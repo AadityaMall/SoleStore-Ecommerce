@@ -41,6 +41,12 @@
   .form-group{
       margin-top: 2vw;
   }
+  .form-group img{
+    width: 70px;
+    min-width:70px;
+    border-radius: 100%;
+    object-fit: contain;
+  }
   
   .form-group input:focus {
       box-shadow: none;
