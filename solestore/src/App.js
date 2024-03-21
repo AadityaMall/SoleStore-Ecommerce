@@ -1,7 +1,7 @@
-import {useState } from "react";
+import React, {useState } from "react";
 import "./components/Layout/css/App.css";
 import Navbar from "./components/Layout/Navbar.js";
-import User from "./components/User.js";
+import User from "./components/Users/User.js"
 import About from "./components/About.js";
 import Home from "./components/Home.js";
 import Shop from "./components/Shop.js";
@@ -9,12 +9,12 @@ import Contact from "./components/Contact.js";
 import Cart from "./components/Cart.js";
 import Wishlist from "./components/Wishlist.js";
 import Error404 from "./components/Error404.js";
-
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Footer from "./components/Layout/Footer.js";
 import ProductPage from "./components/ProductPage.js";
-import LoginSignup from "./components/Layout/LoginSignup.js";
-
+import LoginSignup from "./components/Users/LoginSignup.js";
+import store from "./store.js"
+import { loadUser } from "./actions/userActions.js";
 
 function App() {
   const [mode, setMode] = useState("light");
@@ -28,6 +28,10 @@ function App() {
       document.body.style.backgroundColor = "white";
     }
   };
+
+React.useEffect(()=>{
+  store.dispatch(loadUser());
+},[])
 
   return (
     <>
@@ -43,7 +47,7 @@ function App() {
           <Route path="" element={<Home mode={mode}/>} />
           <Route path="/home" element={<Home mode={mode}/>} />
           <Route path="/about" element={<About mode={mode} />} />
-          <Route path="/user" element={<User />} />
+          <Route path="/account" element={<User />} />
           <Route path="/products" element={<Shop mode = {mode} />} />
           <Route path="/contact" element={<Contact mode={mode} />} />
           <Route path="/cart" element={<Cart />} />

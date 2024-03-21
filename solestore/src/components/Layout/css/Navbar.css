@@ -28,9 +28,6 @@
 .nav-items li{
     margin-left: 2vw;
 }
-.nav-items li a{
-    font-size: 17px;
-}
 .nav-icons li i{
     margin-left: 3vw;
     font-size: 25px;
@@ -39,13 +36,37 @@
     font-weight: 600;
 }
 
+.login-element{
+    margin-left: 3vw;
+    font-size: 16px;
+    border: 1px solid black;
+    border-radius: 10px;
+    transition: .3s ease-in-out;
+}
+.user-element img{
+    margin-left: 3vw;
+    width: 40px;
+    min-width: 40px;
+    aspect-ratio: 1;
+    border-radius: 100%;
+    object-fit: fill;
+}
 
-
+.login-user-element:hover{
+    background-color: #bdc6c9;
+}
 @media screen and (max-width: 992px) {
     .nav-items li i{
         margin-left: 0vw;
     }
     .nav-item-main{
         border-bottom: 1px solid  rgba(0, 0, 0, 0.45);
+    }
+    .login-element{
+        border: none;
+        transition: 0s;
+    }
+    .login-element:hover{
+        background-color: white;
     }
 }

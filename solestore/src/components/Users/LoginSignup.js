@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import "./css/LoginSignup.css";
+import "../Layout/css/LoginSignup.css";
 import $ from "jquery";
 import { Link , useNavigate} from "react-router-dom";
-import Loader from "./Loader";
+import Loader from "../Layout/Loader";
 import { useDispatch, useSelector } from "react-redux";
-import { clearErrors, login } from "../../actions/userActions";
+import { clearErrors, login,register } from "../../actions/userActions";
 import { useAlert } from "react-alert";
 
 const LoginSignup = () => {
@@ -42,9 +42,10 @@ const LoginSignup = () => {
     e.preventDefault();
     const myForm = new FormData();
     myForm.set("name", name);
+    myForm.set("email", email);
     myForm.set("password", password);
     myForm.set("avatar", avatar);
-    console.log("Signuo submit");
+    dispatch(register(myForm))
   };
 
   const registerDataChange = (e) => {
@@ -180,6 +181,7 @@ const LoginSignup = () => {
                           type="text"
                           className="form-control"
                           placeholder="Full Name"
+                          name="name"
                           value={name}
                           onChange={registerDataChange}
                           required
@@ -190,6 +192,7 @@ const LoginSignup = () => {
                         <input
                           type="email"
                           className="form-control"
+                          name="email"
                           value={email}
                           onChange={registerDataChange}
                           placeholder="Email ID"
@@ -201,6 +204,7 @@ const LoginSignup = () => {
                         <input
                           type="password"
                           className="form-control"
+                          name="password"
                           value={password}
                           onChange={registerDataChange}
                           placeholder="Password"
@@ -228,7 +232,7 @@ const LoginSignup = () => {
                         value="register"
                         className="btn btn-block signup-button"
                         id="submit-btn"
-                        disabled={loading?true:false}
+                        // disabled={loading?true:false}
                       />
                       <span id="submitError"></span>
                       <div className="d-flex mt-4 justify-content-center">

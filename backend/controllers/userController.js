@@ -4,17 +4,23 @@ const User = require("../models/userModel");
 const sendToken = require("../utils/JWTtoken");
 const sendEmail = require("../utils/sendEmail.js");
 const crypto = require("crypto");
+const cloudinary = require("cloudinary");
 
 //Register a user -->
 exports.registerUser = asyncError(async (req, res, next) => {
+  const mycloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
+    folder: "soleStoreAvatars",
+    width: 150,
+    crop: "scale",
+  });
   const { name, email, password } = req.body;
   const user = await User.create({
     name,
     email,
     password,
     avatar: {
-      public_id: "Samle id",
-      url: "pfpurl",
+      public_id: mycloud.public_id,
+      url: mycloud.secure_url,
     },
   });
 
@@ -207,7 +213,6 @@ exports.getSingleDetails = asyncError(async (req, res, next) => {
   });
 });
 
-
 //Updating user Role -- Admin
 exports.updateUserRole = asyncError(async (req, res, next) => {
   const newUserData = {
@@ -229,7 +234,6 @@ exports.updateUserRole = asyncError(async (req, res, next) => {
 
 //Deleting USer profile -- Admin
 exports.deleteUser = asyncError(async (req, res, next) => {
-
   const user = await User.findById(req.params.id);
 
   if (!user) {

@@ -1,7 +1,12 @@
 import React from "react";
 import "./css/Navbar.css";
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
+
 const Navbar = (props) => {
+
+  const {isAuthenticated,user} = useSelector(state => state.user)
+
   function topFunction() {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
@@ -63,11 +68,20 @@ const Navbar = (props) => {
                   <i className="fa fa-shopping-bag" aria-hidden="true"></i>
                 </NavLink>
               </li>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/login">
-                  <i className="fa fa-user" aria-hidden="true"></i>
-                </NavLink>
-              </li>
+              {isAuthenticated?(
+                <li className="nav-item user-element">
+                  <NavLink className="nav-link" to="/account">
+                    <img src={user.avatar.url} alt="userProfile"/>
+                  </NavLink>
+                </li>
+              ):(
+                <li className="nav-item login-element">
+                  <NavLink className="nav-link" to="/login">
+                    REGISTER
+                  </NavLink>
+                </li>
+              )}
+
             </ul>
           </div>
         </div>
