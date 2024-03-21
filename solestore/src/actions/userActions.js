@@ -6,6 +6,7 @@ import {
 } from "../constants/userConstant";
 import axios from "axios";
 
+//login
 export const login = (email, password) => async (dispatch) => {
   try {
     dispatch({ type: LOGIN_REQUEST });
@@ -15,6 +16,7 @@ export const login = (email, password) => async (dispatch) => {
       { email, password },
       config
     );
+    dispatch({type:LOGIN_SUCCESS,payload:data.user});
   } catch (error) {
     dispatch({ type: LOGIN_FAIL, payload: error.response.data.message });
   }

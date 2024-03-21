@@ -140,3 +140,10 @@
   .adjust-padding{
       padding: 0px;
   }
+
+  .image-input img{
+    min-width: 80px;
+    width: 80px;
+    aspect-ratio: 1;
+    object-fit: contain;
+  }
