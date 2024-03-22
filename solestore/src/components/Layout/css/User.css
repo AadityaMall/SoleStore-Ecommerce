@@ -1,0 +1,55 @@
+#contentHolder{
+    background-image: url(../../../../public/images/loginpg_bg.png);
+    background-position: center;
+    background-size: cover;
+    overflow: hidden;
+  }
+.userProfilePage-card{
+    box-shadow: 0px 5px 5px;
+    padding: 30px;
+    background-color: white;
+    min-width: 350px;
+    text-align: center;
+}
+
+#clickableDetailsSection:hover{
+    cursor: pointer;
+}
+#userDetailsDisplaySection img{
+    margin-bottom: 2vh;
+    width: 200px;
+    border: 2px solid gray;
+    border-radius: 50%;
+}
+#UserNameExtract{
+    margin-left: 1vh;
+}
+
+.btn{
+    background-color: #000;
+    border:2px solid #000;
+    color: white;
+    width: 50%;
+    font-size: 0.7rem;
+    padding: 1vh;
+    border-radius: 0;
+    transition: .3s ease-in-out;
+}
+
+.btn:hover{
+    border: 2px solid black;
+    color:black;
+}
+
+
+#userWebsiteDataDets div{
+    border: 1px solid black;
+    padding: 20px;
+    margin: 10px 0px;
+}
+#userWebsiteDataDets div:hover{
+    box-shadow: 0px 5px 10px black;
+}
+a{
+    text-decoration: none;
+}

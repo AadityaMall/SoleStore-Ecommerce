@@ -77,7 +77,7 @@ const Navbar = (props) => {
               ):(
                 <li className="nav-item login-element">
                   <NavLink className="nav-link" to="/login">
-                    REGISTER
+                    LOGIN
                   </NavLink>
                 </li>
               )}

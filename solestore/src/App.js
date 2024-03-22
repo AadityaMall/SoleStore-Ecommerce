@@ -15,9 +15,11 @@ import ProductPage from "./components/ProductPage.js";
 import LoginSignup from "./components/Users/LoginSignup.js";
 import store from "./store.js"
 import { loadUser } from "./actions/userActions.js";
+import { useSelector } from "react-redux";
 
 function App() {
   const [mode, setMode] = useState("light");
+  const {user} =  useSelector(state => state.user)
   //Toggle between light and dark mode
   const toggleMode = () => {
     if (mode === "light") {
@@ -47,7 +49,7 @@ React.useEffect(()=>{
           <Route path="" element={<Home mode={mode}/>} />
           <Route path="/home" element={<Home mode={mode}/>} />
           <Route path="/about" element={<About mode={mode} />} />
-          <Route path="/account" element={<User />} />
+          <Route path="/account" element={<User account = {user}/>} />
           <Route path="/products" element={<Shop mode = {mode} />} />
           <Route path="/contact" element={<Contact mode={mode} />} />
           <Route path="/cart" element={<Cart />} />

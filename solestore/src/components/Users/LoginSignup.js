@@ -45,6 +45,7 @@ const LoginSignup = () => {
     myForm.set("email", email);
     myForm.set("password", password);
     myForm.set("avatar", avatar);
+
     dispatch(register(myForm))
   };
 
@@ -225,6 +226,7 @@ const LoginSignup = () => {
                           name="avatar"
                           accept="image/*"
                           onChange={registerDataChange}
+                          required
                         />
                       </div>
                       <input
@@ -232,7 +234,7 @@ const LoginSignup = () => {
                         value="register"
                         className="btn btn-block signup-button"
                         id="submit-btn"
-                        // disabled={loading?true:false}
+                        disabled={loading?true:false}
                       />
                       <span id="submitError"></span>
                       <div className="d-flex mt-4 justify-content-center">

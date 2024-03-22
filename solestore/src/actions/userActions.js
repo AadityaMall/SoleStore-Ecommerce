@@ -9,6 +9,8 @@ import {
   USERLOAD_REQUEST,
   USERLOAD_FAIL,
   USERLOAD_SUCCESS,
+  LOGOUT_SUCCESS,
+  LOGOUT_FAIL,
 } from "../constants/userConstant";
 import axios from "axios";
 
@@ -50,6 +52,18 @@ export const loadUser = () => async (dispatch) => {
     dispatch({ type: USERLOAD_SUCCESS, payload: data.user });
   } catch (error) {
     dispatch({ type: USERLOAD_FAIL, payload: error.response.data.message });
+  }
+};
+
+//Logout User
+export const logout = () => async (dispatch) => {
+  try {
+    await axios.get(
+      `/api/v1/logout`,
+    );
+    dispatch({ type: LOGOUT_SUCCESS });
+  } catch (error) {
+    dispatch({ type: LOGOUT_FAIL, payload: error.response.data.message });
   }
 };
 
