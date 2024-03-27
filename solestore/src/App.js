@@ -16,10 +16,13 @@ import LoginSignup from "./components/Users/LoginSignup.js";
 import store from "./store.js"
 import { loadUser } from "./actions/userActions.js";
 import { useSelector } from "react-redux";
-
+import UpdateUser from "./components/Users/UpdateUser.js";
+import UpdatePassword from "./components/Users/UpdatePassword.js";
+import ForgotPassword from "./components/Users/ForgotPassword.js";
+import ResetPassword from "./components/Users/ResetPassword.js";
 function App() {
   const [mode, setMode] = useState("light");
-  const {user} =  useSelector(state => state.user)
+  const {isAuthenticated} =  useSelector(state => state.user)
   //Toggle between light and dark mode
   const toggleMode = () => {
     if (mode === "light") {
@@ -49,7 +52,11 @@ React.useEffect(()=>{
           <Route path="" element={<Home mode={mode}/>} />
           <Route path="/home" element={<Home mode={mode}/>} />
           <Route path="/about" element={<About mode={mode} />} />
-          <Route path="/account" element={<User account = {user}/>} />
+          {isAuthenticated && <Route path="/account" element={<User/>} />}
+          {isAuthenticated && <Route path="/me/update" element={<UpdateUser/>} />}
+          {isAuthenticated && <Route path="/password/update" element={<UpdatePassword/>} />}
+          <Route path="/password/forgot" element={<ForgotPassword/>} />
+          <Route path="/password/reset/:token" element={<ResetPassword/>} />
           <Route path="/products" element={<Shop mode = {mode} />} />
           <Route path="/contact" element={<Contact mode={mode} />} />
           <Route path="/cart" element={<Cart />} />
@@ -57,7 +64,6 @@ React.useEffect(()=>{
           <Route path="/*" element={<Error404 />} />
           <Route path="/login" element={<LoginSignup />} />
           <Route path="/product/:id" element={<ProductPage mode={mode}/>} />
-
         </Routes>
         <Footer mode={mode} />
       </Router>

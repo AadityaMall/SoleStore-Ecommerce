@@ -80,11 +80,9 @@ exports.forgotPassword = asyncError(async (req, res, next) => {
 
   await user.save({ validateBeforeSave: false });
 
-  const resetPasswordUrl = `${req.protocol}://${req.get(
-    "host"
-  )}/api/v1/password/reset/${resetToken}`;
+  const resetPasswordUrl = `${process.env.FRONTEND_URL}/password/reset/${resetToken}`;
 
-  const message = `Your Password reset token is :- \n\n ${resetPasswordUrl} \n\n if you have not requested this email then please ignore it`;
+  const message = `Your Password reset token is:- \n\n ${resetPasswordUrl} \n\n if you have not requested this email then please ignore it.`;
 
   try {
     await sendEmail({
@@ -176,7 +174,20 @@ exports.updateProfile = asyncError(async (req, res, next) => {
     email: req.body.email,
   };
 
-  //Will add cloudinary avatar later
+  if(req.body.avatar !== ""){
+    const user =  await User.findById(req.user.id);
+    const imageId = user.avatar.public_id;
+    await cloudinary.v2.uploader.destroy(imageId)
+    const mycloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
+      folder: "soleStoreAvatars",
+      width: 150,
+      crop: "scale",
+    });
+    newUserData.avatar = {
+      public_id: mycloud.public_id,
+      url: mycloud.secure_url,
+    }
+  }
 
   const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
     new: true,

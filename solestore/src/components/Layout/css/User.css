@@ -10,6 +10,8 @@
     background-color: white;
     min-width: 350px;
     text-align: center;
+    margin: 80px;
+    margin-top: 50px;
 }
 
 #clickableDetailsSection:hover{
@@ -52,4 +54,9 @@
 }
 a{
     text-decoration: none;
+}
+@media screen and (max-width: 768px) {
+    .userProfilePage-card{
+        margin: 0px;
+    }
 }

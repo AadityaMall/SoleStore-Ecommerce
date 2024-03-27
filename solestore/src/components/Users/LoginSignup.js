@@ -8,6 +8,9 @@ import { clearErrors, login,register } from "../../actions/userActions";
 import { useAlert } from "react-alert";
 
 const LoginSignup = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  });
   const navigate =  useNavigate();
   const dispatch = useDispatch();
   const alert = useAlert();
@@ -45,8 +48,7 @@ const LoginSignup = () => {
     myForm.set("email", email);
     myForm.set("password", password);
     myForm.set("avatar", avatar);
-
-    dispatch(register(myForm))
+    dispatch(register(myForm)) 
   };
 
   const registerDataChange = (e) => {
@@ -58,6 +60,7 @@ const LoginSignup = () => {
           setAvatar(reader.result);
         }
       };
+
       reader.readAsDataURL(e.target.files[0]);
     } else {
       setUser({ ...user, [e.target.name]: e.target.value });
@@ -101,7 +104,7 @@ const LoginSignup = () => {
                     <div className="mb-4">
                       <h3>LOGIN</h3>
                     </div>
-                    <form action="#" onSubmit={loginSubmit}>
+                    <form onSubmit={loginSubmit}>
                       <div className="form-group">
                         <input
                           type="email"
@@ -118,7 +121,6 @@ const LoginSignup = () => {
                         <input
                           type="password"
                           className="form-control"
-                          id="logpassword"
                           placeholder="Password"
                           required
                           minLength="8"
@@ -187,7 +189,6 @@ const LoginSignup = () => {
                           onChange={registerDataChange}
                           required
                         />
-                        <span id="nameError"></span>
                       </div>
                       <div className="form-group mb-4">
                         <input
@@ -199,7 +200,6 @@ const LoginSignup = () => {
                           placeholder="Email ID"
                           required
                         />
-                        <span id="emailError"></span>
                       </div>
                       <div className="form-group mb-4">
                         <input
@@ -232,11 +232,10 @@ const LoginSignup = () => {
                       <input
                         type="submit"
                         value="register"
-                        className="btn btn-block signup-button"
+                        className="btn"
                         id="submit-btn"
                         disabled={loading?true:false}
                       />
-                      <span id="submitError"></span>
                       <div className="d-flex mt-4 justify-content-center">
                         <span>
                           Already have an account?{" "}

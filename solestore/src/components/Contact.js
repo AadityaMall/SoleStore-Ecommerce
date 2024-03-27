@@ -1,7 +1,11 @@
 import React from "react";
 import "./Layout/css/Contact.css";
-const Contact = (props) => {
+import { useEffect } from "react";
 
+const Contact = (props) => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  });
   const contactBanner = () => {
     if (window.innerWidth < 500) {
       return "./images/contactUs_phone_bg.png";
@@ -60,14 +64,6 @@ const Contact = (props) => {
           </div>
 
           <div id="map" className="col-md-6 px-2">
-            <iframe title="myFrame"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3769.9449786834048!2d72.83544851437728!3d19.110069555867852!2m
-            3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c9b888ae67fd%3A0xe0b9538d623ac5d2!2sMukesh%20Patel%20School%20Of%20Technolo
-            gy%20Management%20%26%20Engineering!5e0!3m2!1sen!2sin!4v1667165494830!5m2!1sen!2sin"
-              width="100%"
-              height="100%"
-              loading="lazy"
-            ></iframe>
           </div>
         </div>
 

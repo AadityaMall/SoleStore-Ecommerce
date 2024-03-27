@@ -1,6 +1,9 @@
-import React from "react";
+import React,{useEffect} from "react";
 import "./Layout/css/About.css";
 const About = (props) => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  });
   const darkLogo = "./images/darkmode_logo.png";
   const lightLogo = "./images/lightmode_logo.png";
 

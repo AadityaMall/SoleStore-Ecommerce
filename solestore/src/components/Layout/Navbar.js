@@ -1,23 +1,29 @@
 import React from "react";
 import "./css/Navbar.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const Navbar = (props) => {
 
-  const {isAuthenticated,user} = useSelector(state => state.user)
+  const { isAuthenticated, user } = useSelector((state) => state.user);
 
   function topFunction() {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
   }
+
   return (
     <>
-      <nav className={`navbar navbar-main navbar-expand-lg navbar-${props.mode} bg-${props.mode}`}>
+      <nav
+        className={`navbar navbar-main navbar-expand-lg navbar-${props.mode} bg-${props.mode}`}
+      >
         <div className="container-fluid">
-          <span className="navbar-brand brand" onClick={topFunction} >
-            {props.mainTitle}<span className="brand-item-color">{props.brandTitle}</span>
-          </span>
+          <Link to={`/`}>
+            <span className="navbar-brand brand" onClick={topFunction}>
+              {props.mainTitle}
+              <span className="brand-item-color">{props.brandTitle}</span>
+            </span>
+          </Link>
 
           <button
             className="navbar-toggler"
@@ -38,7 +44,7 @@ const Navbar = (props) => {
                   HOME
                 </NavLink>
               </li>
-              <li className="nav-item-main">
+              <li className="nav-item-main" >
                 <NavLink className="nav-link" to="/products">
                   SHOP
                 </NavLink>
@@ -56,10 +62,18 @@ const Navbar = (props) => {
             </ul>
             <ul className="navbar-nav me-auto mb-2 mb-lg-0 nav-align-item nav-icons">
               <li className="nav-item">
-                <i className="fa fa-adjust nav-link" aria-hidden="true" onClick={props.toggleMode}></i>
+                <i
+                  className="fa fa-adjust nav-link"
+                  aria-hidden="true"
+                  onClick={props.toggleMode}
+                ></i>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link " aria-current="page" to="/wishlist">
+                <NavLink
+                  className="nav-link "
+                  aria-current="page"
+                  to="/wishlist"
+                >
                   <i className="fa fa-heart" aria-hidden="true"></i>
                 </NavLink>
               </li>
@@ -68,20 +82,19 @@ const Navbar = (props) => {
                   <i className="fa fa-shopping-bag" aria-hidden="true"></i>
                 </NavLink>
               </li>
-              {isAuthenticated?(
+              {isAuthenticated ? (
                 <li className="nav-item user-element">
                   <NavLink className="nav-link" to="/account">
-                    <img src={user.avatar.url} alt="userProfile"/>
+                    <img src={user.avatar.url} alt="userProfile" />
                   </NavLink>
                 </li>
-              ):(
+              ) : (
                 <li className="nav-item login-element">
                   <NavLink className="nav-link" to="/login">
                     LOGIN
                   </NavLink>
                 </li>
               )}
-
             </ul>
           </div>
         </div>
