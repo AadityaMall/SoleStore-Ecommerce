@@ -80,7 +80,7 @@ input[type="number"] {
 option[value=""][disabled] {
   display: none;
 }
-.detailSection-5-1 select {
+.detailSection-5-1 select { 
   border-radius: 5px;
   width: 150px;
   height: 30px;
@@ -109,6 +109,10 @@ select option {
 .detailSection-6 #addToCart {
   margin-left: 2vw;
 }
+.detailSection-6-1{
+  width: 130px;
+  min-width: 130px;
+}
 .detailSection-6-1 input,
 .detailSection-6-1 button {
   width: 40px;
@@ -116,6 +120,9 @@ select option {
   text-align: center;
   transition: 0.3s ease-in;
   font-weight: 700;
+  border: none;
+  outline: none;
+  cursor:default;
 }
 .detailSection-6-1 button {
   border-radius: 5rem 0px 0px 5rem;
@@ -137,8 +144,8 @@ select option {
   border: 1px solid gray;
 }
 .mode-dark:hover {
-  background-color: gray;
-  color: white;
+  background-color: gray!important;
+  color: white!important;
 }
 .mode-light {
   border: 1px solid black;
@@ -146,8 +153,8 @@ select option {
   background-color: white;
 }
 .mode-light:hover {
-  background-color: black;
-  color: white;
+  background-color: black!important;
+  color: white!important;
 }
 #personDetsSection img {
   border: 1px solid black;
@@ -185,13 +192,12 @@ select option {
     font-weight: 700;
     font-size: 20px;
 }
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1000px) {
   .details {
     text-align: center;
   }
   .detailSection-2,
   .detailSection-3,
-  .detailSection-5,
   .detailSection-6 {
     justify-content: center;
     margin-top: 3vw;
@@ -201,6 +207,10 @@ select option {
   }
   .detailSection-6 button{
     margin-bottom: 2vw;
+  }
+  .detailSection-6-1 input{
+    border: none;
+    outline: none ;
   }
   .personal-review-submit{
     width: 100%;

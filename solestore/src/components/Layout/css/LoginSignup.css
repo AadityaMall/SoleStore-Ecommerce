@@ -21,14 +21,6 @@
 #nameError #numberError #emailError #confirmPasswordError {
   display: none;
 }
-
-#contentHolder {
-  background-image: url(../../../../public/images/loginpg_bg.png);
-  background-position: center;
-  background-size: cover;
-  overflow: hidden;
-}
-
 .inner-contents {
   width: 100%;
   margin-left: 0px;
@@ -40,22 +32,7 @@
   border-bottom: none;
 }
 
-.form-group {
-  margin-top: 2vw;
-}
-.form-group img {
-  width: 70px;
-  min-width: 70px;
-  border-radius: 100%;
-  object-fit: contain;
-}
-.form-group input {
-  width: 90%;
-}
-.form-group input:focus {
-  box-shadow: none;
-  border: 2px solid black;
-}
+
 
 .content a {
   color: #888;

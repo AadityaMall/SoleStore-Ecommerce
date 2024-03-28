@@ -1,0 +1,119 @@
+.cart-card{
+    background-color: white;
+    border-radius: 15px;
+    margin: 70px;
+}
+.cart-item-display{
+    display: flex;
+    margin: 30px;
+    padding: 5px;
+    border: 1px solid black;
+    border-radius: 20px;
+}
+.cart-item-display .product-details{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+}
+.cart-item-display .product-image img{
+    width: 120px;
+    border-radius:10px ;
+}
+.cart-item-display .cartProd-name{
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    max-width: 400px;
+}
+.cartProd-name .headings-for-page{
+    font-size: 25px;
+}
+
+.cart-item-display .cartProd-price{
+    font-size: 20px;
+    font-weight: 500;
+}
+.cart-item-display .cartProd-quantity{
+    border: 1px solid black;
+}
+.cart-item-display .cartProd-quantity input{
+    width:3vw;
+    min-width: 40px;
+    height: 50px;
+    text-align: center;
+    font-weight: 800;
+    border: none;
+}
+.cart-item-display .cartProd-quantity button{
+    width:3vw;
+    min-width: 40px;
+    height: 50px;
+    border: none;
+    text-align: center;
+    transition: 0.3s ease-in;
+    font-weight: 700;
+    border: none;
+    outline: none;
+    cursor:default;
+}
+.cart-item-display .cartProd-remove{
+    font-size: 20px;
+}
+.cartProd-subTotal{
+    display: flex;
+    flex-direction: column;
+}
+#cartRemoveButton{
+    width: 140px;
+}
+.final-amount{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-right: 100px;
+}
+#checkoutButton{
+    width: 20%!important;
+}
+@media screen and (max-width: 1000px) {
+    .cart-card{
+        margin: 0px;
+        margin-top: 20px;
+    }
+}
+@media screen and (max-width: 800px) {
+    .cart-item-display{
+        margin: 5px;
+        padding: 5px;
+        align-items: center;
+    }
+    .cart-item-display .product-details{
+        flex-direction: column;
+        align-items: flex-start;
+        margin-left: 15px;
+    }
+    .cart-item-display .product-image img{
+        width: 160px;
+        height: 200px;
+    }
+    .cart-item-display .cartProd-quantity input{
+        height: 30px;
+    }
+    .cart-item-display .cartProd-quantity button{
+        height: 30px;
+    }
+    .cartProd-subTotal,.cartProd-quantity{margin-top: 10px;}
+    #cartRemoveButton{margin-top: 10px;}
+    .final-amount{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: 0px;
+        align-items: center;
+        margin-top: 40px;
+    }
+    #checkoutButton{
+        width: 100%!important;
+    }
+}

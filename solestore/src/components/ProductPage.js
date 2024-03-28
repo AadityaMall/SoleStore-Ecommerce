@@ -9,21 +9,41 @@ import ReactStars from "react-rating-stars-component";
 import Loader from "./Layout/Loader";
 import { useAlert } from "react-alert";
 import "react-responsive-modal/styles.css";
-import { Modal } from "react-responsive-modal";
 import ReviewBox from "./Layout/ReviewBox";
-
+import { addToCart } from "../actions/cartAction";
+import { addToWishlist } from "../actions/wishlistAction";
 const ProductPage = (props, { p }) => {
-  //Modal Setup
-  const [open, setOpen] = useState(false);
-  const onOpenModal = () => setOpen(true);
-  const onCloseModal = () => setOpen(false);
-
+  function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
   const alert = useAlert(); // Alert for error
   const { id } = useParams();
   const dispatch = useDispatch();
   const { product, loading, error } = useSelector(
     (state) => state.productDetails
   );
+  const {wishlistItems} = useSelector((state)=>state.wishlist);
+  const isInWishlist = wishlistItems.find((i)=>i.product===product._id)?true:false;
+  
+  const wishlistButtonText = isInWishlist?"Wishlisted":"Wishlist";
+
+  const wishListbuttonStyle = () => {
+    if(isInWishlist){
+      return {
+        backgroundColor:"gray",
+        color:"white",
+      }
+    }
+    else{
+      return{
+        backgroundColor:"black",
+        color:"white"
+      }
+    }
+  }
+
+  const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
     if (error) {
@@ -31,12 +51,21 @@ const ProductPage = (props, { p }) => {
       dispatch(clearErrors());
     }
     dispatch(getProductDetails(id));
+    topFunction()
   }, [dispatch, id, error, alert]);
 
   //every time page loads, scroll to top
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  });
+
+  const incrementQunatity = () => {
+    if (quantity >= product.stock) return;
+    let qty = quantity + 1;
+    setQuantity(qty);
+  };
+  const decrementQunatity = () => {
+    if (quantity <= 1) return;
+    let qty = quantity - 1;
+    setQuantity(qty);
+  };
 
   const options = {
     edit: false,
@@ -50,7 +79,15 @@ const ProductPage = (props, { p }) => {
     activeColor: "black",
     isHalf: true,
     size: 40,
-  }
+  };
+  const addToCartHandler = () => {
+    dispatch(addToCart(id, quantity));
+    alert.success("Item Added to cart");
+  };
+  const addToWishlistHandler = () => {
+    dispatch(addToWishlist(id));
+    alert.success("Item Added to WishList");
+  };
 
   return (
     <>
@@ -100,50 +137,22 @@ const ProductPage = (props, { p }) => {
                   <div className="detailSection-4">
                     <p>{product.description}</p>
                   </div>
-                  <div className="detailSection-5">
-                    <div className={`detailSection-5-1`}>
-                      <select
-                        name="size"
-                        id="size"
-                        className={`color-${
-                          props.mode === "light" ? "dark" : "light"
-                        }`}
-                        defaultValue={"DEFAULT"}
-                      >
-                        <option value="DEFAULT" disabled>
-                          SIZE
-                        </option>
-                        <option value="1">3 UK</option>
-                        <option value="2">4 UK</option>
-                        <option value="3">5 UK</option>
-                        <option value="4">6 UK</option>
-                        <option value="5">7 UK</option>
-                        <option value="6">8 UK</option>
-                        <option value="7">9 UK</option>
-                        <option value="8">10 UK</option>
-                        <option value="9">11 UK</option>
-                      </select>
-                    </div>
-                    <div className="detailSection-5-2">
-                      <p onClick={onOpenModal}>
-                        Size Guide <i className="fa fa-arrow-right"></i>
-                      </p>
-                    </div>
-                  </div>
                   <div className="detailSection-6">
                     <div className={`detailSection-6-1`}>
                       <button
                         className={`mode-${
                           props.mode === "light" ? "dark" : "light"
                         }`}
+                        onClick={decrementQunatity}
                       >
                         -
                       </button>
-                      <input type="number" defaultValue={1} />
+                      <input type="number" value={quantity} readOnly />
                       <button
                         className={`mode-${
                           props.mode === "light" ? "dark" : "light"
                         }`}
+                        onClick={incrementQunatity}
                       >
                         +
                       </button>
@@ -153,6 +162,7 @@ const ProductPage = (props, { p }) => {
                       className={`mode-${
                         props.mode === "light" ? "dark" : "light"
                       }`}
+                      onClick={addToCartHandler}
                     >
                       Add to Cart
                     </button>
@@ -161,8 +171,11 @@ const ProductPage = (props, { p }) => {
                       className={`mode-${
                         props.mode === "light" ? "dark" : "light"
                       }`}
+                      onClick={addToWishlistHandler}
+                      disabled={isInWishlist}
+                      style={wishListbuttonStyle()}
                     >
-                      Add to WishList <i className="fa fa-heart"></i>
+                      {wishlistButtonText} <i className="fa fa-heart"></i>
                     </button>
                   </div>
                 </div>
@@ -206,21 +219,17 @@ const ProductPage = (props, { p }) => {
                 <hr />
                 {product.reviews && product.reviews[0] ? (
                   <div className="otherReviews">
-                    {product.reviews && product.reviews.map((review,index) =>
-                      <ReviewBox review = {review} key={index}/>
-                    )}
+                    {product.reviews &&
+                      product.reviews.map((review, index) => (
+                        <ReviewBox review={review} key={index} />
+                      ))}
                   </div>
-                ):(
+                ) : (
                   <p id="noReviewText">There are no reviews yet</p>
                 )}
               </div>
             </div>
           </div>
-          <Modal open={open} onClose={onCloseModal} center id="sizeModal">
-            <h4>Size Chart</h4>
-            <hr />
-            <img src="../images/sizeChart.png" alt="" />
-          </Modal>
         </>
       )}
     </>
