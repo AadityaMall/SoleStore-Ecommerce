@@ -1,9 +1,9 @@
 import React from "react";
 import { useEffect } from "react";
-import "./Layout/css/Cart.css";
+import "../Layout/css/Cart.css";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
-import { addToCart, removeFromCart } from "../actions/cartAction";
+import { Link, useNavigate } from "react-router-dom";
+import { addToCart, removeFromCart } from "../../actions/cartAction";
 
 const CartItemCard = (props) => {
   const dispatch = useDispatch();
@@ -103,6 +103,10 @@ const Cart = () => {
   for (let i = 0; i < cartItems.length; i++) {
     totalAmount += cartItems[i].quantity * cartItems[i].price;
   }
+  const navigate = useNavigate();
+  const checkouthandler = () => {
+    navigate("/login?redirect=shipping");
+  };
   useEffect(() => {
     window.scrollTo(0, 0);
   });
@@ -116,20 +120,27 @@ const Cart = () => {
               Total Items : {cartItems.length}
             </span>
           </div>
-          {cartItems!==0?
-            cartItems.map((item) => (
-              <>
-                <div className="productsCart" key={item.product}>
-                  <CartItemCard cproduct={item} />
-                </div>
-                <div className="final-amount">
-                  <h3>Total ₹ {totalAmount}</h3>
-                  <button className="btn mt-3" id="checkoutButton">
-                    Checkout
-                  </button>
-                </div>
-              </>
-            )):({})}
+          {cartItems !== 0
+            ? cartItems.map((item) => (
+                <>
+                  <div className="productsCart" key={item.product}>
+                    <CartItemCard cproduct={item} />
+                  </div>
+                </>
+              ))
+            : {}}
+          {cartItems!==0 && (
+          <div className="final-amount">
+            <h3>Total ₹ {totalAmount}</h3>
+            <button
+              className="btn mt-3"
+              id="checkoutButton"
+              onClick={checkouthandler}
+            >
+              Checkout
+            </button>
+          </div>
+          )}
         </div>
       </div>
     </>

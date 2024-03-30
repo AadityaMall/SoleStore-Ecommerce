@@ -30,7 +30,6 @@ const Update = () => {
     if (user) {
       setName(user.name);
       setEmail(user.email);
-      // setAvatar(user.avatar.url)
       setAvatarPreview(user.avatar.url);
     }
     if (error) {
@@ -133,7 +132,7 @@ const Update = () => {
                       value="Update Profile"
                       className="btn btn-block signup-button"
                       id="submit-btn"
-                      // disabled={loading ? true : false}
+                      disabled={loading ? true : false}
                     />
                   </form>
                 </div>

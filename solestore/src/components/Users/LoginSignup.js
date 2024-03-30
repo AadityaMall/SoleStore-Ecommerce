@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../Layout/css/LoginSignup.css";
 import $ from "jquery";
-import { Link , useNavigate} from "react-router-dom";
+import { Link , useLocation, useNavigate} from "react-router-dom";
 import Loader from "../Layout/Loader";
 import { useDispatch, useSelector } from "react-redux";
 import { clearErrors, login,register } from "../../actions/userActions";
@@ -11,6 +11,7 @@ const LoginSignup = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   });
+  const location =  useLocation();
   const navigate =  useNavigate();
   const dispatch = useDispatch();
   const alert = useAlert();
@@ -30,16 +31,16 @@ const LoginSignup = () => {
   const [avatarPreview, setAvatarPreview] = useState(
     "/images/defaultProfile.jpg"
   );
-
+  const redirect = location.search?location.search.split("=")[1]:"/account";
   useEffect(() => {
     if (error) {
       alert.error(error);
       dispatch(clearErrors());
     }
     if(isAuthenticated){
-      navigate("/account");
+      navigate(`/${redirect}`);
     }
-  }, [dispatch, error, alert,navigate,isAuthenticated]);
+  }, [dispatch, error, alert,navigate,isAuthenticated,redirect]);
 
   const registerSubmit = (e) => {
     e.preventDefault();
@@ -53,7 +54,7 @@ const LoginSignup = () => {
 
   const registerDataChange = (e) => {
     if (e.target.name === "avatar") {
-      const reader = new FileReader();
+      const reader = new FileReader();    
       reader.onload = () => {
         if (reader.readyState === 2) {
           setAvatarPreview(reader.result);

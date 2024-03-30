@@ -1,0 +1,57 @@
+.shippingDetails-card {
+  box-shadow: 0px 5px 5px;
+  padding: 30px;
+  background-color: white;
+  min-width: 350px;
+  text-align: center;
+  margin: 400px;
+  margin-top: 50px;
+  margin-bottom: 40px;
+}
+.steps{
+    margin-top: 60px;
+}
+.shippingUser-input {
+  width: 100% !important;
+  padding: 1vmax 4vmax;
+  box-sizing: border-box;
+  border: 1px solid black;
+  outline: none;
+  padding-right: 1vmax;
+}
+.selctInput_Shipping {
+  border: 1px solid black;
+  height: 4vmax;
+}
+.shippingUser-input select option {
+  color: black;
+}
+option[value=" "][disabled] {
+  display: none;
+}
+
+/* MUI STEPPER CSS */
+.MuiStepConnector-line {
+  display: none !important;
+}
+
+.MuiStepConnector-root {
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.471);
+}
+
+.MuiStepConnector-active,
+.MuiStepConnector-completed {
+  font-size: 25px;
+}
+@media screen and (max-width: 992px) {
+  .shippingUser-input {
+    padding: 1vmax 6vmax;
+  }
+  .shippingDetails-card {
+    margin: 0px;
+  }
+  .selctInput_Shipping {
+    height: 6vmax;
+  }
+}

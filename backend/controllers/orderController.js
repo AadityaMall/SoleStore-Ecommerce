@@ -8,9 +8,9 @@ exports.newOrder = asyncError(async (req, res, next) => {
   const {
     shippingInfo,
     orderItems,
-    paymentInfo,
     itemsPrice,
     taxPrice,
+    discount,
     shippingPrice,
     totalPrice,
   } = req.body;
@@ -18,10 +18,10 @@ exports.newOrder = asyncError(async (req, res, next) => {
   const order = await Order.create({
     shippingInfo,
     orderItems,
-    paymentInfo,
     itemsPrice,
     taxPrice,
     shippingPrice,
+    discount,
     totalPrice,
     paidAt: Date.now(),
     user: req.user.id,

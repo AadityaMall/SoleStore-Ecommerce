@@ -44,7 +44,7 @@
     margin: 10px 0px;
 }
 #userWebsiteDataDets div:hover{
-    box-shadow: 0px 5px 10px black;
+    box-shadow: 0px 5px 10px rgb(0, 0, 0);
 }
 a{
     text-decoration: none;

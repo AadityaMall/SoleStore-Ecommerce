@@ -16,7 +16,7 @@ const Product = (props) => {
   return (
     <>
       <Link
-        className={`prod-box prod-boxShadow-${
+        className={`prod-box shadow-${
           props.modeProd === "light" ? "dark" : "light"
         }`}
         to={`/product/${props.product._id}`}

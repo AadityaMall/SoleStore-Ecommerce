@@ -10,23 +10,19 @@ export const wishlistReducer = (
   switch (action.type) {
     case ADD_TO_WISHLIST:
         const item = action.payload;
-
         const isItemExist = state.wishlistItems.find(
           (i) => i.product === item.product
         );
-  
-        if (isItemExist) {
-          return {
-            ...state,
-            wishlistItems: state.wishlistItems.map((i) =>
-              i.product === isItemExist.product ? item : i
-            ),
-          };
-        } else {
+        if (!isItemExist) {
           return {
             ...state,
             wishlistItems: [...state.wishlistItems, item],
           };
+        }else{
+          return{
+            ...state,
+            wishlistItems:[...state.wishlistItems]
+          }
         }
     case REMOVE_FROM_WISHLIST:
       return{
