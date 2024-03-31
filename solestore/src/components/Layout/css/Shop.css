@@ -14,20 +14,20 @@
 }
 .my-slider-price {
   display: flex;
-  width: 300px;
+  width: 20vw;
   justify-content: space-evenly;
-  align-items: center;
+
 }
 #priceRangeLabel {
-  margin-right: 1vw;
-  width: 150px;
+  margin-right: 0vw;
+  width: 10vw;
 }
 .shop-filters li {
-  margin-left: 4.5vw;
+  margin-left: 2.5vw;
 }
 select {
   border-radius: 5px;
-  width: 250px;
+  width: 20vw;
   height: 30px;
   text-align: center;
   font-family: "Alata", sans-serif;
@@ -39,12 +39,23 @@ select option {
 .color-dark {
   color: black;
 }
+.nav-itemm-shop{
+  margin: 0px;
+}
 
 @media screen and (max-width: 992px) {
   .nav-item-shop {
     border-bottom: 1px solid rgba(0, 0, 0, 0.45);
-    display: flex;
-    justify-content: center;
+    justify-content:center;
     padding: 10px 0px;
+  }
+  select{
+    width: 100%;
+  }
+  .my-slider-price{
+    width: 100%;
+  }
+  #priceRangeLabel{
+    width: 40%;
   }
 }

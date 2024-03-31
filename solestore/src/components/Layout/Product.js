@@ -1,16 +1,16 @@
 import React from "react";
-import ReactStars from "react-rating-stars-component";
 import { Link } from "react-router-dom";
 import "./css/Product.css";
+import { Rating } from "@mui/material";
 
 const Product = (props) => {
   
   const options = {
-    edit: false,
-    activeColor: props.modeProd === "light" ? "black" : "white",
     value: props.product.ratings,
-    isHalf: true,
-    size: 25,
+    readOnly:true,
+    precision:0.5,
+    size: "medium",
+    sx:{color:props.modeProd === "light" ? "black" : "white"}
   };
 
   return (
@@ -30,9 +30,9 @@ const Product = (props) => {
           {props.product.name}
         </span>
         <div className="rating-review-prodBox">
-          <ReactStars {...options} />
+          <Rating {...options} />
           <span
-            className={`col-${props.modeProd === "light" ? "light" : "dark"}`}
+            className={`col-${props.modeProd === "light" ? "light" : "dark"} rating-review-prodBox-span`}
           >
             {`(${props.product.numberOfReview} Reviews)`}
           </span>

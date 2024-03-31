@@ -138,7 +138,7 @@ const Home = (props) => {
                 <h1 id="shopByCategoryHead">Shop By Category</h1>
               </div>
               <div className="row text-center mb-5 mt-3">
-                <Link className="col-md-4 mb-5" to={{pathname:'/products' , state:{homeFilter:'Sneakers'}}}>
+                <Link className="col-md-4 mb-5" to={`/products`} state={{homeFilter:"Sneakers"}}>
                   <img
                     src="../images/sneakers_circle.png"
                     alt=""
@@ -147,7 +147,7 @@ const Home = (props) => {
                     }`}
                   />
                 </Link>
-                <Link className="col-md-4 mb-5">
+                <Link className="col-md-4 mb-5" to={`/products`} state={{homeFilter:"Formals"}}>
                   <img
                     src="../images/formal_circle.png"
                     alt=""
@@ -156,7 +156,7 @@ const Home = (props) => {
                     }`}
                   />
                 </Link>
-                <Link className="col-md-4 mb-5">
+                <Link className="col-md-4 mb-5" to={`/products`} state={{homeFilter:"Sports"}}>
                   <img
                     src="../images/sports_circle.png"
                     alt=""

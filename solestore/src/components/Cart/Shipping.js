@@ -97,9 +97,8 @@ const navigate = useNavigate();
               required
               className="form-control selctInput_Shipping"
               onChange={(e) => setCountry(e.target.value)}
-              defaultValue={" "}
             >
-              <option value=" " disabled>
+              <option value=" ">
                 Country
               </option>
               {Country &&
@@ -118,9 +117,8 @@ const navigate = useNavigate();
                 required
                 className="form-control selctInput_Shipping"
                 onChange={(e) => setState(e.target.value)}
-                defaultValue={" "}
               >
-                <option value=" " disabled>
+                <option value=" " >
                   State
                 </option>
                 {State &&

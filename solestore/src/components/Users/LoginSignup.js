@@ -31,7 +31,7 @@ const LoginSignup = () => {
   const [avatarPreview, setAvatarPreview] = useState(
     "/images/defaultProfile.jpg"
   );
-  const redirect = location.search?location.search.split("=")[1]:"/account";
+  const redirect = location.search?location.search.split("=")[1]:"account";
   useEffect(() => {
     if (error) {
       alert.error(error);

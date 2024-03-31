@@ -122,24 +122,22 @@ const Cart = () => {
           </div>
           {cartItems !== 0
             ? cartItems.map((item) => (
-                <>
-                  <div className="productsCart" key={item.product}>
-                    <CartItemCard cproduct={item} />
-                  </div>
-                </>
+                <div className="productsCart" key={item.product}>
+                  <CartItemCard cproduct={item} />
+                </div>
               ))
             : {}}
-          {cartItems!==0 && (
-          <div className="final-amount">
-            <h3>Total ₹ {totalAmount}</h3>
-            <button
-              className="btn mt-3"
-              id="checkoutButton"
-              onClick={checkouthandler}
-            >
-              Checkout
-            </button>
-          </div>
+          {cartItems !== 0 && (
+            <div className="final-amount">
+              <h3>Total ₹ {totalAmount}</h3>
+              <button
+                className="btn mt-3"
+                id="checkoutButton"
+                onClick={checkouthandler}
+              >
+                Checkout
+              </button>
+            </div>
           )}
         </div>
       </div>

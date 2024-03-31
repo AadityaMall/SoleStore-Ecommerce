@@ -8,12 +8,14 @@ import Product from "./Layout/Product.js";
 import "./Layout/css/Shop.css";
 import Pagination from "@mui/material/Pagination";
 import { Slider } from "@mui/material";
+import { useLocation } from "react-router-dom";
 const Shop = (props) => {
   //every time page loads, scroll to top
   useEffect(() => {
     window.scrollTo(0, 0);
   });
-
+  let {state} = useLocation()
+  
   const shopBanner = () => {
     if (window.innerWidth < 500) {
       return "./images/shopWithUs_phone_bg.png";
@@ -33,9 +35,8 @@ const Shop = (props) => {
     useSelector((state) => state.products);
   const [currentPage, setCurrentPage] = useState(1);
   const [price, setPrice] = useState([0, 30000]);
-  const [category,setCategory] =  useState("")
+  const [category,setCategory] =  useState(state?state.homeFilter:"")
   const [ratings,setRatings] =  useState(0)
-
 
   useEffect(() => {
     if (error) {
@@ -73,7 +74,7 @@ const Shop = (props) => {
             </center>
           </div>
           <nav
-            className={`navbar navbar-expand-md navbar-${props.mode} text-${
+            className={`navbar navbar-expand-lg navbar-${props.mode} text-${
               props.mode === "light" ? "dark" : "light"
             }`}
           >
@@ -111,23 +112,23 @@ const Shop = (props) => {
                   </li>
                   <li className="nav-item-shop">
                     <select
+                    value={category}
                       onChange={getFilterCategory}
                       name="filter"
                       id="filter"
                       className={`color-${
                         props.mode === "light" ? "dark" : "light"
                       }`}
-                      defaultValue={"DEFAULT"}
                     >
-                      <option value="DEFAULT" disabled>
+                      <option value="">
                         Filter : Category
                       </option>
                       <option value="Sneakers">Sneakers</option>
                       <option value="Formals">Formals</option>
-                      <option value="Sport">Sports</option>
+                      <option value="Sports">Sports</option>
                     </select>
                   </li>
-                  <li className="nav-item-shop">
+                  {/* <li className="nav-item-shop">
                     <select
                       name="sort"
                       id="sort"
@@ -136,11 +137,11 @@ const Shop = (props) => {
                       }`}
                       defaultValue={"DEFAULT"}
                     >
-                      <option value="DEFAULT" disabled>Sort : Price Range</option>
+                      <option value="DEFAULT">Sort : Price Range</option>
                       <option value="1">Low to High</option>
                       <option value="-1">High to Low</option>
                     </select>
-                  </li>
+                  </li> */}
                   <li className="nav-item-shop">
                     <div className="my-slider-price">
                       <span id="priceRangeLabel">Rating :</span>

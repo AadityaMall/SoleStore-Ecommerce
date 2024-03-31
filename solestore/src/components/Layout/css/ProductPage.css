@@ -40,8 +40,8 @@
   justify-content: flex-start;
   margin-top: 20px;
 }
-.detailSection-2 span {
-  margin-left: 2.4vw;
+.detailSection-2-span {
+  padding-left: 15px;
 }
 
 .detailSection-3 {
@@ -76,9 +76,6 @@ input[type="number"] {
 }
 .color-light {
   color: white;
-}
-option[value=""][disabled] {
-  display: none;
 }
 .detailSection-5-1 select { 
   border-radius: 5px;
@@ -116,7 +113,6 @@ select option {
 .detailSection-6-1 input,
 .detailSection-6-1 button {
   width: 40px;
-  height: 5vh;
   text-align: center;
   transition: 0.3s ease-in;
   font-weight: 700;

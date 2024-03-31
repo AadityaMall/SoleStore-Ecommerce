@@ -23,9 +23,14 @@ import ResetPassword from "./components/Users/ResetPassword.js";
 import Shipping from "./components/Cart/Shipping.js";
 import OrderConfirm from "./components/Cart/OrderConfirm.js";
 import { CheckoutPage } from "./components/Cart/CheckoutPage.js";
+import MyOrders from "./components/Users/MyOrders.js";
+import SingleOrder from "./components/Users/SingleOrder.js";
+import OrderSuccess from "./components/Cart/OrderSuccessfull.js";
+import Dashboard from "./components/Users/Admin/Dashboard.js";
+
 function App() {
   const [mode, setMode] = useState("light");
-  const { isAuthenticated } = useSelector((state) => state.user);
+  const { isAuthenticated, user } = useSelector((state) => state.user);
   //Toggle between light and dark mode
   const toggleMode = () => {
     if (mode === "light") {
@@ -61,7 +66,10 @@ function App() {
             <Route path="/account" element={<LoginSignup />} />
           )}
           {isAuthenticated ? (
-            <Route path="/process/payment" element={<CheckoutPage mode={mode}/>} />
+            <Route
+              path="/process/payment"
+              element={<CheckoutPage mode={mode} />}
+            />
           ) : (
             <Route path="/process/payment" element={<LoginSignup />} />
           )}
@@ -80,6 +88,7 @@ function App() {
           ) : (
             <Route path="/shipping" element={<LoginSignup />} />
           )}
+
           {isAuthenticated ? (
             <Route
               path="/order/confirm"
@@ -88,6 +97,34 @@ function App() {
           ) : (
             <Route path="/order/confirm" element={<LoginSignup />} />
           )}
+          {isAuthenticated ? (
+            <Route path="/order/:id" element={<SingleOrder mode={mode} />} />
+          ) : (
+            <Route path="/order/:id" element={<LoginSignup />} />
+          )}
+          {isAuthenticated ? (
+            <Route path="/orders/me" element={<MyOrders mode={mode} />} />
+          ) : (
+            <Route path="/orders/me" element={<LoginSignup />} />
+          )}
+          {isAuthenticated ? (
+            <Route
+              path="/orderSuccessfull"
+              element={<OrderSuccess mode={mode} />}
+            />
+          ) : (
+            <Route path="/orderSuccessfull" element={<LoginSignup />} />
+          )}
+
+          {isAuthenticated && user.role=="admin"? (
+            <Route
+              path="/admin/dashboard"
+              element={<Dashboard mode={mode} />}
+            />
+          ) : (
+            <Route path="/admin/dashboard" element={<Error404 />} />
+          )}
+
           <Route path="/password/forgot" element={<ForgotPassword />} />
           <Route path="/password/reset/:token" element={<ResetPassword />} />
           <Route path="/products" element={<Shop mode={mode} />} />

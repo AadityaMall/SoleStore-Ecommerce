@@ -26,9 +26,6 @@
 .shippingUser-input select option {
   color: black;
 }
-option[value=" "][disabled] {
-  display: none;
-}
 
 /* MUI STEPPER CSS */
 .MuiStepConnector-line {

@@ -1,13 +1,13 @@
 import React from "react";
 import "./css/ReviewBox.css";
-import ReactStars from "react-rating-stars-component";
+import { Rating } from "@mui/material";
 const ReviewBox = (props) => {
   const options = {
-    edit: false,
-    activeColor: "black",
     value: props.review.rating,
-    isHalf: true,
-    size: 30,
+    readOnly:true,
+    precision:0.5,
+    size: "large",
+    sx:{color:props.mode === "light" ? "black" : "white"}
   };
   return (
     <>
@@ -25,7 +25,7 @@ const ReviewBox = (props) => {
         <div className="user_review">
           <center>
             <div className="rating-review">
-              <ReactStars {...options} />
+              <Rating {...options} />
             </div>
           </center>
           <p>{props.review.comment}</p>

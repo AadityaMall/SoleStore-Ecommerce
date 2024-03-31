@@ -41,7 +41,6 @@ class ApiFeatures {
     const skip = resultPerPge * (currentPage - 1);
     this.query = this.query.limit(resultPerPge).skip(skip);
     return this;
-  }
-
+  }  
 }
 module.exports = ApiFeatures;

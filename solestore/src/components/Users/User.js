@@ -80,7 +80,7 @@ const User = () => {
               </div>
               {user.role === "admin" && (
                 <div id="dashboard">
-                  <Link to={`/dashboard`} className="text-reset">
+                  <Link to={`/admin/dashboard`} className="text-reset">
                     <span className="headings-for-page">
                       Dashboard <i className="fa fa-dashboard"></i>
                     </span>

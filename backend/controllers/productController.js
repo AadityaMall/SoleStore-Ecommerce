@@ -3,7 +3,6 @@ const ErrorHandler = require("../utils/errorHandler");
 const asyncError = require("../middleware/asyncError");
 const ApiFeatures = require("../utils/apiFeatures");
 
-
 //Create Product -- Admin only
 exports.createProduct = asyncError(async (req, res, next) => {
   req.body.user = req.user.id;
@@ -19,9 +18,14 @@ exports.createProduct = asyncError(async (req, res, next) => {
 exports.getAllProducts = asyncError(async (req, res, next) => {
   const prodCount = await Product.countDocuments();
   const resultPerPage = 6;
-  const apiFeature = new ApiFeatures(Product.find(), req.query)
-  .search()
-  .filter();
+  const apiFeature = new ApiFeatures(Product.find(), req.query).filter();
+
+  // if(req.query.sort){
+  //   if(req.query.sort==="1"){
+  //     console.log("here")
+  //   }
+  // }
+  apiFeature.sort();
 
   let products = await apiFeature.query.clone();
 
@@ -95,7 +99,7 @@ exports.createProductReview = asyncError(async (req, res, next) => {
     user: req.user.id,
     name: req.user.name,
     email: req.user.email,
-    avatar: req.user.avatar,
+    avatar: req.user.avatar.url,
     rating: Number(rating),
     comment,
   };

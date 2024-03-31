@@ -1,11 +1,11 @@
 import { combineReducers } from "redux";
 import { configureStore } from "@reduxjs/toolkit";
 import {thunk} from "redux-thunk";
-import { productDetailReducer, productReducer } from "./reducers/productReducer";
+import { newReviewReducer, productDetailReducer, productReducer } from "./reducers/productReducer";
 import { forgotPasswordReducer, profileReducer, userReducer } from "./reducers/userReducer";
 import {cartReducer} from "./reducers/cartReducer"
 import { wishlistReducer } from "./reducers/wishlistReducer";
-import { newOrderReducer } from "./reducers/orderReducer";
+import { myOrdersReducer, newOrderReducer, orderDetailsReducer } from "./reducers/orderReducer";
 const reducers = combineReducers({
   products:productReducer,
   productDetails:productDetailReducer,
@@ -14,7 +14,10 @@ const reducers = combineReducers({
   forgotPassword:forgotPasswordReducer,
   cart:cartReducer,
   wishlist:wishlistReducer,
-  newOrder:newOrderReducer
+  newOrder:newOrderReducer,
+  myOrders:myOrdersReducer,
+  orderDetails:orderDetailsReducer,
+  newReview:newReviewReducer
 });
 const middleware = (getDefaultMiddleware) =>
   getDefaultMiddleware().concat(thunk);

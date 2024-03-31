@@ -1,0 +1,19 @@
+.myOrdersPage{
+    width: 100vw;
+    max-width: 100%;
+    padding: 2vmax 7vmax;
+    box-sizing: border-box;
+    height: 100%;
+}
+.MuiDataGrid-columnHeader{
+    background-color: rgba(128, 128, 128, 0.596);
+    padding: 1vmax!important;
+}
+.MuiToolbar-root{
+    display: none!important;
+}
+@media screen and (max-width:992px) {
+    .myOrdersPage{
+        padding: 2vmax 2vmax;
+    }
+}

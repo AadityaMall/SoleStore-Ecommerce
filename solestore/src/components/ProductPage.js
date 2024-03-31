@@ -3,15 +3,16 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import { Carousel } from "react-responsive-carousel";
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { clearErrors, getProductDetails } from "../actions/productAction";
+import { clearErrors, getProductDetails, newReview } from "../actions/productAction";
 import { useParams } from "react-router-dom";
-import ReactStars from "react-rating-stars-component";
 import Loader from "./Layout/Loader";
 import { useAlert } from "react-alert";
 import "react-responsive-modal/styles.css";
 import ReviewBox from "./Layout/ReviewBox";
 import { addToCart } from "../actions/cartAction";
 import { addToWishlist } from "../actions/wishlistAction";
+import { Rating } from "@mui/material";
+import { NEW_REVIEW_RESET } from "../constants/productConstants";
 const ProductPage = (props, { p }) => {
   function topFunction() {
     document.body.scrollTop = 0;
@@ -23,36 +24,49 @@ const ProductPage = (props, { p }) => {
   const { product, loading, error } = useSelector(
     (state) => state.productDetails
   );
-  const {wishlistItems} = useSelector((state)=>state.wishlist);
-  const isInWishlist = wishlistItems.find((i)=>i.product===product._id)?true:false;
-  
-  const wishlistButtonText = isInWishlist?"Wishlisted":"Wishlist";
+  const { isAuthenticated, user } = useSelector((state) => state.user);
+  const {success,error:reviewError} =  useSelector(state=>state.newReview)
+  const { wishlistItems } = useSelector((state) => state.wishlist);
+  const isInWishlist = wishlistItems.find((i) => i.product === product._id)
+    ? true
+    : false;
+
+  const wishlistButtonText = isInWishlist ? "Wishlisted" : "Wishlist";
 
   const wishListbuttonStyle = () => {
-    if(isInWishlist){
+    if (isInWishlist) {
       return {
-        backgroundColor:"gray",
-        color:"white",
-      }
+        backgroundColor: "gray",
+        color: "white",
+      };
+    } else {
+      return {
+        backgroundColor: "black",
+        color: "white",
+      };
     }
-    else{
-      return{
-        backgroundColor:"black",
-        color:"white"
-      }
-    }
-  }
+  };
 
   const [quantity, setQuantity] = useState(1);
+  const [rating, setrating] = useState(1);
+  const [comment, setcomment] = useState("");
 
   useEffect(() => {
     if (error) {
       alert.error(error);
       dispatch(clearErrors());
     }
+    if (reviewError) {
+      alert.error(reviewError);
+      dispatch(clearErrors());
+    }
+    if(success){
+      alert.success("Review Submitted");
+      dispatch({type:NEW_REVIEW_RESET })
+    }
     dispatch(getProductDetails(id));
-    topFunction()
-  }, [dispatch, id, error, alert]);
+    topFunction();
+  }, [dispatch, id, error, alert, reviewError,success]);
 
   //every time page loads, scroll to top
 
@@ -68,18 +82,13 @@ const ProductPage = (props, { p }) => {
   };
 
   const options = {
-    edit: false,
-    activeColor: "black",
     value: product.ratings,
-    isHalf: true,
-    size: 40,
+    readOnly:true,
+    precision:0.5,
+    size: "large",
+    sx:{color:props.mode === "light" ? "black" : "white"}
   };
 
-  const submitOptions = {
-    activeColor: "black",
-    isHalf: true,
-    size: 40,
-  };
   const addToCartHandler = () => {
     dispatch(addToCart(id, quantity));
     alert.success("Item Added to cart");
@@ -88,6 +97,14 @@ const ProductPage = (props, { p }) => {
     dispatch(addToWishlist(id));
     alert.success("Item Added to WishList");
   };
+
+  const reviewSubmitHandler = () => {
+    const myForm  =  new FormData();
+    myForm.set("rating", rating);
+    myForm.set("comment", comment);
+    myForm.set("productId",id);
+    dispatch(newReview(myForm));
+  }
 
   return (
     <>
@@ -121,8 +138,8 @@ const ProductPage = (props, { p }) => {
                     <p>{`Product # ${product._id}`}</p>
                   </div>
                   <div className="detailSection-2">
-                    <ReactStars {...options} />
-                    <span>{`(${product.numberOfReview} Reviews)`}</span>
+                    <Rating {...options} />
+                    <span className="detailSection-2-span">{`(${product.numberOfReview} Reviews)`}</span>
                   </div>
                   <div className="detailSection-3">
                     <span>{`₹${product.price}`}</span>
@@ -163,6 +180,7 @@ const ProductPage = (props, { p }) => {
                         props.mode === "light" ? "dark" : "light"
                       }`}
                       onClick={addToCartHandler}
+                      disabled={product.stock < 1 ? true : false}
                     >
                       Add to Cart
                     </button>
@@ -185,43 +203,56 @@ const ProductPage = (props, { p }) => {
                 <center>
                   <h1>Reviews</h1>
                 </center>
-                <div className="personal-review-submit">
-                  <div id="personDetsSection">
-                    <img
-                      src="../images/defaultProfile.jpg"
-                      alt="Profile"
-                      className="user_profileImage"
-                    />
-                    <span id="user_profileEmail">example@gmail.com</span>
+                {isAuthenticated ? (
+                  <div className="personal-review-submit">
+                    <div id="personDetsSection">
+                      <img
+                        src={user.avatar.url}
+                        alt="Profile"
+                        className="user_profileImage"
+                      />
+                      <span id="user_profileEmail">{user.email}</span>
+                    </div>
+                    <div>
+                      <Rating
+                        value={rating}
+                        onChange={(e,v) => setrating(v)}
+                        size="large"
+                        sx={{color:props.mode === "light" ? "black" : "white"}}
+                      />
+                    </div>
+                    <div className="reviewForm">
+                      <textarea
+                        cols="30"
+                        rows="5"
+                        placeholder="Your Message"
+                        required
+                        value={comment}
+                        onChange={(e)=>setcomment(e.target.value)}
+                      ></textarea>
+                      {console.log(comment)}
+                      <button
+                        value="submit"
+                        className={`mode-${
+                          props.mode === "light" ? "dark" : "light"
+                        }`}
+                        onClick={reviewSubmitHandler}
+                      >
+                        SUBMIT
+                      </button>
+                    </div>
                   </div>
-                  <div>
-                    <ReactStars {...submitOptions} />
+                ) : (
+                  <div className="loginValidation">
+                    <h1>Login to give review</h1>
                   </div>
-                  <div className="reviewForm">
-                    <textarea
-                      name=""
-                      id=""
-                      cols="30"
-                      rows="5"
-                      placeholder="Your Message"
-                      required
-                    ></textarea>
-                    <button
-                      value="submit"
-                      className={`mode-${
-                        props.mode === "light" ? "dark" : "light"
-                      }`}
-                    >
-                      SUBMIT
-                    </button>
-                  </div>
-                </div>
-                <hr />
+                )}
+
                 {product.reviews && product.reviews[0] ? (
                   <div className="otherReviews">
                     {product.reviews &&
                       product.reviews.map((review, index) => (
-                        <ReviewBox review={review} key={index} />
+                        <ReviewBox review={review} key={index} mode={props.mode} />
                       ))}
                   </div>
                 ) : (

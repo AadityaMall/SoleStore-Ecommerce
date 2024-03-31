@@ -34,7 +34,7 @@ export const CheckoutPage = ({ mode }) => {
   }
   const orderHandler = () => {
     dispatch(createOrder(order))
-    navigate("/orders/me")
+    navigate("/orderSuccessfull")
   }
   useEffect(() => {
     if (
