@@ -188,6 +188,10 @@ select option {
     font-weight: 700;
     font-size: 20px;
 }
+.otherReviews{
+  display: flex;
+  overflow: auto;
+}
 @media screen and (max-width: 1000px) {
   .details {
     text-align: center;

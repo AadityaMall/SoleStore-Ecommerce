@@ -27,6 +27,8 @@ import MyOrders from "./components/Users/MyOrders.js";
 import SingleOrder from "./components/Users/SingleOrder.js";
 import OrderSuccess from "./components/Cart/OrderSuccessfull.js";
 import Dashboard from "./components/Users/Admin/Dashboard.js";
+import ProductsList from "./components/Users/Admin/ProductsList.js";
+import NewProduct from "./components/Users/Admin/NewProduct.js";
 
 function App() {
   const [mode, setMode] = useState("light");
@@ -115,8 +117,8 @@ function App() {
           ) : (
             <Route path="/orderSuccessfull" element={<LoginSignup />} />
           )}
-
-          {isAuthenticated && user.role=="admin"? (
+          {/* Admin Routes */}
+          {isAuthenticated && user.role === "admin" ? (
             <Route
               path="/admin/dashboard"
               element={<Dashboard mode={mode} />}
@@ -124,6 +126,17 @@ function App() {
           ) : (
             <Route path="/admin/dashboard" element={<Error404 />} />
           )}
+          {isAuthenticated && user.role === "admin" ? (
+            <Route path="/admin/products" element={<ProductsList />} />
+          ) : (
+            <Route path="/admin/products" element={<Error404 />} />
+          )}
+          {isAuthenticated && user.role === "admin" ? (
+            <Route path="/admin/product/new" element={<NewProduct />} />
+          ) : (
+            <Route path="/admin/product/new" element={<Error404 />} />
+          )}
+          {/* Admin Routes */}
 
           <Route path="/password/forgot" element={<ForgotPassword />} />
           <Route path="/password/reset/:token" element={<ResetPassword />} />

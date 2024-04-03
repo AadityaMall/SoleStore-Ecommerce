@@ -3,7 +3,11 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import { Carousel } from "react-responsive-carousel";
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { clearErrors, getProductDetails, newReview } from "../actions/productAction";
+import {
+  clearErrors,
+  getProductDetails,
+  newReview,
+} from "../actions/productAction";
 import { useParams } from "react-router-dom";
 import Loader from "./Layout/Loader";
 import { useAlert } from "react-alert";
@@ -25,7 +29,9 @@ const ProductPage = (props, { p }) => {
     (state) => state.productDetails
   );
   const { isAuthenticated, user } = useSelector((state) => state.user);
-  const {success,error:reviewError} =  useSelector(state=>state.newReview)
+  const { success, error: reviewError } = useSelector(
+    (state) => state.newReview
+  );
   const { wishlistItems } = useSelector((state) => state.wishlist);
   const isInWishlist = wishlistItems.find((i) => i.product === product._id)
     ? true
@@ -60,13 +66,13 @@ const ProductPage = (props, { p }) => {
       alert.error(reviewError);
       dispatch(clearErrors());
     }
-    if(success){
+    if (success) {
       alert.success("Review Submitted");
-      dispatch({type:NEW_REVIEW_RESET })
+      dispatch({ type: NEW_REVIEW_RESET });
     }
     dispatch(getProductDetails(id));
     topFunction();
-  }, [dispatch, id, error, alert, reviewError,success]);
+  }, [dispatch, id, error, alert, reviewError, success]);
 
   //every time page loads, scroll to top
 
@@ -83,10 +89,10 @@ const ProductPage = (props, { p }) => {
 
   const options = {
     value: product.ratings,
-    readOnly:true,
-    precision:0.5,
+    readOnly: true,
+    precision: 0.5,
     size: "large",
-    sx:{color:props.mode === "light" ? "black" : "white"}
+    sx: { color: props.mode === "light" ? "black" : "white" },
   };
 
   const addToCartHandler = () => {
@@ -99,12 +105,12 @@ const ProductPage = (props, { p }) => {
   };
 
   const reviewSubmitHandler = () => {
-    const myForm  =  new FormData();
+    const myForm = new FormData();
     myForm.set("rating", rating);
     myForm.set("comment", comment);
-    myForm.set("productId",id);
+    myForm.set("productId", id);
     dispatch(newReview(myForm));
-  }
+  };
 
   return (
     <>
@@ -216,9 +222,11 @@ const ProductPage = (props, { p }) => {
                     <div>
                       <Rating
                         value={rating}
-                        onChange={(e,v) => setrating(v)}
+                        onChange={(e, v) => setrating(v)}
                         size="large"
-                        sx={{color:props.mode === "light" ? "black" : "white"}}
+                        sx={{
+                          color: props.mode === "light" ? "black" : "white",
+                        }}
                       />
                     </div>
                     <div className="reviewForm">
@@ -228,7 +236,7 @@ const ProductPage = (props, { p }) => {
                         placeholder="Your Message"
                         required
                         value={comment}
-                        onChange={(e)=>setcomment(e.target.value)}
+                        onChange={(e) => setcomment(e.target.value)}
                       ></textarea>
                       {console.log(comment)}
                       <button
@@ -248,11 +256,15 @@ const ProductPage = (props, { p }) => {
                   </div>
                 )}
 
-                {product.reviews && product.reviews[0] ? (
+                {product && product.reviews ? (
                   <div className="otherReviews">
                     {product.reviews &&
-                      product.reviews.map((review, index) => (
-                        <ReviewBox review={review} key={index} mode={props.mode} />
+                      product.reviews.map((item, index) => (
+                        <ReviewBox
+                          review={item}
+                          key={index}
+                          mode={props.mode}
+                        />
                       ))}
                   </div>
                 ) : (

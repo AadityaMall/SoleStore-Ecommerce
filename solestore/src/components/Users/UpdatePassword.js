@@ -87,7 +87,7 @@ const UpdatePassword = () => {
                       <input
                         autoComplete="on"
                         type="password"
-                        className="form-control updateUser-input"
+                        className="form-control updateUser-input" 
                         placeholder="New Password"
                         name="newPassword"
                         value={newPassword}
