@@ -87,7 +87,7 @@ const UpdateOrder = ({ mode }) => {
                 <div id="receiptBodyUpper" className="">
                   <span>To : </span>
                   <span id="recieptBodyUserName" className="headings-for-page">
-                    {user.name}
+                    {order && order.user ? order.user.name : " "}
                   </span>
                   <span id="userMobileNumber">
                     {order.shippingInfo.phoneNo}
