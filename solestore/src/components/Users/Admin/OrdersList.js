@@ -3,21 +3,27 @@ import { DataGrid } from "@mui/x-data-grid";
 import "../../Layout/css/ProductsList.css";
 import { useSelector, useDispatch } from "react-redux";
 import { Link , useNavigate } from "react-router-dom";
-import { clearErrors, deleteProduct, getAdminProduct } from "../../../actions/productAction";
+import { clearErrors, deleteOrder, getAllOrders } from "../../../actions/orderAction";
 import { useAlert } from "react-alert";
 import { Edit, Delete } from "@mui/icons-material";
 import SideBar from "./SideBar";
 import { Button } from "@mui/material";
-import { DELETE_PRODUCT_RESET } from "../../../constants/productConstants";
-const ProductsList = () => {
+import { DELETE_ORDERS_RESET } from "../../../constants/orderConstant";
+const OrdersList = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const alert = useAlert();
-  const { error, products } = useSelector((state) => state.products);
-  const { error:deleteError,isDeleted} =  useSelector((state)=> state.updateproduct)
-  
-  const deleteProductHandler = (id) => {
-    dispatch(deleteProduct(id));
+  const { error, orders } = useSelector((state) => state.allOrders);
+  const { error:deleteError,isDeleted} =  useSelector((state)=> state.updateOrder)
+  const orderStatusColor = (stat) => {
+    if (stat === "Processing") {
+      return "text-danger";
+    } else if (stat === "Shipped") {
+      return "text-warning";
+    } else return "text-success";
+  };
+  const deleteOrderHandler = (id) => {
+    dispatch(deleteOrder(id));
   };
   useEffect(() => {
     if(error){
@@ -29,40 +35,37 @@ const ProductsList = () => {
       dispatch(clearErrors())
     }
     if(isDeleted){
-      alert.success("Product Deleted Successfuly");
-      navigate("/admin/dashboard");
-      dispatch({type:DELETE_PRODUCT_RESET})
+      alert.success("Order Deleted Successfuly");
+      navigate("/admin/orders");
+      dispatch({type:DELETE_ORDERS_RESET})
     }
-    dispatch(getAdminProduct())
+    dispatch(getAllOrders())
   }, [error,alert,dispatch,deleteError, navigate, isDeleted])
   
   const columns = [
-    { field: "id", headerName: "Product ID", minWidth: 180, flex: 1 },
+    { field: "id", headerName: "Order ID", minWidth: 300, flex: 1 },
     {
-      field: "name",
-      headerName: "Name",
-      minWidth: 250,
+      field: "status",
+      headerName: "Order Status",
+      minWidth: 150,
+      flex: 1,
+      cellClassName: (params) => {
+        return orderStatusColor( params.row["status"] )
+      },
+    },
+    {
+      field: "itemsQty",
+      headerName: "Quantity",
+      type: "Number",
+      minWidth: 150,
       flex: 1,
     },
     {
-      field: "stock",
-      headerName: "Stock",
+      field: "amount",
+      headerName: "Amount",
       type: "Number",
-      minWidth: 150,
-      flex: 0.5,
-    },
-    {
-      field: "price",
-      headerName: "Price",
-      type: "Number",
-      minWidth: 180,
-      flex: 0.5,
-    },
-    {
-      field: "category",
-      headerName: "Category",
-      minWidth: 180,
-      flex: 0.5,
+      minWidth: 270,
+      flex: 1,
     },
     {
       field: "actions",
@@ -73,10 +76,10 @@ const ProductsList = () => {
       renderCell: (params) => {
         return (
           <>
-            <Link to={`/admin/product/${params.id}`} className="text-reset">
+            <Link to={`/admin/order/${params.id}`} className="text-reset">
               <Edit />
             </Link>
-            <Button className="text-reset" onClick={() => deleteProductHandler(params.id)}>
+            <Button className="text-reset" onClick={() => deleteOrderHandler(params.id)}>
               <Delete />
             </Button>
           </>
@@ -85,14 +88,13 @@ const ProductsList = () => {
     },
   ];
   const rows = [];
-  products &&
-    products.forEach((element) => {
+  orders &&
+    orders.forEach((element) => {
       rows.push({
         id: element._id,
-        stock: element.stock,
-        price: element.price,
-        category: element.category,
-        name: element.name,
+        itemsQty: element.orderItems.length,
+        amount: element.totalPrice,
+        status:element.orderStatus,
       });
     });
 
@@ -105,7 +107,7 @@ const ProductsList = () => {
           <SideBar />
         </div>
         <div className="dashboard-mainContainer col-lg-10">
-          <h1 className="headings-for-page text-center">All Products</h1>
+          <h1 className="headings-for-page text-center">All Orders</h1>
           <div className="data-grid-admin">
             <DataGrid   
               rows={rows}
@@ -122,4 +124,5 @@ const ProductsList = () => {
   );
 };
 
-export default ProductsList;
+
+export default OrdersList

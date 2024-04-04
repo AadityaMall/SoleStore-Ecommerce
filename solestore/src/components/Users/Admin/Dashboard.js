@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import SideBar from "./SideBar";
 import "../../Layout/css/dashboard.css";
 import { useSelector, useDispatch } from "react-redux";
+import { getAllOrders } from "../../../actions/orderAction";
 import { getAdminProduct } from "../../../actions/productAction";
 import { Link } from "react-router-dom";
 import { Doughnut, Line } from "react-chartjs-2";
@@ -16,6 +17,7 @@ import {
   Legend,
   ArcElement,
 } from "chart.js";
+import { getAllUsers } from "../../../actions/userActions";
 Chart.register(
   CategoryScale,
   LinearScale,
@@ -28,9 +30,13 @@ Chart.register(
 );
 const Dashboard = () => {
   const dispatch = useDispatch();
-
+  const { orders } = useSelector((state) => state.allOrders);
+  const { users } = useSelector((state) => state.allUsers);
   const { products } = useSelector((state) => state.products);
-
+  let totalAm = 0;
+  orders && orders.forEach((item)=>{
+    totalAm += item.totalPrice
+  })
   let outOfStock = 0;
   let inStock = 0
   products &&
@@ -45,6 +51,8 @@ const Dashboard = () => {
 
   useEffect(() => {
     dispatch(getAdminProduct());
+    dispatch(getAllOrders())
+    dispatch(getAllUsers());
   }, [dispatch]);
 
   const lineState = {
@@ -52,8 +60,8 @@ const Dashboard = () => {
     datasets: [
       {
         label: "TOTAL AMOUNT",
-        data: [0, 40000],
-        backgroundColor: ["gray"],
+        data: [0, totalAm],
+        backgroundColor: ["black"],
         hoverBackgroundColor: ["black"],
       },
     ],
@@ -78,7 +86,7 @@ const Dashboard = () => {
           <h1 className="headings-for-page text-center">Dashboard</h1>
           <div className="totalAmount-dashboard">
             <p>
-              Total Amount <br /> 12000000
+              Total Amount <br /> {totalAm}
             </p>
           </div>
           <div className="dashboardSummary">
@@ -91,13 +99,13 @@ const Dashboard = () => {
             <Link to={`/admin/users`}>
               <div className="dashboard-element userCount-dashboard">
                 <p className="headings-for-page">Users</p>
-                <b>2</b>
+                <b>{users && users.length}</b>
               </div>
             </Link>
             <Link to={`/admin/orders`}>
               <div className="dashboard-element orderCount-dashboard">
                 <p className="headings-for-page">Orders</p>
-                <b>2</b>
+                <b>{orders && orders.length}</b>
               </div>
             </Link>
           </div>

@@ -24,7 +24,7 @@
 .sidebar > a > img:hover {
   filter: drop-shadow(0 0 10px rgb(58, 54, 54));
 }
-.sidebar a {
+.sidebar a , .sidebar #productTreeElement{
   text-decoration: none;
   color: rgb(0, 0, 0);
   font: 200 1rem "Roboto";

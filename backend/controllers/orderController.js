@@ -89,12 +89,14 @@ exports.updateOrder = asyncError(async (req, res, next) => {
     return next(new ErrorHandler("You have already Dilevered this Order", 404));
   }
 
-  order.orderItems.forEach(async (o) => {
-    await updateStock(o.product, o.quantity);
-  });
+  if (req.body.status === "Shipped") {
+    order.orderItems.forEach(async (o) => {
+      await updateStock(o.product, o.quantity);
+    });
+  }
+  order.orderStatus = req.body.status;
 
   if (req.body.status === "Delivered") {
-    order.orderStatus = req.body.status;
     order.deliveredAt = Date.now();
   }
 

@@ -29,6 +29,12 @@ import OrderSuccess from "./components/Cart/OrderSuccessfull.js";
 import Dashboard from "./components/Users/Admin/Dashboard.js";
 import ProductsList from "./components/Users/Admin/ProductsList.js";
 import NewProduct from "./components/Users/Admin/NewProduct.js";
+import UpdateProduct from "./components/Users/Admin/UpdateProduct.js";
+import OrdersList from "./components/Users/Admin/OrdersList.js";
+import UpdateOrder from "./components/Users/Admin/UpdateOrder.js";
+import UsersList from "./components/Users/Admin/UsersList.js";
+import UpdateUserRole from "./components/Users/Admin/UpdateUserRole.js";
+import AdminReviews from "./components/Users/Admin/AdminReviews.js";
 
 function App() {
   const [mode, setMode] = useState("light");
@@ -47,6 +53,7 @@ function App() {
   React.useEffect(() => {
     store.dispatch(loadUser());
   }, []);
+  window.addEventListener("contextmenu",(e)=>e.preventDefault())
 
   return (
     <>
@@ -135,6 +142,37 @@ function App() {
             <Route path="/admin/product/new" element={<NewProduct />} />
           ) : (
             <Route path="/admin/product/new" element={<Error404 />} />
+          )}
+          {isAuthenticated && user.role === "admin" ? (
+            <Route path="/admin/product/:id" element={<UpdateProduct />} />
+          ) : (
+            <Route path="/admin/product/:id" element={<Error404 />} />
+          )}
+
+          {isAuthenticated && user.role === "admin" ? (
+            <Route path="/admin/orders" element={<OrdersList />} />
+          ) : (
+            <Route path="/admin/orders" element={<Error404 />} />
+          )}
+          {isAuthenticated && user.role === "admin" ? (
+            <Route path="/admin/order/:id" element={<UpdateOrder />} />
+          ) : (
+            <Route path="/admin/order/:id" element={<Error404 />} />
+          )}
+          {isAuthenticated && user.role === "admin" ? (
+            <Route path="/admin/users" element={<UsersList />} />
+          ) : (
+            <Route path="/admin/users" element={<Error404 />} />
+          )}
+          {isAuthenticated && user.role === "admin" ? (
+            <Route path="/admin/user/:id" element={<UpdateUserRole />} />
+          ) : (
+            <Route path="/admin/user/:id" element={<Error404 />} />
+          )}
+          {isAuthenticated && user.role === "admin" ? (
+            <Route path="/admin/reviews" element={<AdminReviews />} />
+          ) : (
+            <Route path="/admin/reviews" element={<Error404 />} />
           )}
           {/* Admin Routes */}
 

@@ -18,17 +18,17 @@ const SideBar = () => {
   return (
     <>
       <div className="sidebar">
-        {window.innerWidth>900 && (
-        <Link to={`/`}>
-          <img src={darkLogo} alt="" />
-        </Link>
+        {window.innerWidth > 900 && (
+          <Link to={`/`}>
+            <img src={darkLogo} alt="" />
+          </Link>
         )}
         <Link to={`/admin/dashboard`}>
           <p>
             <Dashboard /> Dashboard
           </p>
         </Link>
-        <Link to={`/admin/orders`}> 
+        <Link to={`/admin/orders`}>
           <p>
             <ListAlt /> Orders
           </p>
@@ -44,27 +44,26 @@ const SideBar = () => {
             Reviews
           </p>
         </Link>
-        <Link>
-          <div>
-            <SimpleTreeView
-              aria-label="customized"
-              slots={{
-                expandIcon: ExpandMore,
-                collapseIcon: ImportExport,
-                endIcon: Circle,
-              }}
-            >
-              <TreeItem itemId="1" label="Products">
-                <Link to={`/admin/products`} className="">
-                  <TreeItem itemId="2" label="All Products" />
-                </Link>
-                <Link to={`/admin/product/new`}>
-                  <TreeItem itemId="3" label="Create Product" />
-                </Link>
-              </TreeItem>
-            </SimpleTreeView>
-          </div>
-        </Link>
+
+        <div id="productTreeElement">
+          <SimpleTreeView
+            aria-label="customized"
+            slots={{
+              expandIcon: ExpandMore,
+              collapseIcon: ImportExport,
+              endIcon: Circle,
+            }}
+          >
+            <TreeItem itemId="1" label="Products">
+              <Link to={`/admin/products`} className="">
+                <TreeItem itemId="2" label="All Products" />
+              </Link>
+              <Link to={`/admin/product/new`}>
+                <TreeItem itemId="3" label="Create Product" />
+              </Link>
+            </TreeItem>
+          </SimpleTreeView>
+        </div>
       </div>
     </>
   );

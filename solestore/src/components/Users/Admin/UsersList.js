@@ -3,21 +3,21 @@ import { DataGrid } from "@mui/x-data-grid";
 import "../../Layout/css/ProductsList.css";
 import { useSelector, useDispatch } from "react-redux";
 import { Link , useNavigate } from "react-router-dom";
-import { clearErrors, deleteProduct, getAdminProduct } from "../../../actions/productAction";
+import { clearErrors, deleteUser, getAllUsers } from "../../../actions/userActions";
 import { useAlert } from "react-alert";
 import { Edit, Delete } from "@mui/icons-material";
 import SideBar from "./SideBar";
 import { Button } from "@mui/material";
-import { DELETE_PRODUCT_RESET } from "../../../constants/productConstants";
-const ProductsList = () => {
+import { USER_DELETE_RESET } from "../../../constants/userConstant";
+const UsersList = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const alert = useAlert();
-  const { error, products } = useSelector((state) => state.products);
-  const { error:deleteError,isDeleted} =  useSelector((state)=> state.updateproduct)
+  const { error, users } = useSelector((state) => state.allUsers);
+  const { error:deleteError,isDeleted} =  useSelector((state)=> state.profile)
   
-  const deleteProductHandler = (id) => {
-    dispatch(deleteProduct(id));
+  const deleteUserHandler = (id) => {
+    dispatch(deleteUser(id));
   };
   useEffect(() => {
     if(error){
@@ -29,40 +29,37 @@ const ProductsList = () => {
       dispatch(clearErrors())
     }
     if(isDeleted){
-      alert.success("Product Deleted Successfuly");
-      navigate("/admin/dashboard");
-      dispatch({type:DELETE_PRODUCT_RESET})
+      alert.success("User Deleted");
+      navigate("/admin/users");
+      dispatch({type:USER_DELETE_RESET})
     }
-    dispatch(getAdminProduct())
+    dispatch(getAllUsers())
   }, [error,alert,dispatch,deleteError, navigate, isDeleted])
   
   const columns = [
-    { field: "id", headerName: "Product ID", minWidth: 180, flex: 1 },
+    { field: "id", headerName: "User ID", minWidth: 180, flex: 1 },
     {
       field: "name",
       headerName: "Name",
-      minWidth: 250,
+      minWidth: 200,
+      flex: 0.7,
+    },
+    {
+      field: "email",
+      headerName: "Email ID",
+      minWidth: 200,
       flex: 1,
     },
     {
-      field: "stock",
-      headerName: "Stock",
-      type: "Number",
-      minWidth: 150,
-      flex: 0.5,
-    },
-    {
-      field: "price",
-      headerName: "Price",
-      type: "Number",
+      field: "role",
+      headerName: "Role",
       minWidth: 180,
       flex: 0.5,
-    },
-    {
-      field: "category",
-      headerName: "Category",
-      minWidth: 180,
-      flex: 0.5,
+      cellClassName: (params) => {
+        return params.row["role"] === "admin"
+          ? "text-success"
+          : "text-danger";
+      },
     },
     {
       field: "actions",
@@ -73,10 +70,10 @@ const ProductsList = () => {
       renderCell: (params) => {
         return (
           <>
-            <Link to={`/admin/product/${params.id}`} className="text-reset">
+            <Link to={`/admin/user/${params.id}`} className="text-reset">
               <Edit />
             </Link>
-            <Button className="text-reset" onClick={() => deleteProductHandler(params.id)}>
+            <Button className="text-reset" onClick={() => deleteUserHandler(params.id)}>
               <Delete />
             </Button>
           </>
@@ -85,14 +82,13 @@ const ProductsList = () => {
     },
   ];
   const rows = [];
-  products &&
-    products.forEach((element) => {
+  users &&
+    users.forEach((element) => {
       rows.push({
         id: element._id,
-        stock: element.stock,
-        price: element.price,
-        category: element.category,
         name: element.name,
+        email: element.email,
+        role: element.role,
       });
     });
 
@@ -105,7 +101,7 @@ const ProductsList = () => {
           <SideBar />
         </div>
         <div className="dashboard-mainContainer col-lg-10">
-          <h1 className="headings-for-page text-center">All Products</h1>
+          <h1 className="headings-for-page text-center">All Users</h1>
           <div className="data-grid-admin">
             <DataGrid   
               rows={rows}
@@ -122,4 +118,6 @@ const ProductsList = () => {
   );
 };
 
-export default ProductsList;
+
+
+export default UsersList

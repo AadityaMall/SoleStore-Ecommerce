@@ -5,20 +5,26 @@ import {
   newProductreducer,
   newReviewReducer,
   productDetailReducer,
-  productReducer,
+  updateproductReducer,
   productsReducer,
+  productReviewsReducer,
+  reviewReducer,
 } from "./reducers/productReducer";
 import {
+  allUsersReducer,
   forgotPasswordReducer,
   profileReducer,
+  userDetailsReducer,
   userReducer,
 } from "./reducers/userReducer";
 import { cartReducer } from "./reducers/cartReducer";
 import { wishlistReducer } from "./reducers/wishlistReducer";
 import {
+  allOrdersReducer,
   myOrdersReducer,
   newOrderReducer,
   orderDetailsReducer,
+  updateOrdersReducer,
 } from "./reducers/orderReducer";
 const reducers = combineReducers({
   products: productsReducer,
@@ -33,7 +39,13 @@ const reducers = combineReducers({
   orderDetails: orderDetailsReducer,
   newReview: newReviewReducer,
   newProduct: newProductreducer,
-  product: productReducer,
+  updateproduct: updateproductReducer,
+  updateOrder:updateOrdersReducer,
+  allOrders : allOrdersReducer,
+  allUsers:allUsersReducer,
+  userDetails: userDetailsReducer,
+  productReviews: productReviewsReducer,
+  review: reviewReducer,
 });
 const middleware = (getDefaultMiddleware) =>
   getDefaultMiddleware().concat(thunk);

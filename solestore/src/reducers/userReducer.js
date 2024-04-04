@@ -25,6 +25,20 @@ import {
   RESET_PASSWORD_FAIL,
   RESET_PASSWORD_REQUEST,
   RESET_PASSWORD_SUCCESS,
+  ALL_USERS_FAIL,
+  ALL_USERS_REQUEST,
+  ALL_USERS_SUCCESS,
+  USER_DETAIL_FAIL,
+  USER_DETAIL_REQUEST,
+  USER_DETAIL_SUCCESS,
+  USER_DELETE_FAIL,
+  USER_DELETE_REQUEST,
+  USER_DELETE_SUCCESS,
+  ADMIN_USER_UPDATE_FAIL,
+  ADMIN_USER_UPDATE_REQUEST,
+  ADMIN_USER_UPDATE_SUCCESS,
+  ADMIN_USER_UPDATE_RESET,
+  USER_DELETE_RESET,
 } from "../constants/userConstant";
 export const userReducer = (state = { user: [] }, action) => {
   switch (action.type) {
@@ -85,28 +99,46 @@ export const profileReducer = (state = {}, action) => {
   switch (action.type) {
     case USERUPDATE_REQUEST:
     case UPDATE_PASSWORD_REQUEST:
+    case ADMIN_USER_UPDATE_REQUEST:
+    case USER_DELETE_REQUEST:
       return {
         loading: true,
         ...state,
       };
     case USERUPDATE_SUCCESS:
     case UPDATE_PASSWORD_SUCCESS:
+    case ADMIN_USER_UPDATE_SUCCESS:
       return {
         ...state,
         loading: false,
         isUpdated: action.payload,
       };
+    case USER_DELETE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        isDeleted: action.payload.success,
+        message:action.payload.message
+      };
     case USERUPDATE_FAIL:
     case UPDATE_PASSWORD_FAIL:
+    case ADMIN_USER_UPDATE_FAIL:
+    case USER_DELETE_FAIL:
       return {
         loading: false,
         error: action.payload,
       };
     case USERUPDATE_RESET:
     case UPDATE_PASSWORD_RESET:
+    case ADMIN_USER_UPDATE_RESET:
       return {
         ...state,
         isUpdated: false,
+      };
+    case USER_DELETE_RESET:
+      return {
+        ...state,
+        isDeleted: false,
       };
     case CLEAR_ERRORS:
       return {
@@ -149,6 +181,65 @@ export const forgotPasswordReducer = (state = {}, action) => {
         ...state,
         error: null,
       };
+    default:
+      return state;
+  }
+};
+export const allUsersReducer = (state = { users: [] }, action) => {
+  switch (action.type) {
+    case ALL_USERS_REQUEST:
+      return {
+        loading: true,
+        ...state,
+      };
+
+    case ALL_USERS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        users: action.payload,
+      };
+    case ALL_USERS_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
+      };
+    default:
+      return state;
+  }
+};
+export const userDetailsReducer = (state = { user: {} }, action) => {
+  switch (action.type) {
+    case USER_DETAIL_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case USER_DETAIL_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        user: action.payload,
+      };
+
+    case USER_DETAIL_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
+      };
+
     default:
       return state;
   }
