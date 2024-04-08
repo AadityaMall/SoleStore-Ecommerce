@@ -174,10 +174,10 @@ exports.updateProfile = asyncError(async (req, res, next) => {
     email: req.body.email,
   };
 
-  if(req.body.avatar !== "undefined"){
-    const user =  await User.findById(req.user.id);
+  if (req.body.avatar !== "undefined") {
+    const user = await User.findById(req.user.id);
     const imageId = user.avatar.public_id;
-    await cloudinary.v2.uploader.destroy(imageId)
+    await cloudinary.v2.uploader.destroy(imageId);
     const mycloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
       folder: "soleStoreAvatars",
       width: 150,
@@ -186,7 +186,7 @@ exports.updateProfile = asyncError(async (req, res, next) => {
     newUserData.avatar = {
       public_id: mycloud.public_id,
       url: mycloud.secure_url,
-    }
+    };
   }
 
   const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
@@ -253,8 +253,8 @@ exports.deleteUser = asyncError(async (req, res, next) => {
     );
   }
   const imageId = user.avatar.public_id;
-  await cloudinary.v2.uploader.destroy(imageId)
-  
+  await cloudinary.v2.uploader.destroy(imageId);
+
   await user.deleteOne();
 
   res.status(200).json({

@@ -73,7 +73,7 @@ export const loadUser = () => async (dispatch) => {
     const { data } = await axios.get(`/api/v1/me`);
     dispatch({ type: USERLOAD_SUCCESS, payload: data.user });
   } catch (error) {
-    dispatch({ type: USERLOAD_FAIL, payload: error.response.data.message });
+    dispatch({ type: USERLOAD_FAIL, payload: "No user Logged in!" });
   }
 };
 

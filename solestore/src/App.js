@@ -53,7 +53,7 @@ function App() {
   React.useEffect(() => {
     store.dispatch(loadUser());
   }, []);
-  window.addEventListener("contextmenu",(e)=>e.preventDefault())
+  // window.addEventListener("contextmenu",(e)=>e.preventDefault())
 
   return (
     <>

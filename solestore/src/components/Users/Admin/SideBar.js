@@ -13,8 +13,7 @@ import {
 import "../../Layout/css/AdminSideBar.css";
 
 const SideBar = () => {
-  const darkLogo = "https://i.ibb.co/qYRd6qN/darkmode-logo.png";
-  //   const lightLogo = "https://i.ibb.co/0MyCLvg/lightmode-logo.png";
+  const darkLogo = "https://res.cloudinary.com/dqjeist4k/image/upload/v1712325115/soleStoreAvatars/darkmode_logo_jzymyp.png";
   return (
     <>
       <div className="sidebar">

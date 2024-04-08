@@ -2,8 +2,8 @@ import React from "react";
 import "./css/Footer.css";
 import { Link } from "react-router-dom";
 const Footer = (props) => {
-  const darkLogo = "https://i.ibb.co/qYRd6qN/darkmode-logo.png";
-  const lightLogo = "https://i.ibb.co/0MyCLvg/lightmode-logo.png"
+  const darkLogo = "https://res.cloudinary.com/dqjeist4k/image/upload/v1712325115/soleStoreAvatars/darkmode_logo_jzymyp.png";
+  const lightLogo = "https://res.cloudinary.com/dqjeist4k/image/upload/v1712325114/soleStoreAvatars/lightmode_logo_z1n9lz.png"
   return (
     <>
 
@@ -138,9 +138,7 @@ const Footer = (props) => {
 
         <div className="text-center p-4 copyright">
           
-            © 2023 Copyright: C002 Aaditya Mall, C006 Manya Gor, C017 Shivam
-            Kulkarni
-          
+            © 2024 Copyright: Aaditya Rajesh Mall
         </div>
       </footer>
     </>

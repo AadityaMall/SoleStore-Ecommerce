@@ -4,8 +4,9 @@ const About = (props) => {
   useEffect(() => {
     window.scrollTo(0, 0);
   });
-  const darkLogo = "./images/darkmode_logo.png";
-  const lightLogo = "./images/lightmode_logo.png";
+  const darkLogo = "https://res.cloudinary.com/dqjeist4k/image/upload/v1712325115/soleStoreAvatars/darkmode_logo_jzymyp.png";
+  const lightLogo = "https://res.cloudinary.com/dqjeist4k/image/upload/v1712325114/soleStoreAvatars/lightmode_logo_z1n9lz.png"
+ 
 
   const aboutBanner = () => {
     if (window.innerWidth < 500) {

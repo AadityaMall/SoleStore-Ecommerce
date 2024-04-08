@@ -15,6 +15,7 @@ import "../../Layout/css/UpdateOrder.css";
 import { UPDATE_ORDERS_RESET } from "../../../constants/orderConstant";
 
 const UpdateOrder = ({ mode }) => {
+  const darkLogo = "https://res.cloudinary.com/dqjeist4k/image/upload/v1712325115/soleStoreAvatars/darkmode_logo_jzymyp.png";
   const dispatch = useDispatch();
   const alert = useAlert();
   const { order, loading, error } = useSelector((state) => state.orderDetails);
@@ -22,7 +23,6 @@ const UpdateOrder = ({ mode }) => {
     (state) => state.updateOrder
   );
   const { id } = useParams();
-  const { user } = useSelector((state) => state.user);
   const [status, setStatus] = useState("");
   const orderStatusColor = () => {
     if (order.orderStatus === "Processing") {
@@ -79,7 +79,7 @@ const UpdateOrder = ({ mode }) => {
               <div className="mainReciept">
                 <div id="recieptHead">
                   <img
-                    src="https://i.ibb.co/qYRd6qN/darkmode-logo.png"
+                    src={darkLogo}
                     alt=""
                   />
                   <h3 className="head-receipt">YOUR ORDER RECEIPT</h3>
@@ -92,7 +92,10 @@ const UpdateOrder = ({ mode }) => {
                   <span id="userMobileNumber">
                     {order.shippingInfo.phoneNo}
                   </span>
-                  <span id="userEmailId">{user.email}</span>
+                  <span id="userEmailId">
+                  {order && order.user ? order.user.email : " "}
+
+                    </span>
                   <span id="userAddress">{address}</span>
                 </div>
                 <div id="receiptBodyMid" className="">

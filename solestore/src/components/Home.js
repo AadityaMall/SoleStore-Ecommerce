@@ -3,7 +3,6 @@ import { useEffect } from "react";
 import "./Layout/css/Home.css";
 import Product from "./Layout/Product.js";
 import { Link } from "react-router-dom";
-import MetaData from "./Layout/MetaData.js";
 import { clearErrors, getProduct } from "../actions/productAction.js";
 import { useSelector, useDispatch } from "react-redux";
 import Loader from "./Layout/Loader.js";
@@ -38,7 +37,6 @@ const Home = (props) => {
         <Loader />
       ) : (
         <>
-          <MetaData title="SoleStore : Home" />
 
           {/* Carusel Code Start */}
           <div

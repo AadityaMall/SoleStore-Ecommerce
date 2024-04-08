@@ -84,7 +84,8 @@ const LoginSignup = () => {
       $(".login-frame").show();
     });
   });
-
+  const lightLogo = "https://res.cloudinary.com/dqjeist4k/image/upload/v1712325114/soleStoreAvatars/lightmode_logo_z1n9lz.png"
+ 
   return (
     <>
       {loading?<Loader/> : 
@@ -94,7 +95,7 @@ const LoginSignup = () => {
             <div className="row justify-content-center inner-contents">
               <div className="col-md align-logo adjust-padding">
                 <img
-                  src="https://i.ibb.co/0MyCLvg/lightmode-logo.png"
+                  src={lightLogo}
                   alt="Llogo"
                   className="login-logo"
                 />
@@ -162,7 +163,7 @@ const LoginSignup = () => {
             <div className="row justify-content-center inner-contents">
               <div className="col-md align-logo adjust-padding">
                 <img
-                  src="https://i.ibb.co/0MyCLvg/lightmode-logo.png"
+                  src={lightLogo}
                   alt="Llogo "
                   className="login-logo"
                 />
