@@ -1,0 +1,36 @@
+@import url("https://fonts.googleapis.com/css2?family=Alata&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Outfit&display=swap");
+
+.headings-for-page {
+  font-family: "Outfit", sans-serif;
+  font-weight: 700;
+}
+#contentHolder {
+  background-image: url(./images/loginpg_bg.png);
+  background-position: center;
+  background-size: cover;
+  overflow: hidden;
+}
+
+.form-group {
+  margin-top: 2vw;
+}
+.form-group img {
+  width: 70px;
+  min-width: 70px;
+  border-radius: 100%;
+  object-fit: contain;
+}
+.form-group input {
+  width: 90%;
+}
+.form-group input:focus {
+  box-shadow: none;
+  border: 2px solid black;
+}
+.shadow-light {
+  box-shadow: 0px 5px 10px rgb(255, 255, 255);
+}
+.shadow-dark {
+  box-shadow: 0px 5px 10px rgb(0, 0, 0);
+}
