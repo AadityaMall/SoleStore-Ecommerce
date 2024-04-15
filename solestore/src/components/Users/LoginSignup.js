@@ -44,11 +44,13 @@ const LoginSignup = () => {
 
   const registerSubmit = (e) => {
     e.preventDefault();
-    const myForm = new FormData();
-    myForm.set("name", name);
-    myForm.set("email", email);
-    myForm.set("password", password);
-    myForm.set("avatar", avatar);
+    const myForm =  {
+      "name": name,
+      "password": password,
+      "email": email,
+      "avatar": avatar
+
+    }
     dispatch(register(myForm)) 
   };
 
