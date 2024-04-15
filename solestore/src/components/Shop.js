@@ -9,13 +9,30 @@ import "./Layout/css/Shop.css";
 import Pagination from "@mui/material/Pagination";
 import { Slider } from "@mui/material";
 import { useLocation } from "react-router-dom";
+
 const Shop = (props) => {
-  //every time page loads, scroll to top
+  const [isNavbarFixed, setIsNavbarFixed] = useState(false);
+
   useEffect(() => {
-    window.scrollTo(0, 0);
-  });
-  let {state} = useLocation()
-  
+    const handleScroll = () => {
+      const scrollTop = window.pageYOffset;
+      const filterNav = document.getElementById("filterNav");
+
+      if (filterNav) {
+        setIsNavbarFixed(scrollTop >= 200);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  //every time page loads, scroll to top
+
+  let { state } = useLocation();
   const shopBanner = () => {
     if (window.innerWidth < 500) {
       return "./images/shopWithUs_phone_bg.png";
@@ -25,27 +42,46 @@ const Shop = (props) => {
   };
 
   const getFilterCategory = () => {
-    let selectElement = document.querySelector('#filter');
+    let selectElement = document.querySelector("#filter");
     setCategory(selectElement.value);
-  }
-
+  };
+  const getSortValue = () => {
+    let selectElement = document.querySelector("#sort");
+    setSort(selectElement.value);
+  };
   const alert = useAlert();
   const dispatch = useDispatch();
-  const { loading, error, products, resultPerPage, productsCount, filteredProductsCount} =
-    useSelector((state) => state.products);
+  const {
+    loading,
+    error,
+    products,
+    resultPerPage,
+    productsCount,
+    filteredProductsCount,
+  } = useSelector((state) => state.products);
   const [currentPage, setCurrentPage] = useState(1);
   const [price, setPrice] = useState([0, 30000]);
-  const [category,setCategory] =  useState(state?state.homeFilter:"")
-  const [ratings,setRatings] =  useState(0)
+  const [category, setCategory] = useState(state ? state.homeFilter : "");
+  const [sort, setSort] = useState();
+  const [ratings, setRatings] = useState(0);
+  
+  const homeFilterAvailable = state ? state.homeFilter : ""
 
   useEffect(() => {
     if (error) {
       alert.error(error);
       dispatch(clearErrors());
     }
-    dispatch(getProduct(currentPage,price,category,ratings));
-  }, [dispatch, alert, error, currentPage,price,category,ratings]);
+    const dispatcher = () => {
+      dispatch(getProduct(1, [0,30000], homeFilterAvailable, 0));
+    }
+    dispatcher();
+  }, [dispatch, alert, error, homeFilterAvailable]);
 
+  const applyFilters = () => {
+    dispatch(getProduct(currentPage, price, category, ratings, sort));
+    
+  }
   const setCurrentPageNo = (e, p) => {
     setCurrentPage(p);
   };
@@ -54,6 +90,20 @@ const Shop = (props) => {
   };
 
   let count = filteredProductsCount;
+
+  useEffect(() => {
+    const handleScrollToTop = () => {
+      window.scrollTo(0, 0);
+    };
+
+    handleScrollToTop(); // Scroll to top when component mounts
+
+    return () => {
+      // Cleanup (not really necessary for scrollTo, but good practice)
+      window.removeEventListener("scroll", handleScrollToTop);
+    };
+  }, []); // Empty dependency array to run once on component mount
+
   return (
     <>
       {loading ? (
@@ -74,9 +124,18 @@ const Shop = (props) => {
             </center>
           </div>
           <nav
-            className={`navbar navbar-expand-lg navbar-${props.mode} text-${
-              props.mode === "light" ? "dark" : "light"
-            }`}
+            className={`navbar navbar-expand-lg navbar-${props.mode} bg-${
+              props.mode
+            } text-${props.mode === "light" ? "dark" : "light"} filter-navbar`}
+            id="filterNav"
+            style={{
+              borderTop: `1px solid ${
+                props.mode === "light" ? "black" : "white"
+              }`,
+              position: isNavbarFixed ? "fixed" : "relative",
+              top: isNavbarFixed ? 60 : 0,
+              paddingTop:isNavbarFixed && window.innerWidth>900?50:10
+            }}
           >
             <div className="container-fluid">
               <button
@@ -101,7 +160,7 @@ const Shop = (props) => {
                       <span id="priceRangeLabel">Price Range :</span>
                       <Slider
                         value={price}
-                        onChangeCommitted={priceHandler}
+                        onChange={priceHandler}
                         valueLabelDisplay="on"
                         aria-labelledby="range-slider"
                         min={0}
@@ -112,7 +171,7 @@ const Shop = (props) => {
                   </li>
                   <li className="nav-item-shop">
                     <select
-                    value={category}
+                      value={category}
                       onChange={getFilterCategory}
                       name="filter"
                       id="filter"
@@ -120,35 +179,34 @@ const Shop = (props) => {
                         props.mode === "light" ? "dark" : "light"
                       }`}
                     >
-                      <option value="">
-                        Filter : Category
-                      </option>
+                      <option value="">Filter : Category</option>
                       <option value="Sneakers">Sneakers</option>
                       <option value="Formals">Formals</option>
                       <option value="Sports">Sports</option>
                     </select>
                   </li>
-                  {/* <li className="nav-item-shop">
+                  <li className="nav-item-shop">
                     <select
+                      value={sort}
+                      onChange={getSortValue}
                       name="sort"
                       id="sort"
                       className={`color-${
                         props.mode === "light" ? "dark" : "light"
                       }`}
-                      defaultValue={"DEFAULT"}
                     >
                       <option value="DEFAULT">Sort : Price Range</option>
-                      <option value="1">Low to High</option>
-                      <option value="-1">High to Low</option>
+                      <option value="price">Low to High</option>
+                      <option value="-price">High to Low</option>
                     </select>
-                  </li> */}
+                  </li>
                   <li className="nav-item-shop">
                     <div className="my-slider-price">
                       <span id="priceRangeLabel">Rating :</span>
                       <Slider
                         value={ratings}
-                        onChangeCommitted={(e,newRating) =>{
-                          setRatings(newRating)
+                        onChange={(e, newRating) => {
+                          setRatings(newRating);
                         }}
                         valueLabelDisplay="on"
                         aria-labelledby="continuous-slider"
@@ -156,6 +214,11 @@ const Shop = (props) => {
                         max={5}
                         color="secondary"
                       />
+                    </div>
+                  </li>
+                  <li className="nav-item-shop">
+                    <div className="apply-filter">
+                        <button className="btn-apply-filter btn" onClick={applyFilters}>Apply</button>
                     </div>
                   </li>
                 </ul>

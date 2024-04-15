@@ -16,18 +16,21 @@
   display: flex;
   width: 20vw;
   justify-content: space-evenly;
-
 }
 #priceRangeLabel {
   margin-right: 0vw;
-  width: 10vw;
+  width: 60%;
 }
 .shop-filters li {
   margin-left: 2.5vw;
 }
+.shop-filters {
+  display: flex;
+  justify-content: space-evenly;
+}
 select {
   border-radius: 5px;
-  width: 20vw;
+  width: 15vw;
   height: 30px;
   text-align: center;
   font-family: "Alata", sans-serif;
@@ -39,23 +42,36 @@ select option {
 .color-dark {
   color: black;
 }
-.nav-itemm-shop{
+.nav-itemm-shop {
   margin: 0px;
+}
+.btn-apply-filter {
+  width: 130px;
+}
+.btn-apply-filter:hover {
+  background-color: white;
+}
+.filter-navbar {
+  z-index: 999;
+  width: 100%;
 }
 
 @media screen and (max-width: 992px) {
   .nav-item-shop {
     border-bottom: 1px solid rgba(0, 0, 0, 0.45);
-    justify-content:center;
+    justify-content: center;
     padding: 10px 0px;
   }
-  select{
+  select {
     width: 100%;
   }
-  .my-slider-price{
-    width: 100%;
+  .my-slider-price {
+    width: 85%;
   }
-  #priceRangeLabel{
-    width: 40%;
+  #priceRangeLabel {
+    width: 60%;
+  }
+  .btn-apply-filter {
+    width: 100%;
   }
 }

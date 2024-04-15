@@ -13,8 +13,17 @@ import Loader from "../Layout/Loader";
 
 const UpdatePassword = () => {
   useEffect(() => {
-    window.scrollTo(0, 0);
-  });
+    const handleScrollToTop = () => {
+      window.scrollTo(0, 0);
+    };
+
+    handleScrollToTop(); // Scroll to top when component mounts
+
+    return () => {
+      // Cleanup (not really necessary for scrollTo, but good practice)
+      window.removeEventListener("scroll", handleScrollToTop);
+    };
+  }, []); // Empty dependency array to run once on component mount
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.user);
   const { isUpdated, loading, error } = useSelector((state) => state.profile);

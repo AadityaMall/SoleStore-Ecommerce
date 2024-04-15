@@ -8,8 +8,17 @@ import { useNavigate } from "react-router-dom";
 
 const ForgotPassword = () => {
   useEffect(() => {
-    window.scrollTo(0, 0);
-  });
+    const handleScrollToTop = () => {
+      window.scrollTo(0, 0);
+    };
+
+    handleScrollToTop(); // Scroll to top when component mounts
+
+    return () => {
+      // Cleanup (not really necessary for scrollTo, but good practice)
+      window.removeEventListener("scroll", handleScrollToTop);
+    };
+  }, []); // Empty dependency array to run once on component mount
   const navigate = useNavigate();
   const { error, message, loading } = useSelector(
     (state) => state.forgotPassword

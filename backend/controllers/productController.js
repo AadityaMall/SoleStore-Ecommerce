@@ -38,8 +38,10 @@ exports.createProduct = asyncError(async (req, res, next) => {
 exports.getAllProducts = asyncError(async (req, res, next) => {
   const prodCount = await Product.countDocuments();
   const resultPerPage = 6;
-  const apiFeature = new ApiFeatures(Product.find(), req.query).filter();
-
+  let apiFeature = new ApiFeatures(Product.find(), req.query).filter();
+  if(req.query.sort!==undefined){
+    apiFeature = new ApiFeatures(Product.find().sort(req.query.sort), req.query).filter();
+  }
   let products = await apiFeature.query.clone();
 
   let filteredProductsCount = products.length;

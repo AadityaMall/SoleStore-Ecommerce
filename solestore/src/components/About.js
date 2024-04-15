@@ -2,8 +2,17 @@ import React,{useEffect} from "react";
 import "./Layout/css/About.css";
 const About = (props) => {
   useEffect(() => {
-    window.scrollTo(0, 0);
-  });
+    const handleScrollToTop = () => {
+      window.scrollTo(0, 0);
+    };
+
+    handleScrollToTop(); // Scroll to top when component mounts
+
+    return () => {
+      // Cleanup (not really necessary for scrollTo, but good practice)
+      window.removeEventListener("scroll", handleScrollToTop);
+    };
+  }, []); // Empty dependency array to run once on component mount
   const darkLogo = "https://res.cloudinary.com/dqjeist4k/image/upload/v1712325115/soleStoreAvatars/darkmode_logo_jzymyp.png";
   const lightLogo = "https://res.cloudinary.com/dqjeist4k/image/upload/v1712325114/soleStoreAvatars/lightmode_logo_z1n9lz.png"
  

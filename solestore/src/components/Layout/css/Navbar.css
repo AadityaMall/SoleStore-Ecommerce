@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit&display=swap');
 
 .navbar-main{
-    z-index:999;
+    z-index:1000;
     box-shadow: 10px 0px 5px black;
     position: sticky;
     top: 0;
@@ -49,7 +49,7 @@
     min-width: 40px;
     aspect-ratio: 1;
     border-radius: 100%;
-    object-fit: fill;
+    object-fit: contain;
 }
 
 .login-user-element:hover{

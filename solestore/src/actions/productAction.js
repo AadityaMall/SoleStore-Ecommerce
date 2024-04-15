@@ -30,13 +30,21 @@ import {
   UPDATE_PRODUCT_REQUEST,
 } from "../constants/productConstants";
 
-export const getProduct = (currentPage=1,price=[0,30000],category,ratings=0) => async (dispatch) => {
+export const getProduct = (currentPage=1,price=[0,30000],category,ratings=0,sort) => async (dispatch) => {
   try {
     dispatch({ type: ALL_PRODUCT_REQUEST });
     let link = `/api/v1/products?page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}`;
-    if(category){
-      link = `/api/v1/products?page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}`;
+    if(category && sort){
+      link = `/api/v1/products?page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}&ratings[gte]=${ratings}&sort=${sort}`;
     }
+    else{
+      if(category){
+        link = `/api/v1/products?page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}&ratings[gte]=${ratings}`;
+      }
+      if(sort){
+        link = `/api/v1/products?page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}&sort=${sort}`;
+      }
+    }    
     const { data } = await axios.get(link);
     dispatch({
       type: ALL_PRODUCT_SUCCESS,

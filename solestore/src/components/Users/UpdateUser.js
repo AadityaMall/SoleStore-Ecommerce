@@ -48,11 +48,11 @@ const Update = () => {
 
   const updateSubmit = (e) => {
     e.preventDefault();
-    const myForm = new FormData();
-    myForm.set("name", name);
-    myForm.set("email", email);
-    myForm.set("avatar", avatar);
-
+    const myForm =  {
+      "name": name,
+      "email": email,
+      "avatar": avatar
+    }
     dispatch(updateProfile(myForm));
   };
 

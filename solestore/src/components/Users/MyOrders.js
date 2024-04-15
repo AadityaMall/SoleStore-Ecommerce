@@ -74,6 +74,19 @@ const MyOrders = ({ mode }) => {
     dispatch(myOrders());
   }, [dispatch, alert, error]);
 
+  useEffect(() => {
+    const handleScrollToTop = () => {
+      window.scrollTo(0, 0);
+    };
+
+    handleScrollToTop(); // Scroll to top when component mounts
+
+    return () => {
+      // Cleanup (not really necessary for scrollTo, but good practice)
+      window.removeEventListener("scroll", handleScrollToTop);
+    };
+  }, []); // Empty dependency array to run once on component mount
+
   return (
     <>
       {loading ? (
