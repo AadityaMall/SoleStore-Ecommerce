@@ -119,9 +119,6 @@ const ProductPage = (props, { p }) => {
       ) : (
         <>
           <div className={`text-${props.mode === "light" ? "dark" : "light"}`}>
-            <div className="page-title">
-              <span>{`Products > ${product.name} >`}</span>
-            </div>
             <div
               className={`container p-4 prod-detsShadow-${
                 props.mode === "light" ? "dark" : "light"
@@ -184,6 +181,8 @@ const ProductPage = (props, { p }) => {
                       id="addToCart"
                       className={`mode-${
                         props.mode === "light" ? "dark" : "light"
+                      } ${
+                        product.stock < 1 ? "disabled-true" : "disabled-false"
                       }`}
                       onClick={addToCartHandler}
                       disabled={product.stock < 1 ? true : false}
@@ -252,7 +251,9 @@ const ProductPage = (props, { p }) => {
                   </div>
                 ) : (
                   <div className="loginValidation">
-                    <h1>Login to give review</h1>
+                    <center>
+                      <h3>Login to give review</h3>
+                    </center>
                   </div>
                 )}
 

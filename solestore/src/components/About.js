@@ -96,7 +96,8 @@ const About = (props) => {
             <div className="col-sm-6 creatorMainBox my-4">
               <span>Aaditya Mall</span>
               <br />
-              Phone : 9326430750 <br /> Email : aadityarmall@gmail.com
+              <i className="fa fa-phone"></i> : 9326430750 <br /> 
+              <i className="fa fa-envelope"></i> : aadityarmall@gmail.com
               <div className="format-socials-icons mb-2">
                 <a href="https://facebook.com" className="me-4 text-reset">
                   <i className="fa fa-facebook-f"></i>

@@ -63,7 +63,7 @@ export const register = (userData) => async (dispatch) => {
     const { data } = await axios.post(`/api/v1/register`, userData, config);
     dispatch({ type: REGISTER_SUCCESS, payload: data.user });
   } catch (error) {
-    dispatch({ type: REGISTER_FAIL, payload: error.response.data.message });
+    dispatch({ type: REGISTER_FAIL, payload: "Image size should be less than 10 MB" });
   }
 };
 
@@ -95,7 +95,7 @@ export const updateProfile = (userData) => async (dispatch) => {
     const { data } = await axios.put(`/api/v1/me/update`, userData, config);
     dispatch({ type: USERUPDATE_SUCCESS, payload: data.success });
   } catch (error) {
-    dispatch({ type: USERUPDATE_FAIL, payload: error.response.data.message });
+    dispatch({ type: USERUPDATE_FAIL, payload: "Image size should be less than 10 MB" });
   }
 };
 

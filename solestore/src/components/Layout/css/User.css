@@ -25,23 +25,6 @@
     margin-left: 1vh;
 }
 
-.btn{
-    background-color: #000;
-    border:2px solid #000;
-    color: white;
-    width: 50%;
-    font-size: 0.7rem;
-    padding: 1vh;
-    border-radius: 0;
-    transition: .3s ease-in-out;
-}
-
-.btn:hover{
-    border: 2px solid black;
-    color:black;
-}
-
-
 #userWebsiteDataDets div{
     border: 1px solid black;
     padding: 20px;

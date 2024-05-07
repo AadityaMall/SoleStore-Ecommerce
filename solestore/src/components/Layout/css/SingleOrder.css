@@ -62,19 +62,8 @@
   .ReceiptItem{
     margin-top: 20px;
   }
-  .summed-up-price{
-    display: flex;
-    text-align: right;
-    margin-right: 20px;
-  }
   #totalPrice , #FinaltotalPrice{
     margin-left: 10px;
-  }
-  #orderComplete{
-    width: 100%!important;
-  }
-  #orderComplete:hover{
-    background-color: white;
   }
   .orderProductsDisplay{
     display: flex;

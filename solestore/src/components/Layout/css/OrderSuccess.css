@@ -1,5 +1,5 @@
 .orderSuccess{
-    margin:100px;
+    margin: 20px 70px;
     padding:100px;
     display: flex;
     flex-direction: column;
@@ -12,4 +12,10 @@
 }
 .btn-orderSuccess{
     margin:10px
+}
+@media screen and (max-width:992px){
+    .orderSuccess{
+        margin: 0px;
+        padding: 20px;
+    }
 }

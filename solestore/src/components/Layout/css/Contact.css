@@ -28,12 +28,6 @@
   width: 100%;
 }
 
-.adjust-flex{
-  display: flex;
-  flex-direction: column;
-}
-
-
 #contactForm input , #contactForm textarea{
   width: 100%;
   padding: 15px 15px;
@@ -68,7 +62,9 @@
 	flex-wrap: wrap;
 	vertical-align: middle;
 }
-
+.people-details{
+  width: 90%;
+}
 .people-details img{
 	width: 17vw;
   max-width: 175px;

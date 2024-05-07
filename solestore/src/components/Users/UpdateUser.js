@@ -77,7 +77,7 @@ const Update = () => {
             <div className="userProfilePage-card row">
               <div id="userUpdateDivision">
                 <div id="userDetailsDisplaySection">
-                  <img src={``} alt="" />
+                  <img src={user.avatar.url} alt="" />
                   <div>
                     <h3>Update Profile</h3>
                   </div>

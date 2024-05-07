@@ -15,7 +15,7 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    width: 500px;
+    width: 400px;
     padding: 10px;
   }
   #recieptHead{
@@ -33,8 +33,9 @@
   }
   .payment-outer{
     display: flex;
-  
+  flex-direction: column;
     justify-content: center;
+    align-items: center;
   }
   .payment{
     background-color: white;
@@ -87,20 +88,24 @@
   }
   .summed-up-price{
     display: flex;
-    text-align: right;
-    margin-right: 20px;
+    flex-direction: column;
+    width: 40%;
+  }
+  .summed-up-price span{
+    display: flex;
+    justify-content: space-between;
   }
   #totalPrice , #FinaltotalPrice{
     margin-left: 10px;
   }
-  #orderComplete{
-    width: 100%!important;
-  }
-  #orderComplete:hover{
-    background-color: white;
-  }
   @media screen and (max-width:992px) {
    .payment{
     margin-top:80px;
-   } 
+   }
+   .summed-up-price{
+    width: 70%;
+   }
+   .payment{
+    width: 90%;
+   }
   }

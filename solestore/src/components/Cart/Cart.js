@@ -127,7 +127,7 @@ const Cart = () => {
                 </div>
               ))
             : {}}
-          {cartItems !== 0 && (
+          {cartItems.length !== 0? (
             <div className="final-amount">
               <h3>Total ₹ {totalAmount}</h3>
               <button
@@ -138,6 +138,12 @@ const Cart = () => {
                 Checkout
               </button>
             </div>
+          ):(
+            <div>
+              <h3>Shopping Cart Empty</h3>
+              <Link to={`/products`} className="btn">Shop Now</Link>
+            </div>
+
           )}
         </div>
       </div>

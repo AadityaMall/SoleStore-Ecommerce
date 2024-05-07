@@ -43,9 +43,6 @@
   margin-right: 0.5rem;
 }
 
-.MuiTypography-root {
-  background-color: #fff !important;
-}
 @media screen and (max-width: 900px) {
   .sidebar {
     padding: 0rem 0;

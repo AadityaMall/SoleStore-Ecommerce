@@ -117,7 +117,7 @@ const LoginSignup = () => {
                         <h3>LOGIN</h3>
                       </div>
                       <form onSubmit={loginSubmit}>
-                        <div className="form-group">
+                        <div className="form-group mb-4 justify-content-center">
                           <input
                             type="email"
                             className="form-control"
@@ -129,7 +129,7 @@ const LoginSignup = () => {
                             onChange={(e) => setLoginEmail(e.target.value)}
                           />
                         </div>
-                        <div className="form-group mb-4">
+                        <div className="form-group mb-4 justify-content-center">
                           <input
                             type="password"
                             className="form-control"
@@ -189,7 +189,7 @@ const LoginSignup = () => {
                         encType="multipart/form-data"
                         onSubmit={registerSubmit}
                       >
-                        <div className="form-group mb-4">
+                        <div className="form-group mb-4 justify-content-center">
                           <input
                             autoComplete="on"
                             type="text"
@@ -201,7 +201,7 @@ const LoginSignup = () => {
                             required
                           />
                         </div>
-                        <div className="form-group mb-4">
+                        <div className="form-group mb-4 justify-content-center">
                           <input
                             type="email"
                             className="form-control"
@@ -212,7 +212,7 @@ const LoginSignup = () => {
                             required
                           />
                         </div>
-                        <div className="form-group mb-4">
+                        <div className="form-group mb-4 justify-content-center">
                           <input
                             type="password"
                             className="form-control"
@@ -225,7 +225,7 @@ const LoginSignup = () => {
                             autoComplete="off"
                           />
                         </div>
-                        <div className="form-group mb-4 image-input">
+                        <div className="form-group mb-4 justify-content-center">
                           <img
                             src={avatarPreview}
                             alt="Avatar Preview"
@@ -237,12 +237,12 @@ const LoginSignup = () => {
                             name="avatar"
                             accept="image/*"
                             onChange={registerDataChange}
-                            required
+                            
                           />
                         </div>
                         <input
                           type="submit"
-                          value="register"
+                          value="Register"
                           className="btn"
                           id="submit-btn"
                           disabled={loading ? true : false}

@@ -41,6 +41,9 @@
 .MuiStepConnector-completed {
   font-size: 25px;
 }
+.MuiTypography-root{
+  background-color: transparent!important;
+}
 @media screen and (max-width: 992px) {
   .shippingUser-input {
     padding: 1vmax 6vmax;
@@ -52,3 +55,4 @@
     height: 6vmax;
   }
 }
+

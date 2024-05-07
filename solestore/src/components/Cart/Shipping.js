@@ -36,7 +36,7 @@ const navigate = useNavigate();
   };
   return (
     <>
-    <div className="steps">
+    <div className="steps mb-3">
       <CheckoutSteps activeStep={0} mode={mode} />
     </div>
       <div className="shippingDetails-card">

@@ -95,22 +95,30 @@ const MyOrders = ({ mode }) => {
         <>
           <div className={``}>
             <h3
-              className={`headings-for-page text-center mt-5 mb-5 text-${
+              className={`text-center mt-5 mb-5 text-${
                 mode === "light" ? "dark" : "light"
               }`}
             >
-              {user.name}'s Orders
+              <b className="headings-for-page ">{user.name}'s</b> Orders
             </h3>
-            <div className="data-grid bg-white mb-4 myOrdersPage">
-              <DataGrid
-                rows={rows}
-                columns={columns}
-                pageSize={10}
-                autoHeight
-                className="my-orders-table"
-                disableRowSelectionOnClick
-              />
-            </div>
+            {orders && orders.length !== 0 ? (
+              <div className="data-grid bg-white mb-4 myOrdersPage">
+                <DataGrid
+                  rows={rows}
+                  columns={columns}
+                  pageSize={10}
+                  autoHeight
+                  className="my-orders-table"
+                  disableRowSelectionOnClick
+                />
+              </div>
+            ) : (
+              <div>
+                <center>
+                  <h3>No orders available</h3>
+                </center>
+              </div>
+            )}
           </div>
         </>
       )}

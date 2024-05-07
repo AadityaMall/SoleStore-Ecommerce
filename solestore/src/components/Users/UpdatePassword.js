@@ -67,7 +67,7 @@ const UpdatePassword = () => {
             <div className="userProfilePage-card row">
               <div id="userUpdateDivision">
                 <div id="userDetailsDisplaySection">
-                  <img src={``} alt="" />
+                  <img src={user.avatar.url} alt="" />
                   <div>
                     <h3>Change Password</h3>
                   </div>

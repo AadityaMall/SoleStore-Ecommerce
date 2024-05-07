@@ -106,37 +106,37 @@ const OrderConfirm = ({ mode }) => {
       >
         <div className="row">
           <div className="col-md-6">
-            <div className="row">
+            <div className="p-5 pb-0">
               <h3 className="headings-for-page">Shipping Info</h3>
-              <div className="d-flex flex-wrap  mt-2 shipping-info">
+              <div className="d-flex flex-column flex-wrap  mt-2 shipping-info">
                 <b>Name :</b>
                 <span> {user.name}</span>
               </div>
-              <div className="d-flex flex-wrap mt-2 shipping-info">
+              <div className="d-flex flex-column flex-wrap mt-2 shipping-info">
                 <b>Address :</b>
                 <span> {address}</span>
               </div>
-              <div className="d-flex flex-wrap mt-2 shipping-info">
+              <div className="d-flex flex-column flex-wrap mt-2 shipping-info">
                 <b>Number :</b>
                 <span> {shippingInfo.phoneNo}</span>
               </div>
             </div>
-            <div className="row mt-5">
-              <h3 className="headings-for-page">Your Cart Items</h3>
+            <div className=" mt-5 justify-content-center align-center">
+              <h3 className="headings-for-page text-center mb-3">Your Cart Items</h3>
               {cartItems !== 0
                 ? cartItems.map((item, index) => (
                     <div
-                      className={`cart-item-display-orderPage mt-0 border border-${
+                      className={`cart-item-display-orderPage p-3 mt-0 border border-${
                         mode === "light" ? "dark" : "light"
                       } shadow-${mode === "light" ? "dark" : "light"}`}
                       key={index}
                     >
-                      <div className="product-image">
+                      <div className="product-image d-flex flex-column justify-content-center align-center">
                         <Link to={`/product/${item.product}`}>
                           <img src={item.image} alt="product" />
                         </Link>
                       </div>
-                      <div className="product-details">
+                      <div className="product-details d-flex flex-column">
                         <Link
                           to={`/product/${item.product}`}
                           className="text-reset"
@@ -150,10 +150,10 @@ const OrderConfirm = ({ mode }) => {
                         </Link>
                         <div className="cartProd-price">
                           <span>
-                            {item.price}*{item.quantity} =
+                            {item.price}*{item.quantity} = 
                           </span>
                           <span className="headings-for-page">
-                            ₹{item.price * item.quantity}
+                             ₹{item.price * item.quantity}
                           </span>
                         </div>
                       </div>
@@ -203,10 +203,10 @@ const OrderConfirm = ({ mode }) => {
             </div>
           </div>
         </div>
-        <div className="proceed-payment row mt-5">
+        <div className="form-group justify-content-center mt-4 pb-4">
           <button
             className="btn"
-            id="proceedPaymentButton"
+            id=""
             onClick={proceedToPayment}
           >
             Proceed for Payment
