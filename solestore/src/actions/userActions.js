@@ -37,6 +37,7 @@ import {
   ADMIN_USER_UPDATE_SUCCESS,
 } from "../constants/userConstant";
 import axios from "axios";
+import { CHECK_IF_SUBSCIRBED } from "../constants/newsLetterConstants";
 
 //login
 export const login = (email, password) => async (dispatch) => {
@@ -49,6 +50,12 @@ export const login = (email, password) => async (dispatch) => {
       config
     );
     dispatch({ type: LOGIN_SUCCESS, payload: data.user });
+    try {
+      const { data } = await axios.get("/api/v1/subscriptionStatus");
+      dispatch({ type: CHECK_IF_SUBSCIRBED, payload: data.success });
+    } catch (err) {
+      console.log(err);
+    }
   } catch (error) {
     dispatch({ type: LOGIN_FAIL, payload: error.response.data.message });
   }
@@ -56,14 +63,23 @@ export const login = (email, password) => async (dispatch) => {
 
 //Register
 export const register = (userData) => async (dispatch) => {
-  console.log(userData)
+  console.log(userData);
   try {
     dispatch({ type: REGISTER_REQUEST });
     const config = { headers: { "Content-Type": "application/json" } };
     const { data } = await axios.post(`/api/v1/register`, userData, config);
     dispatch({ type: REGISTER_SUCCESS, payload: data.user });
+    try {
+      const { data } = await axios.get("/api/v1/subscriptionStatus");
+      dispatch({ type: CHECK_IF_SUBSCIRBED, payload: data.success });
+    } catch (err) {
+      console.log(err);
+    }
   } catch (error) {
-    dispatch({ type: REGISTER_FAIL, payload: "Image size should be less than 10 MB" });
+    dispatch({
+      type: REGISTER_FAIL,
+      payload: "Image size should be less than 10 MB",
+    });
   }
 };
 
@@ -83,6 +99,8 @@ export const logout = () => async (dispatch) => {
   try {
     await axios.get(`/api/v1/logout`);
     dispatch({ type: LOGOUT_SUCCESS });
+    dispatch({ type: CHECK_IF_SUBSCIRBED, payload: {} });
+
   } catch (error) {
     dispatch({ type: LOGOUT_FAIL, payload: error.response.data.message });
   }
@@ -95,7 +113,10 @@ export const updateProfile = (userData) => async (dispatch) => {
     const { data } = await axios.put(`/api/v1/me/update`, userData, config);
     dispatch({ type: USERUPDATE_SUCCESS, payload: data.success });
   } catch (error) {
-    dispatch({ type: USERUPDATE_FAIL, payload: "Image size should be less than 10 MB" });
+    dispatch({
+      type: USERUPDATE_FAIL,
+      payload: "Image size should be less than 10 MB",
+    });
   }
 };
 

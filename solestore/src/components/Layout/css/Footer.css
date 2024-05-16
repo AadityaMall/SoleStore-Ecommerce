@@ -53,27 +53,30 @@ footer .copyright {
     background-color: white;
     color: rgb(0, 0, 0);
 }
-.input-subscribe input{
-    width: 50%;
-    height: 30px;
-    padding-left: 1vw;
-    background-color: white;
+.subscribed-text{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    background-color: black;
     outline: none;
-    border: 2px solid #000000;
-    font-size: 13px;
+    height: 40px;
+    color: white;
+    transition: 0.3s ease-in-out;
     margin-top: 10px;
+    font-size: 15px;
+    font-weight: 700;
 }
 .input-subscribe{
     background-color: rgba(0, 0, 0, 0.47);
     padding-bottom: 3vh;
     margin: 0vw 1vw;
-    padding-right: 0px!important;
+    display: flex;
+    justify-content: center;
+}
+.input-subscribe button{
+ width: 40%;
 }
 @media screen and (max-width: 768px){
-    .input-subscribe input{
-        width: 90%;
-    }
-    .input-subscribe .col1 , .input-subscribe .col2{
-        text-align: center!important;
-    }
+
 }

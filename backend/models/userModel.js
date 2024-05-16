@@ -37,6 +37,101 @@ const userSchema = new mongoose.Schema({
     default: "user",
   },
 
+  cart: [
+    {
+      productID: {
+        type: mongoose.Schema.ObjectId,
+        ref: "Product",
+        required: true,
+      },
+      name: {
+        type: String,
+        required: true,
+      },
+      category: {
+        type: String,
+        required: true,
+      },
+      price: {
+        type: Number,
+        required: true,
+      },
+      image: {
+        type: String,
+        required: true,
+      },
+      quantity: {
+        type: Number,
+        required: true,
+      },
+      stock: {
+        type: Number,
+        required: true,
+      },
+    },
+  ],
+
+  wishlist: [
+    {
+      productID: {
+        type: mongoose.Schema.ObjectId,
+        ref: "Product",
+        required: true,
+      },
+      name: {
+        type: String,
+        required: true,
+      },
+      category: {
+        type: String,
+        required: true,
+      },
+      price: {
+        type: Number,
+        required: true,
+      },
+      image: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
+  
+  shipping: [
+    {
+
+      name: {
+        type: String,
+        required:true,
+      },
+
+      address: {
+        type: String,
+        required: [true,"Please enter valid address"],
+      },
+      city: {
+        type: String,
+        required: true,
+      },
+      zipcode: {
+        type: Number,
+        required: true,
+      },
+      phone: {
+        type: Number,
+        required: true,
+      },
+      country: {
+        type: String,
+        required: true,
+      },
+      state: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
+
   resetPasswordToken: String,
   resetPasswordExpire: Date,
 });
@@ -59,7 +154,7 @@ userSchema.methods.getJWTToken = function () {
 //Compare Password -->
 
 userSchema.methods.comparePassword = async function (enteredPass) {
-  const res =  await bcryptjs.compare(enteredPass, this.password);
+  const res = await bcryptjs.compare(enteredPass, this.password);
   return res;
 };
 

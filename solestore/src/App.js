@@ -35,6 +35,7 @@ import UpdateOrder from "./components/Users/Admin/UpdateOrder.js";
 import UsersList from "./components/Users/Admin/UsersList.js";
 import UpdateUserRole from "./components/Users/Admin/UpdateUserRole.js";
 import AdminReviews from "./components/Users/Admin/AdminReviews.js";
+import { checkForSubscription } from "./actions/newsLetterActions.js";
 
 function App() {
   const [mode, setMode] = useState("light");
@@ -52,6 +53,7 @@ function App() {
 
   React.useEffect(() => {
     store.dispatch(loadUser());
+    store.dispatch(checkForSubscription());
   }, []);
   // window.addEventListener("contextmenu",(e)=>e.preventDefault())
 
@@ -124,6 +126,12 @@ function App() {
           ) : (
             <Route path="/orderSuccessfull" element={<LoginSignup />} />
           )}
+          {isAuthenticated ? (
+            <Route path="/cart" element={<Cart />} />
+          ) : (
+            <Route path="/cart" element={<LoginSignup />} />
+          )}
+
           {/* Admin Routes */}
           {isAuthenticated && user.role === "admin" ? (
             <Route
@@ -180,7 +188,6 @@ function App() {
           <Route path="/password/reset/:token" element={<ResetPassword />} />
           <Route path="/products" element={<Shop mode={mode} />} />
           <Route path="/contact" element={<Contact mode={mode} />} />
-          <Route path="/cart" element={<Cart />} />
           <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/*" element={<Error404 />} />
           <Route path="/login" element={<LoginSignup />} />

@@ -26,7 +26,6 @@ exports.createProduct = asyncError(async (req, res, next) => {
 
   req.body.images = imagesLink;
   req.body.user = req.user.id;
-  console.log(req.body.stock);
   const product = await Product.create(req.body);
   res.status(201).json({
     success: true,
@@ -169,6 +168,7 @@ exports.createProductReview = asyncError(async (req, res, next) => {
       if (rev.user.toString() === req.user.id.toString()) {
         rev.rating = rating;
         rev.comment = comment;
+        rev.avatar =  req.user.avatar;
       }
     });
   } else {
@@ -205,7 +205,6 @@ exports.getProductReviews = asyncError(async (req, res, next) => {
 
 exports.deleteReview = asyncError(async (req, res, next) => {
   const product = await Product.findById(req.query.productId);
-  console.log(product)
   if (!product) {
     return next(new ErrorHandler("Product not found", 404));
   }

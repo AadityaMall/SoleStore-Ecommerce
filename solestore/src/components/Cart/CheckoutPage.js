@@ -12,7 +12,8 @@ export const CheckoutPage = ({ mode }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
-  const { cartItems, shippingInfo } = useSelector((state) => state.cart);
+  const cartItems = user.cart;
+  const { shippingInfo } = useSelector((state) => state.cart);
   const { error } = useSelector((state) => state.newOrder);
   const orderInfo = sessionStorage.getItem("orderInfo")
     ? JSON.parse(sessionStorage.getItem("orderInfo"))
@@ -43,7 +44,6 @@ export const CheckoutPage = ({ mode }) => {
   };
   useEffect(() => {
     if (
-      !localStorage.getItem("cartItems") ||
       !localStorage.getItem("shippingInfo") ||
       !sessionStorage.getItem("orderInfo")
     ) {
@@ -74,13 +74,10 @@ export const CheckoutPage = ({ mode }) => {
                     id="recieptBodyUserName"
                     className="headings-for-page pb-2"
                   >
-                    {user.name}
+                    {shippingInfo.name}
                   </span>
                   <span id="userMobileNumber" className="pb-2">
                     {shippingInfo.phoneNo}
-                  </span>
-                  <span id="userEmailId" className="pb-2">
-                    {user.email}
                   </span>
                   <span id="userAddress" className="pb-2">
                     {address}
@@ -143,14 +140,14 @@ export const CheckoutPage = ({ mode }) => {
                       <span>
                         Discount Code :
                         <span>
-                          {orderInfo.disCode == "" ? (
+                          {orderInfo.disCode === "" ? (
                             <span>None</span>
                           ) : (
                             <span>{orderInfo.disCode}</span>
                           )}
                         </span>
                       </span>
-                      {orderInfo.disCode == "" ? (
+                      {orderInfo.disCode === "" ? (
                         <></>
                       ) : (
                         <span>

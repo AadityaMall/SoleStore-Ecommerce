@@ -5,32 +5,36 @@ const asyncError = require("../middleware/asyncError");
 
 //Create new order
 exports.newOrder = asyncError(async (req, res, next) => {
-  const {
-    shippingInfo,
-    orderItems,
-    itemsPrice,
-    taxPrice,
-    discount,
-    shippingPrice,
-    totalPrice,
-  } = req.body;
+  try{
 
-  const order = await Order.create({
-    shippingInfo,
-    orderItems,
-    itemsPrice,
-    taxPrice,
-    shippingPrice,
-    discount,
-    totalPrice,
-    paidAt: Date.now(),
-    user: req.user.id,
-  });
-
-  res.status(201).json({
-    success: true,
-    order,
-  });
+    const {
+      shippingInfo,
+      orderItems,
+      itemsPrice,
+      taxPrice,
+      discount,
+      shippingPrice,
+      totalPrice,
+    } = req.body;
+    const order = await Order.create({
+      shippingInfo,
+      orderItems,
+      itemsPrice,
+      taxPrice,
+      shippingPrice,
+      discount,
+      totalPrice,
+      paidAt: Date.now(),
+      user: req.user.id,
+    });
+  
+    res.status(201).json({
+      success: true,
+      order,
+    });
+  }catch(err){
+    console.log(err);
+  }
 });
 
 //Get single Order
@@ -88,12 +92,6 @@ exports.updateOrder = asyncError(async (req, res, next) => {
   if (order.orderStatus === "Delivered") {
     return next(new ErrorHandler("You have already Dilevered this Order", 404));
   }
-
-  if (req.body.status === "Shipped") {
-    order.orderItems.forEach(async (o) => {
-      await updateStock(o.product, o.quantity);
-    });
-  }
   order.orderStatus = req.body.status;
 
   if (req.body.status === "Delivered") {
@@ -107,11 +105,7 @@ exports.updateOrder = asyncError(async (req, res, next) => {
     order,
   });
 });
-async function updateStock(id, quantity) {
-  const product = await Product.findById(id);
-  product.stock = product.stock - quantity;
-  await product.save({ validateBeforeSave: false });
-}
+
 
 //Delete order -- admin only
 exports.deleteOrder = asyncError(async (req, res, next) => {

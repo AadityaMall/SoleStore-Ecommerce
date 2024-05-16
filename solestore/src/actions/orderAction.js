@@ -34,6 +34,12 @@ export const createOrder = (order) => async (dispatch) => {
     const { data } = await axios.post("/api/v1/order/new", order, config);
     localStorage.clear();
     sessionStorage.clear();
+    try{
+      await axios.delete("/api/v1/cartitems")
+      await axios.get(`/api/v1/me`)
+    }catch(error){
+      console.log(error)
+    }
     dispatch({ type: CREATE_ORDER_SUCCESS, payload: data });
   } catch (error) {
     dispatch({

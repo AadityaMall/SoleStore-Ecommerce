@@ -8,16 +8,17 @@ import {
   getProductDetails,
   newReview,
 } from "../actions/productAction";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Loader from "./Layout/Loader";
 import { useAlert } from "react-alert";
 import "react-responsive-modal/styles.css";
 import ReviewBox from "./Layout/ReviewBox";
 import { addToCart } from "../actions/cartAction";
-import { addToWishlist } from "../actions/wishlistAction";
+import { addToWishList } from "../actions/wishlistAction";
 import { Rating } from "@mui/material";
 import { NEW_REVIEW_RESET } from "../constants/productConstants";
-const ProductPage = (props, { p }) => {
+const ProductPage = (props) => {
+  const navigate = useNavigate();
   function topFunction() {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
@@ -25,33 +26,18 @@ const ProductPage = (props, { p }) => {
   const alert = useAlert(); // Alert for error
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { product, loading, error } = useSelector(
-    (state) => state.productDetails
-  );
-  const { isAuthenticated, user } = useSelector((state) => state.user);
+  const {
+    isAuthenticated,
+    user,
+    loading: userLoad,
+  } = useSelector((state) => state.user);
   const { success, error: reviewError } = useSelector(
     (state) => state.newReview
   );
-  const { wishlistItems } = useSelector((state) => state.wishlist);
-  const isInWishlist = wishlistItems.find((i) => i.product === product._id)
-    ? true
-    : false;
-
-  const wishlistButtonText = isInWishlist ? "Wishlisted" : "Wishlist";
-
-  const wishListbuttonStyle = () => {
-    if (isInWishlist) {
-      return {
-        backgroundColor: "gray",
-        color: "white",
-      };
-    } else {
-      return {
-        backgroundColor: "black",
-        color: "white",
-      };
-    }
-  };
+  const { product, loading, error } = useSelector(
+    (state) => state.productDetails
+  );
+  
 
   const [quantity, setQuantity] = useState(1);
   const [rating, setrating] = useState(1);
@@ -77,8 +63,8 @@ const ProductPage = (props, { p }) => {
   //every time page loads, scroll to top
 
   const incrementQunatity = () => {
-    if (quantity >= product.stock) return;
     let qty = quantity + 1;
+    if (qty > product.stock) return;
     setQuantity(qty);
   };
   const decrementQunatity = () => {
@@ -96,12 +82,24 @@ const ProductPage = (props, { p }) => {
   };
 
   const addToCartHandler = () => {
-    dispatch(addToCart(id, quantity));
-    alert.success("Item Added to cart");
+    try {
+      if(!isAuthenticated){
+        navigate("/login")
+        return
+      }
+      dispatch(addToCart(id, quantity));
+      alert.success("Item Added to cart");
+    } catch (err) {
+      alert.error(err);
+    }
   };
   const addToWishlistHandler = () => {
-    dispatch(addToWishlist(id));
-    alert.success("Item Added to WishList");
+    try {
+      dispatch(addToWishList(id));
+      alert.success("Item Added to WishList");
+    } catch (err) {
+      alert.error(err);
+    }
   };
 
   const reviewSubmitHandler = () => {
@@ -114,7 +112,7 @@ const ProductPage = (props, { p }) => {
 
   return (
     <>
-      {loading ? (
+      {loading || userLoad ? (
         <Loader />
       ) : (
         <>
@@ -158,48 +156,51 @@ const ProductPage = (props, { p }) => {
                     <p>{product.description}</p>
                   </div>
                   <div className="detailSection-6">
-                    <div className={`detailSection-6-1`}>
-                      <button
-                        className={`mode-${
-                          props.mode === "light" ? "dark" : "light"
-                        }`}
-                        onClick={decrementQunatity}
-                      >
-                        -
-                      </button>
-                      <input type="number" value={quantity} readOnly />
-                      <button
-                        className={`mode-${
-                          props.mode === "light" ? "dark" : "light"
-                        }`}
-                        onClick={incrementQunatity}
-                      >
-                        +
-                      </button>
-                    </div>
+                    {product.stock >= 1 && (
+                      <div className={`detailSection-6-1`}>
+                        <button
+                          className={`mode-${
+                            props.mode === "light" ? "dark" : "light"
+                          }`}
+                          onClick={decrementQunatity}
+                        >
+                          -
+                        </button>
+                        <input type="number" value={quantity} readOnly />
+                        <button
+                          className={`mode-${
+                            props.mode === "light" ? "dark" : "light"
+                          }`}
+                          onClick={incrementQunatity}
+                        >
+                          +
+                        </button>
+                      </div>
+                    )}
                     <button
                       id="addToCart"
-                      className={`mode-${
-                        props.mode === "light" ? "dark" : "light"
-                      } ${
-                        product.stock < 1 ? "disabled-true" : "disabled-false"
-                      }`}
+                      className={`btn`}
                       onClick={addToCartHandler}
                       disabled={product.stock < 1 ? true : false}
                     >
                       Add to Cart
                     </button>
+                    {!isAuthenticated && (
+                      <button className="btn" id="addToWishList" onClick={(e)=>navigate("/login")}>Add to Wish List <i className="fa fa-heart"></i></button>
+                    )}
+                    {user && user.wishlist ? (
                     <button
                       id="addToWishList"
                       className={`mode-${
                         props.mode === "light" ? "dark" : "light"
-                      }`}
+                      } btn`}
                       onClick={addToWishlistHandler}
-                      disabled={isInWishlist}
-                      style={wishListbuttonStyle()}
+                      disabled={user.wishlist.find((i) => i.productID === product._id)}
+
                     >
-                      {wishlistButtonText} <i className="fa fa-heart"></i>
+                      {user.wishlist.find((i) => i.productID === product._id)?"Wishlisted":"WishList"} <i className="fa fa-heart"></i>
                     </button>
+                    ):(<span></span>)}
                   </div>
                 </div>
               </div>
@@ -237,7 +238,6 @@ const ProductPage = (props, { p }) => {
                         value={comment}
                         onChange={(e) => setcomment(e.target.value)}
                       ></textarea>
-                      {console.log(comment)}
                       <button
                         value="submit"
                         className={`mode-${

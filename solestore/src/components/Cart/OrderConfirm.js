@@ -8,8 +8,9 @@ import { useAlert } from "react-alert";
 const OrderConfirm = ({ mode }) => {
   const alert = useAlert();
   const navigate = useNavigate();
-  const { shippingInfo, cartItems } = useSelector((state) => state.cart);
+  const { shippingInfo } = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.user);
+  const cartItems =  user.cart;
   //Discount Cupons that are available
   const discountCoupons = [
     { code: "asm50", val: 50 },
@@ -71,7 +72,6 @@ const OrderConfirm = ({ mode }) => {
       setfinalAmount(temptotalBeforeDiscount);
     }
   };
-
   const address = `${shippingInfo.address}, ${shippingInfo.city}, ${shippingInfo.state}, ${shippingInfo.pinCode}, ${shippingInfo.country}`;
 
   const proceedToPayment = () => {
@@ -110,7 +110,7 @@ const OrderConfirm = ({ mode }) => {
               <h3 className="headings-for-page">Shipping Info</h3>
               <div className="d-flex flex-column flex-wrap  mt-2 shipping-info">
                 <b>Name :</b>
-                <span> {user.name}</span>
+                <span> {shippingInfo.name}</span>
               </div>
               <div className="d-flex flex-column flex-wrap mt-2 shipping-info">
                 <b>Address :</b>
@@ -121,7 +121,7 @@ const OrderConfirm = ({ mode }) => {
                 <span> {shippingInfo.phoneNo}</span>
               </div>
             </div>
-            <div className=" mt-5 justify-content-center align-center">
+            <div className=" mt-5 d-flex flex-column justify-content-center align-items-center">
               <h3 className="headings-for-page text-center mb-3">Your Cart Items</h3>
               {cartItems !== 0
                 ? cartItems.map((item, index) => (

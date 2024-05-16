@@ -133,6 +133,8 @@ select option {
   border-radius: 0.5rem;
   transition: 0.1s ease-in;
   margin-left: 10px;
+  font-size: 16px!important;
+  font-weight: 600;
 }
 .mode-dark {
   color: white;
@@ -157,6 +159,8 @@ select option {
   border-radius: 50%;
   width: 60px;
   margin-right: 10px;
+  aspect-ratio: 1;
+  object-fit: contain;
 }
 #personDetsSection,.reviewForm {
   text-align: left;

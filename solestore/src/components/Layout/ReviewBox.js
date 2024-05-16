@@ -9,7 +9,6 @@ const ReviewBox = (props) => {
     size: "large",
     sx:{color:props.mode === "light" ? "black" : "white"}
   };
-console.log(props.review)
   return (
     <>
       <div className="review-card">

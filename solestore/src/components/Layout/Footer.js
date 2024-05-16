@@ -1,30 +1,76 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./css/Footer.css";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  checkForSubscription,
+  ApplyForSubscription,
+  unsubscription
+} from "../../actions/newsLetterActions";
+import { useAlert } from "react-alert";
 const Footer = (props) => {
-  const darkLogo = "https://res.cloudinary.com/dqjeist4k/image/upload/v1712325115/soleStoreAvatars/darkmode_logo_jzymyp.png";
-  const lightLogo = "https://res.cloudinary.com/dqjeist4k/image/upload/v1712325114/soleStoreAvatars/lightmode_logo_z1n9lz.png"
+  const { isAuthenticated, loading } = useSelector((state) => state.user);
+  const { subscriptionStatus } = useSelector((state) => state.newsLetter);
+  const alert = useAlert();
+  const dispatch = useDispatch();
+  const darkLogo =
+    "https://res.cloudinary.com/dqjeist4k/image/upload/v1712325115/soleStoreAvatars/darkmode_logo_jzymyp.png";
+  const lightLogo =
+    "https://res.cloudinary.com/dqjeist4k/image/upload/v1712325114/soleStoreAvatars/lightmode_logo_z1n9lz.png";
+  const applyForSubscriptionHandler = () => {
+    dispatch(ApplyForSubscription());
+    alert.success("Thank you for Subscribing to News Letter");
+  };
+  const UnsubscribeHandler = () => {
+    dispatch(unsubscription());
+    alert.success("Unsubscribed to News Letter");
+  };
+  useEffect(() => {
+    dispatch(checkForSubscription());
+  }, [dispatch]);
+
   return (
     <>
-
-      <div className="container-fluid newsLetter">
-        <div className="row NewsText">
-          <div className="col-md-12">
-            <h1>Subscribe to our News Letter</h1>
-            <p>Get notified about our latest products, exciting deals and offers!</p>
+      {!loading && isAuthenticated && subscriptionStatus !== undefined && (
+        <div className="container-fluid newsLetter">
+          <div className="row NewsText">
+            <div className="col-md-12">
+              <h1>Subscribe to our News Letter</h1>
+              <p>
+                Get notified about our latest products, exciting deals and
+                offers!
+              </p>
+            </div>
+          </div>
+          <div className="row input-subscribe">
+            {subscriptionStatus ? (
+              <div className="d-flex flex-column justify-content-center  align-items-center">
+                <span
+                  className="subscribed-text"
+                >
+                  Subscribed to News Letter
+                </span>
+                <button className="button-subscirbe" onClick={UnsubscribeHandler}>Unsubcribe</button>
+              </div>
+            ) : (
+              <div>
+                <button
+                  className="button-subscirbe"
+                  onClick={applyForSubscriptionHandler}
+                >
+                  Subscribe
+                </button>
+              </div>
+            )}
           </div>
         </div>
-        <div className="row input-subscribe">
-          <div className="col-md-8 col1" style={{textAlign:"right"}}>
-            <input type="text" name="NewsLetter" id="NewsLetter" placeholder="Enter valid Email"/>
-          </div>
-          <div className="col-md-4 col2" style={{textAlign:"left"}}>
-            <button className="button-subscirbe">SUBMIT</button>
-          </div>
-        </div>
-      </div>
+      )}
 
-      <footer className={`text-center text-lg-start bg-${props.mode} text-${props.mode==='light'?'dark':'light'}`}>
+      <footer
+        className={`text-center text-lg-start bg-${props.mode} text-${
+          props.mode === "light" ? "dark" : "light"
+        }`}
+      >
         <section className="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
           <div className="me-5 d-none d-lg-block">
             <span>Get connected with us on social networks:</span>
@@ -56,7 +102,7 @@ const Footer = (props) => {
                   Sole<span className="brand-item-color">Store</span>
                 </h3>
                 <img
-                  src = {props.mode==='light'?lightLogo:darkLogo}
+                  src={props.mode === "light" ? lightLogo : darkLogo}
                   className="images"
                   alt="logo"
                 />
@@ -137,8 +183,7 @@ const Footer = (props) => {
         </section>
 
         <div className="text-center p-4 copyright">
-          
-            © 2024 Copyright: Aaditya Rajesh Mall
+          © 2024 Copyright: Aaditya Rajesh Mall
         </div>
       </footer>
     </>
