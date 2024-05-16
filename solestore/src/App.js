@@ -131,6 +131,11 @@ function App() {
           ) : (
             <Route path="/cart" element={<LoginSignup />} />
           )}
+          {isAuthenticated ? (
+            <Route path="/wishlist" element={<Wishlist />} />
+          ) : (
+            <Route path="/wishlist" element={<LoginSignup />} />
+          )}
 
           {/* Admin Routes */}
           {isAuthenticated && user.role === "admin" ? (
@@ -188,7 +193,6 @@ function App() {
           <Route path="/password/reset/:token" element={<ResetPassword />} />
           <Route path="/products" element={<Shop mode={mode} />} />
           <Route path="/contact" element={<Contact mode={mode} />} />
-          <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/*" element={<Error404 />} />
           <Route path="/login" element={<LoginSignup />} />
           <Route path="/product/:id" element={<ProductPage mode={mode} />} />
