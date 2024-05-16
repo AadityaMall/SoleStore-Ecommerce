@@ -55,9 +55,9 @@ const Wishlist = () => {
   });
   return (
     <>
-    {loading || !user || !user.wishlist?(<Loader/>):(
-
+    {loading?(<Loader/>):(
       <div className="container-fluid" id="contentHolder" >
+        {user && user.wishlist?(
         <div className="wishlist-card p-3">
           <div className="title">
             <h2 className="headings-for-page">Shopping Wishlist</h2>
@@ -74,6 +74,7 @@ const Wishlist = () => {
               <h5>No Items in WishList , Shop Now !!</h5>
             )}
         </div>
+        ):(<span>Not loading</span>)}
       </div>
     )}
     </>
