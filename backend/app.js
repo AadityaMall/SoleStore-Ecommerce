@@ -3,13 +3,14 @@ const app = express();
 const errorMiddleware = require("./middleware/error");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
-const cors = require("cors");
+const cors = require('cors');
 
-app.use(
-  cors({
-    credentials: true, // Allow credentials (cookies)
-  })
-);
+const corsOptions = {
+  origin: 'https://sole-store.vercel.app', // Replace with your frontend's URL
+  credentials: true, // Allow credentials (cookies, headers)
+};
+
+app.use(cors(corsOptions));
 
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: false }));
