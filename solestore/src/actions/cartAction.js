@@ -6,13 +6,12 @@ import {
   DELETE_SHIPPING_INFO,
   SAVE_SHIPPING_INFO,
 } from "../constants/cartConstant";
-import axios from "axios";
 import {
   USERLOAD_REQUEST,
   USERLOAD_FAIL,
   USERLOAD_SUCCESS,
 } from "../constants/userConstant";
-
+import api from "./apiAction"
 //addToCart
 export const addToCart = (id, quantity) => async (dispatch, getState) => {
   try {
@@ -26,10 +25,10 @@ export const addToCart = (id, quantity) => async (dispatch, getState) => {
       productId: id,
       quantity: quantity,
     };
-    await axios.post("/api/v1/cartitems", cartData, config);
+    await api.post("/api/v1/cartitems", cartData, config);
     try {
       dispatch({ type: USERLOAD_REQUEST });
-      const { data } = await axios.get(`/api/v1/me`);
+      const { data } = await api.get(`/api/v1/me`);
       dispatch({ type: USERLOAD_SUCCESS, payload: data.user });
     } catch (error) {
       dispatch({ type: USERLOAD_FAIL, payload: "No user Logged in!" });
@@ -43,10 +42,10 @@ export const removeFromCart = (id) => async (dispatch) => {
     type: REMOVE_FROM_CART,
   });
   try {
-    await axios.delete(`/api/v1/cartitems/${id}`);
+    await api.delete(`/api/v1/cartitems/${id}`);
     try {
       dispatch({ type: USERLOAD_REQUEST });
-      const { data } = await axios.get(`/api/v1/me`);
+      const { data } = await api.get(`/api/v1/me`);
       dispatch({ type: USERLOAD_SUCCESS, payload: data.user });
     } catch (error) {
       dispatch({ type: USERLOAD_FAIL, payload: "No user Logged in!" });
@@ -60,10 +59,10 @@ export const addShippingInfo = (dets) => async (dispatch) => {
   try{
     dispatch({type: ADD_SHIPPING_INFO,});
     const config  = {headers:{"Content-Type":"application/json"}}
-    await axios.post("/api/v1/shippingAddress",dets,config)
+    await api.post("/api/v1/shippingAddress",dets,config)
     try{
       dispatch({type:USERLOAD_REQUEST});
-      const {data} = await axios.get(`/api/v1/me`);
+      const {data} = await api.get(`/api/v1/me`);
       dispatch({type:USERLOAD_SUCCESS, payload:data.user})
     }catch(err){
       dispatch({type:USERLOAD_FAIL, payload:"No user logged in"});
@@ -76,10 +75,10 @@ export const updateShippingInfo = (dets) => async (dispatch) => {
   try{
     dispatch({type: UPDATE_SHIPPING_INFO,});
     const config  = {headers:{"Content-Type":"application/json"}}
-    await axios.put("/api/v1/shippingAddress",dets,config)
+    await api.put("/api/v1/shippingAddress",dets,config)
     try{
       dispatch({type:USERLOAD_REQUEST});
-      const {data} = await axios.get(`/api/v1/me`);
+      const {data} = await api.get(`/api/v1/me`);
       dispatch({type:USERLOAD_SUCCESS, payload:data.user})
     }catch(err){
       dispatch({type:USERLOAD_FAIL, payload:"No user logged in"});
@@ -91,10 +90,10 @@ export const updateShippingInfo = (dets) => async (dispatch) => {
 export const deleteShippingInfo = (id) => async (dispatch) => {
   try{
     dispatch({type: DELETE_SHIPPING_INFO,});
-    await axios.delete(`/api/v1/shippingAddr/${id}`)
+    await api.delete(`/api/v1/shippingAddr/${id}`)
     try{
       dispatch({type:USERLOAD_REQUEST});
-      const {data} = await axios.get(`/api/v1/me`);
+      const {data} = await api.get(`/api/v1/me`);
       dispatch({type:USERLOAD_SUCCESS, payload:data.user})
     }catch(err){
       dispatch({type:USERLOAD_FAIL, payload:"No user logged in"});

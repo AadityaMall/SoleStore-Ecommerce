@@ -1,4 +1,4 @@
-import axios from "axios";
+import api from "./apiAction" 
 import {
   ALL_PRODUCT_FAIL,
   ALL_PRODUCT_REQUEST,
@@ -45,7 +45,7 @@ export const getProduct = (currentPage=1,price=[0,30000],category,ratings=0,sort
         link = `/api/v1/products?page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}&sort=${sort}`;
       }
     }    
-    const { data } = await axios.get(link);
+    const { data } = await api.get(link);
     dispatch({
       type: ALL_PRODUCT_SUCCESS,
       payload: data,
@@ -61,7 +61,7 @@ export const getProduct = (currentPage=1,price=[0,30000],category,ratings=0,sort
 export const getAdminProduct = () => async (dispatch) => {
   try {
     dispatch({ type: ADMIN_PRODUCT_REQUEST });
-    const { data } = await axios.get("/api/v1/admin/products");
+    const { data } = await api.get("/api/v1/admin/products");
     dispatch({
       type: ADMIN_PRODUCT_SUCCESS,
       payload: data
@@ -78,7 +78,7 @@ export const getAdminProduct = () => async (dispatch) => {
 export const getProductDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_DETAIL_REQUEST });
-    const { data } = await axios.get(`/api/v1/product/${id}`);
+    const { data } = await api.get(`/api/v1/product/${id}`);
     dispatch({
       type: PRODUCT_DETAIL_SUCCESS,
       payload: data.product,
@@ -97,7 +97,7 @@ export const newReview = (reviewData) => async (dispatch) => {
     const config = {
       headers:{"Content-Type":"application/json"},
     }
-    const { data } = await axios.put(`/api/v1/review`, reviewData,config);
+    const { data } = await api.put(`/api/v1/review`, reviewData,config);
     dispatch({
       type: NEW_REVIEW_SUCCESS,
       payload: data.success,
@@ -118,7 +118,7 @@ export const newProduct = (productData) => async (dispatch) => {
     }
     console.log("control here");
     console.log(productData)
-    const { data } = await axios.post(`/api/v1/admin/product/new`, productData,config);
+    const { data } = await api.post(`/api/v1/admin/product/new`, productData,config);
     dispatch({
       type: NEW_PRODUCT_SUCCESS,
       payload: data,
@@ -136,7 +136,7 @@ export const deleteProduct = (id) => async (dispatch) => {
   try {
     dispatch({ type: DELETE_PRODUCT_REQUEST });
     console.log(`/api/v1/admin/product/${id}`)
-    const { data } = await axios.delete(`/api/v1/admin/product/${id}`);
+    const { data } = await api.delete(`/api/v1/admin/product/${id}`);
     dispatch({
       type: DELETE_PRODUCT_SUCCESS,
       payload: data.success,
@@ -156,7 +156,7 @@ export const updateProduct = (id,productData) => async (dispatch) => {
     const config = {
       headers:{"Content-Type":"multipart/form-data"},
     }
-    const { data } = await axios.put(`/api/v1/admin/product/${id}`, productData,config);
+    const { data } = await api.put(`/api/v1/admin/product/${id}`, productData,config);
     dispatch({
       type: UPDATE_PRODUCT_SUCCESS,
       payload: data.success,
@@ -173,7 +173,7 @@ export const updateProduct = (id,productData) => async (dispatch) => {
 export const getAllReviews = (id) => async (dispatch) => {
   try {
     dispatch({ type: ALL_REVIEW_REQUEST });
-    const { data } = await axios.get(`/api/v1/reviews?id=${id}`);
+    const { data } = await api.get(`/api/v1/reviews?id=${id}`);
     dispatch({
       type: ALL_REVIEW_SUCCESS,
       payload: data.reviews
@@ -188,7 +188,7 @@ export const getAllReviews = (id) => async (dispatch) => {
 export const deleteReview = (reviewId,ProductId) => async (dispatch) => {
   try {
     dispatch({ type: DELETE_REVIEW_REQUEST });
-    const { data } = await axios.delete(`/api/v1/reviews?id=${reviewId}&productId=${ProductId}`);
+    const { data } = await api.delete(`/api/v1/reviews?id=${reviewId}&productId=${ProductId}`);
     dispatch({
       type: DELETE_REVIEW_SUCCESS,
       payload: data.success

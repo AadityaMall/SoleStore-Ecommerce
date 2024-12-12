@@ -7,8 +7,7 @@ import {
   USERLOAD_FAIL,
   USERLOAD_SUCCESS,
 } from "../constants/userConstant";
-import axios from "axios";
-
+import api from "./apiAction"
 //addToCart
 export const addToWishList = (id) => async (dispatch) => {
   try {
@@ -21,10 +20,10 @@ export const addToWishList = (id) => async (dispatch) => {
     const wishlistData = {
       productId: id,
     };
-    await axios.post("/api/v1/wishlistItem", wishlistData, config);
+    await api.post("/api/v1/wishlistItem", wishlistData, config);
     try {
       dispatch({ type: USERLOAD_REQUEST });
-      const { data } = await axios.get(`/api/v1/me`);
+      const { data } = await api.get(`/api/v1/me`);
       dispatch({ type: USERLOAD_SUCCESS, payload: data.user });
     } catch (error) {
       dispatch({ type: USERLOAD_FAIL, payload: "No user Logged in!" });
@@ -38,10 +37,10 @@ export const removeFromWishlist = (id) => async (dispatch) => {
     type: REMOVE_FROM_WISHLIST,
   });
   try {
-    await axios.delete(`/api/v1/wishlistItem/${id}`);
+    await api.delete(`/api/v1/wishlistItem/${id}`);
     try {
       dispatch({ type: USERLOAD_REQUEST });
-      const { data } = await axios.get(`/api/v1/me`);
+      const { data } = await api.get(`/api/v1/me`);
       dispatch({ type: USERLOAD_SUCCESS, payload: data.user });
     } catch (error) {
       dispatch({ type: USERLOAD_FAIL, payload: "No user Logged in!" });
