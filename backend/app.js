@@ -5,17 +5,8 @@ const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
-const allowedOrigin = "http://localhost:3000";
-
 app.use(
   cors({
-    origin: function (origin, callback) {
-      if (!origin || origin === allowedOrigin) {
-        callback(null, origin); // Allow the origin
-      } else {
-        callback(new Error("Not allowed by CORS")); // Block the origin
-      }
-    },
     credentials: true, // Allow credentials (cookies)
   })
 );
