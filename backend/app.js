@@ -5,7 +5,7 @@ const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const cors = require('cors');
 
-const allowedOrigins = ['http://localhost:3000', 'https://sole-store.vercel.app/'];
+const allowedOrigins = ['http://localhost:3000', 'https://sole-store.vercel.app'];
 
 app.use(cors({
     origin: function (origin, callback) {
