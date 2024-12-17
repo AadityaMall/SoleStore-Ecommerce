@@ -7,7 +7,7 @@ const sendToken = (user,statusCode,res,options={secure:true}) => {
     const cookieOptions = {
         expires: new Date(Date.now() + (options.expires || process.env.COOKIE_EXPIRE) * 24 * 60 * 60 * 1000),
         httpOnly: true,
-        secure: options.secure || false, // Default to false in development
+        secure: true, // Default to false in development
         sameSite: 'None'
     }
 

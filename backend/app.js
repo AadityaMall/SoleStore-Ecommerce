@@ -5,17 +5,9 @@ const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const cors = require('cors');
 
-const allowedOrigins = ['http://localhost:3000', 'https://sole-store.vercel.app'];
-
 app.use(cors({
-    origin: function (origin, callback) {
-        if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-            callback(null, origin); // Allow the origin
-        } else {
-            callback(new Error('Not allowed by CORS')); // Block the origin
-        }
-    },
-    credentials: true // Allow credentials (cookies)
+  origin: ['http://localhost:3000', 'https://sole-store.vercel.app'],
+  credentials: true // Allow cookies in requests
 }));
 
 app.use(express.json({ limit: "50mb" }));
