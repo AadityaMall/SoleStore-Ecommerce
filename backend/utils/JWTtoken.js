@@ -1,6 +1,6 @@
 //Creating token and saving it in cookie
 
-const sendToken = (user,statusCode,res,options={}) => {
+const sendToken = (user,statusCode,res,options={secure:true}) => {
     const token =  user.getJWTToken();
 
     //Options for cookie -->
