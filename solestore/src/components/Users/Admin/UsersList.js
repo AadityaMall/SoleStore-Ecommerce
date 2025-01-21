@@ -4,7 +4,8 @@ import "../../Layout/css/ProductsList.css";
 import { useSelector, useDispatch } from "react-redux";
 import { Link , useNavigate } from "react-router-dom";
 import { clearErrors, deleteUser, getAllUsers } from "../../../actions/userActions";
-import { useAlert } from "react-alert";
+import { toast } from "react-toastify";
+
 import { Edit, Delete } from "@mui/icons-material";
 import SideBar from "./SideBar";
 import { Button } from "@mui/material";
@@ -12,7 +13,7 @@ import { USER_DELETE_RESET } from "../../../constants/userConstant";
 const UsersList = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const alert = useAlert();
+
   const { error, users } = useSelector((state) => state.allUsers);
   const { error:deleteError,isDeleted} =  useSelector((state)=> state.profile)
   
@@ -21,20 +22,20 @@ const UsersList = () => {
   };
   useEffect(() => {
     if(error){
-      alert.error(error)
+      toast.error(error)
       dispatch(clearErrors());
     }
     if(deleteError){
-      alert.error(deleteError);
+      toast.error(deleteError);
       dispatch(clearErrors())
     }
     if(isDeleted){
-      alert.success("User Deleted");
+      toast.success("User Deleted");
       navigate("/admin/users");
       dispatch({type:USER_DELETE_RESET})
     }
     dispatch(getAllUsers())
-  }, [error,alert,dispatch,deleteError, navigate, isDeleted])
+  }, [error,dispatch,deleteError, navigate, isDeleted])
   
   const columns = [
     { field: "id", headerName: "User ID", minWidth: 180, flex: 1 },

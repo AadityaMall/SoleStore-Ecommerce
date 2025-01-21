@@ -4,9 +4,8 @@ import { useSelector } from "react-redux";
 import CheckoutSteps from "./CheckoutSteps";
 import { useNavigate, Link } from "react-router-dom";
 import "../Layout/css/orderConfirm.css";
-import { useAlert } from "react-alert";
+import { toast } from "react-toastify";
 const OrderConfirm = ({ mode }) => {
-  const alert = useAlert();
   const navigate = useNavigate();
   const { shippingInfo } = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.user);
@@ -66,9 +65,9 @@ const OrderConfirm = ({ mode }) => {
       setdiscountVisible(true);
       const discountValue = (discVal / 100) * temptotalBeforeDiscount;
       setfinalAmount(temptotalBeforeDiscount - discountValue);
-      alert.success("Discount Applied");
+      toast.success("Discount Applied");
     } else {
-      alert.error("Invalid Discount Coupon");
+      toast.error("Invalid Discount Coupon");
       setfinalAmount(temptotalBeforeDiscount);
     }
   };

@@ -4,7 +4,8 @@ import "../../Layout/css/ProductsList.css";
 import { useSelector, useDispatch } from "react-redux";
 import { Link , useNavigate } from "react-router-dom";
 import { clearErrors, deleteProduct, getAdminProduct } from "../../../actions/productAction";
-import { useAlert } from "react-alert";
+import { toast } from "react-toastify";
+
 import { Edit, Delete } from "@mui/icons-material";
 import SideBar from "./SideBar";
 import { Button } from "@mui/material";
@@ -12,7 +13,7 @@ import { DELETE_PRODUCT_RESET } from "../../../constants/productConstants";
 const ProductsList = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const alert = useAlert();
+
   const { error, products } = useSelector((state) => state.products);
   const { error:deleteError,isDeleted} =  useSelector((state)=> state.updateproduct)
   
@@ -21,20 +22,20 @@ const ProductsList = () => {
   };
   useEffect(() => {
     if(error){
-      alert.error(error)
+      toast.error(error)
       dispatch(clearErrors());
     }
     if(deleteError){
-      alert.error(deleteError);
+      toast.error(deleteError);
       dispatch(clearErrors())
     }
     if(isDeleted){
-      alert.success("Product Deleted Successfuly");
+      toast.success("Product Deleted Successfuly");
       navigate("/admin/dashboard");
       dispatch({type:DELETE_PRODUCT_RESET})
     }
     dispatch(getAdminProduct())
-  }, [error,alert,dispatch,deleteError, navigate, isDeleted])
+  }, [error,dispatch,deleteError, navigate, isDeleted])
   
   const columns = [
     { field: "id", headerName: "Product ID", minWidth: 180, flex: 1 },

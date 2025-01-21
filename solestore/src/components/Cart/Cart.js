@@ -4,16 +4,15 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { addToCart, removeFromCart } from "../../actions/cartAction";
 import Loader from "../Layout/Loader";
-import { useAlert } from "react-alert";
+import {toast} from "react-toastify"
 
 const Cart = () => {
-  const alert = useAlert();
   const dispatch = useDispatch();
   const { user, loading } = useSelector((state) => state.user);
   const incrementQunatity = (id, quantity, stock) => {
     const newQty = quantity + 1;
     if (stock < 1){
-      alert.error("Stock not available")
+      toast.error("Stock not available")
       return;
     } 
     try {

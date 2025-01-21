@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { clearErrors, getProduct } from "../actions/productAction.js";
 import { useSelector, useDispatch } from "react-redux";
 import Loader from "./Layout/Loader.js";
-import { useAlert } from "react-alert";
+import { toast } from "react-toastify";
 import Product from "./Layout/Product.js";
 import "./Layout/css/Shop.css";
 import Pagination from "@mui/material/Pagination";
@@ -49,7 +49,7 @@ const Shop = (props) => {
     let selectElement = document.querySelector("#sort");
     setSort(selectElement.value);
   };
-  const alert = useAlert();
+
   const dispatch = useDispatch();
   const {
     loading,
@@ -69,14 +69,14 @@ const Shop = (props) => {
 
   useEffect(() => {
     if (error) {
-      alert.error(error);
+      toast.error(error);
       dispatch(clearErrors());
     }
     const dispatcher = () => {
       dispatch(getProduct(1, [0,30000], homeFilterAvailable, 0));
     }
     dispatcher();
-  }, [dispatch, alert, error, homeFilterAvailable]);
+  }, [dispatch,  error, homeFilterAvailable]);
 
   const applyFilters = () => {
     dispatch(getProduct(currentPage, price, category, ratings, sort));

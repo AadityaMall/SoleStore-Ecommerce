@@ -7,11 +7,10 @@ import {
   ApplyForSubscription,
   unsubscription
 } from "../../actions/newsLetterActions";
-import { useAlert } from "react-alert";
+import { toast } from "react-toastify";
 const Footer = (props) => {
   const { isAuthenticated, loading } = useSelector((state) => state.user);
   const { subscriptionStatus } = useSelector((state) => state.newsLetter);
-  const alert = useAlert();
   const dispatch = useDispatch();
   const darkLogo =
     "https://res.cloudinary.com/dqjeist4k/image/upload/v1712325115/soleStoreAvatars/darkmode_logo_jzymyp.png";
@@ -19,11 +18,11 @@ const Footer = (props) => {
     "https://res.cloudinary.com/dqjeist4k/image/upload/v1712325114/soleStoreAvatars/lightmode_logo_z1n9lz.png";
   const applyForSubscriptionHandler = () => {
     dispatch(ApplyForSubscription());
-    alert.success("Thank you for Subscribing to News Letter");
+    toast.success("Thank you for Subscribing to News Letter");
   };
   const UnsubscribeHandler = () => {
     dispatch(unsubscription());
-    alert.success("Unsubscribed to News Letter");
+    toast.success("Unsubscribed to News Letter");
   };
   useEffect(() => {
     dispatch(checkForSubscription());

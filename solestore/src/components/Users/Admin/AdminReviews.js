@@ -7,7 +7,8 @@ import {
   deleteReview,
   getAllReviews,
 } from "../../../actions/productAction";
-import { useAlert } from "react-alert";
+import { toast } from "react-toastify";
+
 import { Delete } from "@mui/icons-material";
 import SideBar from "./SideBar";
 import { Button } from "@mui/material";
@@ -15,7 +16,7 @@ import { DELETE_REVIEW_RESET } from "../../../constants/productConstants";
 import { LocalOffer } from "@mui/icons-material";
 const AdminReviews = () => {
   const dispatch = useDispatch();
-  const alert = useAlert();
+
   const { error: deleteError, isDeleted } = useSelector(
     (state) => state.review
   );
@@ -35,20 +36,20 @@ const AdminReviews = () => {
       dispatch(getAllReviews(productId));
     }
     if (error) {
-      alert.error(error);
+      toast.error(error);
       dispatch(clearErrors());
     }
 
     if (deleteError) {
-      alert.error(deleteError);
+      toast.error(deleteError);
       dispatch(clearErrors());
     }
 
     if (isDeleted) {
-      alert.success("Review Deleted Successfuly");
+      toast.success("Review Deleted Successfuly");
       dispatch({ type: DELETE_REVIEW_RESET });
     }
-  }, [error, alert, dispatch, deleteError, isDeleted,productId]);
+  }, [error, dispatch, deleteError, isDeleted,productId]);
 
   const columns = [
     { field: "id", headerName: "Review ID", minWidth: 150, flex: 0.8 },

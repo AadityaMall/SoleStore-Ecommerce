@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useAlert } from "react-alert";
+import { toast } from "react-toastify";
+
 import { useNavigate , useParams } from "react-router-dom";
 import {
   clearErrors,
@@ -25,21 +26,21 @@ const ResetPassword = () => {
   const navigate = useNavigate();
   const { success, loading, error } = useSelector((state) => state.forgotPassword);
   const dispatch = useDispatch();
-  const alert = useAlert();
+
   const [password, setPassword] = useState();
   const [conirmPassword, setConfirmPassword] = useState();
   const { token } = useParams();
   useEffect(() => {
     
     if (error) {
-      alert.error(error);
+      toast.error(error);
       dispatch(clearErrors());
     }
     if (success) {
-      alert.success("Password Reset");
+      toast.success("Password Reset");
       navigate("/login");
     }
-  }, [dispatch, error, alert, navigate, success]);
+  }, [dispatch, error,  navigate, success]);
 
   const resetPasswordSubmit = (e) => {
     e.preventDefault();

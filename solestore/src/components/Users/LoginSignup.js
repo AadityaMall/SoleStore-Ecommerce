@@ -5,13 +5,13 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import Loader from "../Layout/Loader";
 import { useDispatch, useSelector } from "react-redux";
 import { clearErrors, login, register } from "../../actions/userActions";
-import { useAlert } from "react-alert";
+import { toast } from "react-toastify";
 
 const LoginSignup = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const alert = useAlert();
+
   const { error, loading, isAuthenticated } = useSelector(
     (state) => state.user
   );
@@ -31,13 +31,13 @@ const LoginSignup = () => {
   const redirect = location.search ? location.search.split("=")[1] : "account";
   useEffect(() => {
     if (error) {
-      alert.error(error);
+      toast.error(error);
       dispatch(clearErrors());
     }
     if (isAuthenticated) {
       navigate(`/${redirect}`);
     }
-  }, [dispatch, error, alert, navigate, isAuthenticated, redirect]);
+  }, [dispatch, error,  navigate, isAuthenticated, redirect]);
 
   const registerSubmit = (e) => {
     e.preventDefault();

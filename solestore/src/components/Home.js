@@ -6,11 +6,9 @@ import { Link } from "react-router-dom";
 import { clearErrors, getProduct } from "../actions/productAction.js";
 import { useSelector, useDispatch } from "react-redux";
 import Loader from "./Layout/Loader.js";
-import { useAlert } from "react-alert";
+import { toast } from "react-toastify";
 
 const Home = (props) => {
-
-  const alert = useAlert(); // Alert for error
 
   const dispatch = useDispatch();
 
@@ -20,11 +18,11 @@ const Home = (props) => {
 
   useEffect(() => {
     if (error) {
-      alert.error(error);
+      toast.error(error);
       dispatch(clearErrors());
     }
     dispatch(getProduct());
-  }, [dispatch, error, alert]);
+  }, [dispatch, error]);
 
   //every time page loads, scroll to top
   useEffect(() => {

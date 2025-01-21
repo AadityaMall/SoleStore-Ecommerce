@@ -9,7 +9,7 @@ import {
   updateShippingInfo,
 } from "../../actions/cartAction";
 import { Country, State } from "country-state-city";
-import { useAlert } from "react-alert";
+import { toast } from "react-toastify";
 import CheckoutSteps from "./CheckoutSteps";
 import Loader from "../Layout/Loader";
 import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
@@ -209,7 +209,7 @@ const Shipping = ({ mode }) => {
   const shippingAddress = user.shipping;
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const alert = useAlert();
+
   const [addModalOpen, setAddModalOpen] = useState(false);
   const [updateModalOpen, setupdateModalOpen] = useState(false);
   if (addModalOpen || updateModalOpen) {
@@ -258,7 +258,7 @@ const Shipping = ({ mode }) => {
   const shippingSubmit = (e) => {
     e.preventDefault();
     if (phoneNo.length !== 10) {
-      alert.error("Phone number should be of 10 digits");
+      toast.error("Phone number should be of 10 digits");
       return;
     }
     dispatch(

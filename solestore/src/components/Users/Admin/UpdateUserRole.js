@@ -6,7 +6,8 @@ import {
   clearErrors,
   getUserDetail,
 } from "../../../actions/userActions";
-import { useAlert } from "react-alert";
+import { toast } from "react-toastify";
+
 import { useNavigate, useParams } from "react-router-dom";
 import { VerifiedUser, Person, AlternateEmail } from "@mui/icons-material";
 import SideBar from "./SideBar";
@@ -14,7 +15,7 @@ import { ADMIN_USER_UPDATE_SUCCESS } from "../../../constants/userConstant";
 import Loader from "../../Layout/Loader";
 const UpdateUserRole = () => {
   const dispatch = useDispatch();
-  const alert = useAlert();
+
   const navigate = useNavigate();
   const { id } = useParams();
   const { loading, error, user } = useSelector((state) => state.userDetails);
@@ -49,19 +50,19 @@ const UpdateUserRole = () => {
       setRole(user.role);
     }
     if (error) {
-      alert.error(error);
+      toast.error(error);
       dispatch(clearErrors());
     }
     if (updateError) {
-      alert.error(error);
+      toast.error(error);
       dispatch(clearErrors());
     }
     if (isUpdated) {
-      alert.success("User Updated Successfully");
+      toast.success("User Updated Successfully");
       navigate("/admin/users");
       dispatch({ type: ADMIN_USER_UPDATE_SUCCESS });
     }
-  }, [dispatch, alert, error, navigate, isUpdated, id, user, updateError]);
+  }, [dispatch, error, navigate, isUpdated, id, user, updateError]);
 
   return (
     <>

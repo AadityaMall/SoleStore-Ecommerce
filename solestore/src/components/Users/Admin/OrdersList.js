@@ -4,7 +4,8 @@ import "../../Layout/css/ProductsList.css";
 import { useSelector, useDispatch } from "react-redux";
 import { Link , useNavigate } from "react-router-dom";
 import { clearErrors, deleteOrder, getAllOrders } from "../../../actions/orderAction";
-import { useAlert } from "react-alert";
+import { toast } from "react-toastify";
+
 import { Edit, Delete } from "@mui/icons-material";
 import SideBar from "./SideBar";
 import { Button } from "@mui/material";
@@ -12,7 +13,6 @@ import { DELETE_ORDERS_RESET } from "../../../constants/orderConstant";
 const OrdersList = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const alert = useAlert();
   const { error, orders } = useSelector((state) => state.allOrders);
   const { error:deleteError,isDeleted} =  useSelector((state)=> state.updateOrder)
   const orderStatusColor = (stat) => {
@@ -27,20 +27,20 @@ const OrdersList = () => {
   };
   useEffect(() => {
     if(error){
-      alert.error(error)
+      toast.error(error)
       dispatch(clearErrors());
     }
     if(deleteError){
-      alert.error(deleteError);
+      toast.error(deleteError);
       dispatch(clearErrors())
     }
     if(isDeleted){
-      alert.success("Order Deleted Successfuly");
+      toast.success("Order Deleted Successfuly");
       navigate("/admin/orders");
       dispatch({type:DELETE_ORDERS_RESET})
     }
     dispatch(getAllOrders())
-  }, [error,alert,dispatch,deleteError, navigate, isDeleted])
+  }, [error,dispatch,deleteError, navigate, isDeleted])
   
   const columns = [
     { field: "id", headerName: "Order ID", minWidth: 300, flex: 1 },

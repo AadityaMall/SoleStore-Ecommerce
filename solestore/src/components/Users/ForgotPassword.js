@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useAlert } from "react-alert";
+import { toast } from "react-toastify";
 import { clearErrors, forgotPassword } from "../../actions/userActions";
 import Loader from "../Layout/Loader";
 import { useNavigate } from "react-router-dom";
@@ -25,7 +25,7 @@ const ForgotPassword = () => {
   );
   const { isAuthenticated } = useSelector((state) => state.user);
   const dispatch = useDispatch();
-  const alert = useAlert();
+
   const [email, setEmail] = useState();
 
   useEffect(() => {
@@ -33,13 +33,13 @@ const ForgotPassword = () => {
       navigate("/account");
     }
     if (error) {
-      alert.error(error);
+      toast.error(error);
       dispatch(clearErrors());
     }
     if (message) {
-      alert.success(message);
+      toast.success(message);
     }
-  }, [dispatch, error, alert, message, isAuthenticated,navigate]);
+  }, [dispatch, error,  message, isAuthenticated,navigate]);
 
   const forgotPasswordSubmit = (e) => {
     e.preventDefault();

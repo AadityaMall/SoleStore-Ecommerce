@@ -3,7 +3,8 @@ import { useEffect } from "react";
 import "../Layout/css/User.css";
 import "../Layout/css/UpdateUser.css";
 import { useDispatch, useSelector } from "react-redux";
-import { useAlert } from "react-alert";
+import { toast } from "react-toastify";
+
 import { useNavigate } from "react-router-dom";
 import {
   loadUser,
@@ -21,7 +22,7 @@ const Update = () => {
   const { user } = useSelector((state) => state.user);
   const { isUpdated, loading, error } = useSelector((state) => state.profile);
   const dispatch = useDispatch();
-  const alert = useAlert();
+
   const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [avatar, setAvatar] = useState();
@@ -33,18 +34,18 @@ const Update = () => {
       setAvatarPreview(user.avatar.url);
     }
     if (error) {
-      alert.error(error);
+      toast.error(error);
       dispatch(clearErrors());
     }
     if (isUpdated) {
-      alert.success("Profile Updated Successfully");
+      toast.success("Profile Updated Successfully");
       dispatch(loadUser());
       navigate("/account");
       dispatch({
         type: USERUPDATE_RESET,
       });
     }
-  }, [dispatch, error, alert, navigate, user, isUpdated]);
+  }, [dispatch, error, navigate, user, isUpdated]);
 
   const updateSubmit = (e) => {
     e.preventDefault();

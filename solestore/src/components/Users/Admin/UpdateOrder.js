@@ -8,7 +8,8 @@ import {
   updateOrder,
 } from "../../../actions/orderAction";
 import { AccountTree } from "@mui/icons-material";
-import { useAlert } from "react-alert";
+import { toast } from "react-toastify";
+
 import Loader from "../../Layout/Loader";
 import "../../Layout/css/SingleOrder.css";
 import "../../Layout/css/UpdateOrder.css";
@@ -17,7 +18,6 @@ import { UPDATE_ORDERS_RESET } from "../../../constants/orderConstant";
 const UpdateOrder = ({ mode }) => {
   const darkLogo = "https://res.cloudinary.com/dqjeist4k/image/upload/v1712325115/soleStoreAvatars/darkmode_logo_jzymyp.png";
   const dispatch = useDispatch();
-  const alert = useAlert();
   const { order, loading, error } = useSelector((state) => state.orderDetails);
   const { error: updateError, isUpdated } = useSelector(
     (state) => state.updateOrder
@@ -43,18 +43,18 @@ const UpdateOrder = ({ mode }) => {
   useEffect(() => {
     dispatch(getOrderDetails(id));
     if (error) {
-      alert.error(error);
+      toast.error(error);
       dispatch(clearErrors());
     }
     if (updateError) {
-      alert.error(updateError);
+      toast.error(updateError);
       dispatch(clearErrors());
     }
     if (isUpdated) {
-      alert.success("Order Submitted Successfullt");
+      toast.success("Order Submitted Successfullt");
       dispatch({ type: UPDATE_ORDERS_RESET });
     }
-  }, [dispatch, alert, error, id, updateError, isUpdated]);
+  }, [dispatch, error, id, updateError, isUpdated]);
 
   if (order && order.shippingInfo) {
     var address = `${order.shippingInfo.address}, ${order.shippingInfo.city}, ${order.shippingInfo.state}, ${order.shippingInfo.pinCode}, ${order.shippingInfo.country}`;

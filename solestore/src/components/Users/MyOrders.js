@@ -6,13 +6,14 @@ import Loader from "../Layout/Loader";
 import { Link } from "react-router-dom";
 import { myOrders, clearErrors } from "../../actions/orderAction";
 import { Launch } from "@mui/icons-material";
-import { useAlert } from "react-alert";
+import { toast } from "react-toastify";
+
 
 const MyOrders = ({ mode }) => {
   const { user } = useSelector((state) => state.user);
   const { loading, error, orders } = useSelector((state) => state.myOrders);
   const dispatch = useDispatch();
-  const alert = useAlert();
+
   const rows = [];
   orders &&
     orders.forEach((item, index) => {
@@ -68,11 +69,11 @@ const MyOrders = ({ mode }) => {
 
   useEffect(() => {
     if (error) {
-      alert.error(error);
+      toast.error(error);
       dispatch(clearErrors());
     }
     dispatch(myOrders());
-  }, [dispatch, alert, error]);
+  }, [dispatch,  error]);
 
   useEffect(() => {
     const handleScrollToTop = () => {

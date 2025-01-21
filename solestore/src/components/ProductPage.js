@@ -10,20 +10,21 @@ import {
 } from "../actions/productAction";
 import { useNavigate, useParams } from "react-router-dom";
 import Loader from "./Layout/Loader";
-import { useAlert } from "react-alert";
+
 import "react-responsive-modal/styles.css";
 import ReviewBox from "./Layout/ReviewBox";
 import { addToCart } from "../actions/cartAction";
 import { addToWishList } from "../actions/wishlistAction";
 import { Rating } from "@mui/material";
 import { NEW_REVIEW_RESET } from "../constants/productConstants";
+import { toast } from "react-toastify";
 const ProductPage = (props) => {
   const navigate = useNavigate();
   function topFunction() {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
   }
-  const alert = useAlert(); // Alert for error
+
   const { id } = useParams();
   const dispatch = useDispatch();
   const {
@@ -45,20 +46,20 @@ const ProductPage = (props) => {
 
   useEffect(() => {
     if (error) {
-      alert.error(error);
+      toast.error(error);
       dispatch(clearErrors());
     }
     if (reviewError) {
-      alert.error(reviewError);
+      toast.error(reviewError);
       dispatch(clearErrors());
     }
     if (success) {
-      alert.success("Review Submitted");
+      toast.success("Review Submitted");
       dispatch({ type: NEW_REVIEW_RESET });
     }
     dispatch(getProductDetails(id));
     topFunction();
-  }, [dispatch, id, error, alert, reviewError, success]);
+  }, [dispatch, id, error,  reviewError, success]);
 
   //every time page loads, scroll to top
 
@@ -88,17 +89,17 @@ const ProductPage = (props) => {
         return
       }
       dispatch(addToCart(id, quantity));
-      alert.success("Item Added to cart");
+      toast.success("Item Added to cart");
     } catch (err) {
-      alert.error(err);
+      toast.error(err);
     }
   };
   const addToWishlistHandler = () => {
     try {
       dispatch(addToWishList(id));
-      alert.success("Item Added to WishList");
+      toast.success("Item Added to WishList");
     } catch (err) {
-      alert.error(err);
+      toast.error(err);
     }
   };
 

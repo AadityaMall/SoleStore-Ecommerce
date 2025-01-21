@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, Link } from "react-router-dom";
 import { getOrderDetails, clearErrors } from "../../actions/orderAction";
-import { useAlert } from "react-alert";
+import { toast } from "react-toastify";
 import Loader from "../Layout/Loader";
 import "../Layout/css/SingleOrder.css";
 import html2canvas from "html2canvas";
@@ -13,7 +13,7 @@ const SingleOrder = ({ mode }) => {
     "https://res.cloudinary.com/dqjeist4k/image/upload/v1712325115/soleStoreAvatars/darkmode_logo_jzymyp.png";
   const dispatch = useDispatch();
   const receiptRef = useRef(null);
-  const alert = useAlert();
+
   const { order, loading, error } = useSelector((state) => state.orderDetails);
   const { id } = useParams();
   const { user } = useSelector((state) => state.user);
@@ -21,10 +21,10 @@ const SingleOrder = ({ mode }) => {
   useEffect(() => {
     dispatch(getOrderDetails(id));
     if (error) {
-      alert.error(error);
+      toast.error(error);
       dispatch(clearErrors());
     }
-  }, [dispatch, alert, error, id]);
+  }, [dispatch,  error, id]);
 
   const handleDownloadPDF = () => {
     const scale = 2;

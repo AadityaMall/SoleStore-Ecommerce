@@ -4,11 +4,11 @@ import "../Layout/css/CheckoutPage.css";
 import CheckoutSteps from "./CheckoutSteps";
 import { useDispatch, useSelector } from "react-redux";
 import { clearErrors, createOrder } from "../../actions/orderAction";
-import { useAlert } from "react-alert";
+import { toast } from "react-toastify";
 export const CheckoutPage = ({ mode }) => {
   const darkLogo =
     "https://res.cloudinary.com/dqjeist4k/image/upload/v1712325115/soleStoreAvatars/darkmode_logo_jzymyp.png";
-  const alert = useAlert();
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
@@ -50,10 +50,10 @@ export const CheckoutPage = ({ mode }) => {
       navigate("/cart");
     }
     if (error) {
-      alert.error(error);
+      toast.error(error);
       dispatch(clearErrors());
     }
-  }, [alert, dispatch, error, navigate]);
+  }, [ dispatch, error, navigate]);
   return (
     <>
       <div className="container-fluid">

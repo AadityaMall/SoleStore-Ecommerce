@@ -6,7 +6,8 @@ import {
   clearErrors,
   getProductDetails,
 } from "../../../actions/productAction";
-import { useAlert } from "react-alert";
+import { toast } from "react-toastify";
+
 import { useNavigate, useParams } from "react-router-dom";
 import {
   AccountTree,
@@ -20,7 +21,7 @@ import { UPDATE_PRODUCT_RESET } from "../../../constants/productConstants";
 const UpdateProduct = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const alert = useAlert();
+
   const navigate = useNavigate();
 
   const {
@@ -93,20 +94,20 @@ const UpdateProduct = () => {
     }
 
     if (error) {
-      alert.error(error);
+      toast.error(error);
       dispatch(clearErrors());
     }
     if (updateError) {
-      alert.error(updateError);
+      toast.error(updateError);
       dispatch(clearErrors());
     }
 
     if (isUpdated) {
-      alert.success("Product Created Successfully");
+      toast.success("Product Created Successfully");
       navigate("/admin/products");
       dispatch({ type: UPDATE_PRODUCT_RESET });
     }
-  }, [dispatch, alert, error, navigate, isUpdated, id, product, updateError]);
+  }, [dispatch, error, navigate, isUpdated, id, product, updateError]);
 
   return (
     <>
