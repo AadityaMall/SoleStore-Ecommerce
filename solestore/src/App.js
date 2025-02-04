@@ -51,12 +51,6 @@ function App() {
     }
   };
 
-  React.useEffect(() => {
-    store.dispatch(loadUser());
-    store.dispatch(checkForSubscription());
-  }, []);
-  // window.addEventListener("contextmenu",(e)=>e.preventDefault())
-
   return (
     <>
       <Router>
