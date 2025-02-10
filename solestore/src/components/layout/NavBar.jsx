@@ -117,7 +117,7 @@ const NavBar = (props) => {
                 <Link
                   to="/login"
 
-                  className={`tw:flex py-2 tw:md:py-0 tw:justify-center tw:text-[18px] tw:dark:text-white tw:border tw:rounded-sm tw:px-[20px] ${
+                  className={`tw:flex text-reset tw:no-underline py-2 tw:md:py-0 tw:justify-center tw:text-[18px] tw:dark:text-white tw:border tw:rounded-sm tw:px-[20px] ${
                     isActive("/login")
                       ? "tw:font-bold"
                       : "tw:hover:font-semibold"
