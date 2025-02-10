@@ -1,8 +1,11 @@
 import React, { lazy, useState } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+
 const NavBar = lazy(() => import("./components/layout/NavBar"));
 const Home = lazy(() => import("./components/pages/Home"));
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Footer from "./components/layout/Footer";
+const Footer = lazy(() => import("./components/layout/Footer"));
+const About = lazy(() => import("./components/pages/About"));
+const Contact = lazy(() => import("./components/pages/Contact"));
 const App = () => {
   const [mode, setMode] = useState("light");
   const toggleMode = () => {
@@ -18,10 +21,12 @@ const App = () => {
     <>
       <Router>
         <NavBar mode={mode} toggleMode={toggleMode} />
-        <div className="tw:mt-[17%] tw:md:mt-[30px]">
+        <div className="tw:mt-[17%] tw:md:mt-[72px]">
           <Routes>
             <Route path="/" element={<Home mode={mode} />} />
             <Route path="" element={<Home mode={mode} />} />
+            <Route path="/about" element={<About mode={mode} />} />
+            <Route path="/contact" element={<Contact mode={mode} />} />
           </Routes>
         </div>
         <Footer mode={mode}/>
