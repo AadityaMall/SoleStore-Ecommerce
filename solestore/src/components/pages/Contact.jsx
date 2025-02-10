@@ -24,7 +24,7 @@ const Contact = ({ mode }) => {
         </div>
 
         <Container>
-          <Row className="m-5">
+          <Row className="m-5 tw:dark:text-white">
             <Col md={6} className="tw:py-5 tw:px-2">
               <span className="tw:text-xl tw:font-bold">GET IN TOUCH</span>
               <h2 className="tw:my-4 tw:font-brand">Visit our agency location or contact us today.</h2>
@@ -71,7 +71,6 @@ const Contact = ({ mode }) => {
               <h2 className="tw:my-4 tw:font-brand">We love your feedbacks!</h2>
             </div>
           </Row>
-          
           <Row className="tw:p-4">
             <Col md={8}>
               <form

@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Navbar, Nav, Container } from "react-bootstrap";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const NavBar = (props) => {
   const [expanded, setExpanded] = useState(false);
-  const location = useLocation(); // Get current route
-  //   const { isAuthenticated, user } = useSelector((state) => state.user);
+  const location = useLocation();
+  const { isAuthenticated, user } = useSelector((state) => state.user);
 
   // Function to check if the link is active
   const isActive = (path) => location.pathname === path;
@@ -21,104 +21,110 @@ const NavBar = (props) => {
       className="p-2 tw:shadow-[10px_0px_5px_rgba(0,0,0)]"
     >
       <Container fluid>
-        <Navbar.Brand href="/" className="tw:font-brand tw:text-[30px] tw:dark:text-white">
+        <Navbar.Brand
+          href="/"
+          className="tw:font-brand tw:text-[30px] tw:dark:text-white"
+        >
           Sole<span className="tw:text-[#899194]">Store</span>
         </Navbar.Brand>
         <Navbar.Toggle
+          className="tw:dark:bg-white tw:dark:text-white"
           onClick={() => setExpanded((prev) => !prev)}
           aria-controls="navbar-nav"
         />
         <Navbar.Collapse id="navbar-nav">
           <Nav className="tw:md:!mx-[2rem] tw:!flex tw:!justify-evenly tw:md:!w-[40%]">
-            <Nav.Link
-              href="/"
-              className={`tw:flex tw:justify-center tw:text-[18px] tw:dark:text-white ${
+            <Link
+              to="/"
+              className={`tw:flex py-2 tw:md:py-0 tw:justify-center tw:text-[18px] tw:dark:text-white text-reset tw:no-underline ${
                 isActive("/") ? "tw:font-bold" : "tw:hover:font-semibold"
               }`}
             >
               Home
-            </Nav.Link>
-            <Nav.Link
-              href="/products"
-              className={`tw:flex tw:justify-center tw:text-[18px] tw:dark:text-white ${
+            </Link>
+            <Link
+              to="/products"
+              className={`tw:flex py-2 tw:md:py-0 tw:justify-center tw:text-[18px] tw:dark:text-white text-reset tw:no-underline ${
                 isActive("/products")
                   ? "tw:font-bold"
                   : "tw:hover:font-semibold"
               }`}
             >
               Shop
-            </Nav.Link>
-            <Nav.Link
-              href="/about"
-              className={`tw:flex tw:justify-center tw:text-[18px] tw:dark:text-white ${
+            </Link>
+            <Link
+              to="/about"
+              className={`tw:flex py-2 tw:md:py-0 tw:justify-center tw:text-[18px] tw:dark:text-white text-reset tw:no-underline ${
                 isActive("/about") ? "tw:font-bold" : "tw:hover:font-semibold"
               }`}
             >
               About Us
-            </Nav.Link>
-            <Nav.Link
-              href="/contact"
-              className={`tw:flex tw:justify-center tw:text-[18px] tw:dark:text-white ${
+            </Link>
+            <Link
+              to="/contact"
+              className={`tw:flex py-2 tw:md:py-0 tw:justify-center tw:text-[18px] tw:dark:text-white text-reset tw:no-underline ${
                 isActive("/contact") ? "tw:font-bold" : "tw:hover:font-semibold"
               }`}
             >
               Contact
-            </Nav.Link>
+            </Link>
           </Nav>
           <Nav className="ms-auto tw:!flex tw:!justify-evenly tw:md:!w-[40%]">
-            <Nav.Link
+            <Link
               onClick={props.toggleMode}
-              className={`tw:flex tw:justify-center tw:text-[18px] tw:dark:text-white tw:align-center`}
+              className={`tw:flex py-2 tw:md:py-0 tw:no-underline text-reset tw:justify-center tw:text-[18px] tw:dark:text-white tw:align-center`}
             >
               <i className="tw:flex tw:items-center fa fa-adjust"></i>
-            </Nav.Link>
-            <Nav.Link
-              href="/wishlist"
-              className={`tw:flex tw:justify-center tw:text-[18px] tw:dark:text-white tw:align-center ${
+            </Link>
+            <Link
+              to="/wishlist"
+              className={`text-reset py-2 tw:md:py-0 tw:no-underline tw:flex tw:justify-center tw:text-[18px] tw:dark:text-white tw:align-center ${
                 isActive("/wishlist")
                   ? "tw:font-bold"
                   : "tw:hover:font-semibold"
               }`}
             >
-              <i className="tw:flex tw:items-center fa fa-heart"></i>
-            </Nav.Link>
-            <Nav.Link
-              href="/cart"
-              className={`tw:flex tw:justify-center tw:text-[18px] tw:dark:text-white tw:align-center ${
+              <i className="tw:flex py-2 tw:md:py-0 tw:items-center fa fa-heart"></i>
+            </Link>
+            <Link
+              to="/cart"
+              className={`tw:flex py-2 tw:md:py-0 tw:no-underline text-reset tw:justify-center tw:text-[18px] tw:dark:text-white tw:align-center ${
                 isActive("/cart") ? "tw:font-bold" : "tw:hover:font-semibold"
               }`}
             >
-              <i className="tw:flex tw:items-center fa fa-shopping-bag"></i>
-            </Nav.Link>
-            {false ? (
+              <i className="tw:flex py-2 tw:md:py-0 tw:items-center fa fa-shopping-bag"></i>
+            </Link>
+            {isAuthenticated ? (
               <>
-                <Nav.Link
-                  href="/account"
-                  className={`tw:flex tw:justify-center tw:text-[18px] tw:dark:text-white ${
+                <Link
+                  to="/account"
+                  className={`tw:flex py-2 tw:md:py-0 tw:no-underline tw:justify-center tw:text-[18px] tw:dark:text-white text-reset tw:no-underline ${
                     isActive("/account")
                       ? "tw:font-bold"
                       : "tw:hover:font-semibold"
                   }`}
+                  
                 >
                   <img
                     src={user.avatar.url}
                     className="tw:w-[40px] tw:min-w-[40px] tw:aspect-square tw:object-contain tw:rounded-full"
                     alt="userProfile"
                   />
-                </Nav.Link>
+                </Link>
               </>
             ) : (
               <>
-                <Nav.Link
-                  href="/login"
-                  className={`tw:flex tw:justify-center tw:text-[18px] tw:dark:text-white tw:border tw:rounded-sm tw:px-[20px] ${
+                <Link
+                  to="/login"
+
+                  className={`tw:flex py-2 tw:md:py-0 tw:justify-center tw:text-[18px] tw:dark:text-white tw:border tw:rounded-sm tw:px-[20px] ${
                     isActive("/login")
                       ? "tw:font-bold"
                       : "tw:hover:font-semibold"
                   }`}
                 >
                   Login
-                </Nav.Link>
+                </Link>
               </>
             )}
           </Nav>

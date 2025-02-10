@@ -5,3 +5,8 @@
 @theme {
   --font-brand: 'Alata', sans-serif;
 }
+@keyframes customSpin {
+  100% {
+    transform: rotate(360deg);
+  }
+}

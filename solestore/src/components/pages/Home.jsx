@@ -1,7 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Carousel, Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { clearErrors, getProduct } from "../redux/actions/productAction";
+import { toast } from "react-toastify";
+import ProductBox from "../layout/ProductBox";
 const Home = (props) => {
+  const dispatch = useDispatch();
+
+  const { loading, error, products } = useSelector((state) => state.products);
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+      dispatch(clearErrors());
+    }
+    dispatch(getProduct());
+  }, [dispatch, error]);
+
   return (
     <>
       <Carousel interval={2000} id="homeCarousel">
@@ -94,8 +110,21 @@ const Home = (props) => {
             </Row>
           </Row>
           <Row className="tw:mt-[70px]">
-            <h1 className="tw:font-brand tw:text-center">Our Featured Products</h1>
+            <h1 className="tw:font-brand tw:text-center">
+              Our Featured Products
+            </h1>
             <Row className="mt-5">
+              {products &&
+                products.slice(0, 3).map((product, index) => (
+                  <>
+                    <Col md={4} className="tw:flex tw:justify-center tw:items-center" key={index}>
+                      <ProductBox
+                        product={product}
+                        modeProd={props.mode}
+                      />
+                    </Col>
+                  </>
+                ))}
             </Row>
           </Row>
         </div>
