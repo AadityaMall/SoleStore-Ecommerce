@@ -14,7 +14,7 @@ const NavBar = (props) => {
   // Function to check if the link is active
   const isActive = (path) => location.pathname === path;
 
-  if(location.pathname === "/admin/dashboard"){
+  if(location.pathname.startsWith("/admin")){
     return null;
   }
 

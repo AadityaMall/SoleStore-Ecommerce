@@ -13,7 +13,7 @@ const Contact = lazy(() => import("./components/pages/Main/Contact"));
 const Loader = lazy(() => import("./components/layout/Loader"));
 const Shop = lazy(() => import("./components/pages/Main/Shop"));
 const Login = lazy(() => import("./components/layout/Login"));
-const AdminDashboard = lazy(() => import("./components/pages/Admin/AdminDashboard"));
+const AdminDashboard = lazy(() => import("./components/pages/Admin/AdminNavbar"));
 const ForgotPassword = lazy(() =>
   import("./components/pages/Account/ForgotPassword")
 );
@@ -60,7 +60,7 @@ const App = () => {
     <>
         <Suspense fallback={<Loader />}>
           <NavBar mode={mode} toggleMode={toggleMode} />
-          <div className={`${location.pathname === "/admin/dashboard" ? "" : "tw:mt-[17%] tw:md:mt-[72px]"}`} >
+          <div className={`${location.pathname.startsWith("/admin")? "" : "tw:mt-[17%] tw:md:mt-[72px]"}`} >
             <Routes>
               <Route path="/" element={<Home mode={mode} />} />
               <Route path="" element={<Home mode={mode} />} />
@@ -126,9 +126,9 @@ const App = () => {
               )}
               
               {isAuthenticated ? (
-                <Route path="/admin/dashboard" element={<AdminDashboard mode={mode} />} />
+                <Route path="/admin/*" element={<AdminDashboard mode={mode} />} />
               ) : (
-                <Route path="/admin/dashboard" element={<Login mode={mode} />} />
+                <Route path="/admin/*" element={<Login mode={mode} />} />
               )}
             </Routes>
           </div>

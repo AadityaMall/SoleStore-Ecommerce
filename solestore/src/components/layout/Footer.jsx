@@ -1,7 +1,14 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 const Footer = (props) => {
+
+  const location = useLocation();
+  if(location.pathname.startsWith("/admin")){
+    return null;
+  }
+
   return (
     <div data-theme={props.mode}>
       <footer className="tw:bg-gray-100 tw:dark:bg-[#212529] tw:py-2 tw:px-3 tw:dark:text-white">
