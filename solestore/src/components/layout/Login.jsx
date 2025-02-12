@@ -80,9 +80,8 @@ const Login = ({ mode }) => {
 
   return (
     <div
-      className={`tw:bg-[url(/images/loginpg_bg.png)] tw:bg-cover tw:bg-center tw:min-h-[70vh] tw:pb-12 tw:flex tw:justify-center tw:py-1 tw:px-4 tw:sm:px-6 tw:lg:px-8 ${
-        mode === "dark" ? "tw:bg-gray-900" : "tw:bg-gray-50"
-      }`}
+      className={`tw:bg-[url(/images/loginpg_bg.png)] tw:bg-cover tw:bg-center tw:min-h-[70vh] tw:pb-12 tw:flex tw:justify-center tw:py-1 tw:px-4 tw:sm:px-6 tw:lg:px-8`}
+      data-theme={mode}
     >
       <div className="tw:md:max-w-[60%] tw:min-h-full tw:mt-[50px] tw:w-full tw:space-y-8 tw:bg-[rgba(255,255,255,0.7)] tw:dark:bg-gray-800 tw:p-8 tw:rounded-lg tw:shadow-lg">
         <Row>

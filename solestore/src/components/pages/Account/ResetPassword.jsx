@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { clearErrors, resetPassword } from "../redux/actions/userActions";
+import { clearErrors, resetPassword } from "../../redux/actions/userActions";
 import { toast } from "react-toastify";
-import Loader from "./Loader";
+import Loader from "../../layout/Loader";
 
 const ResetPassword = ({ mode }) => {
   const navigate = useNavigate();
@@ -48,7 +48,7 @@ const ResetPassword = ({ mode }) => {
         mode === "dark" ? "tw:bg-gray-900" : "tw:bg-gray-50"
       }`}
     >
-      <div className="tw:max-w-md tw:w-full tw:my-12 tw:space-y-8 tw:bg-[rgba(255,255,255,0.7)] tw:dark:bg-gray-800 tw:p-8 tw:rounded-lg tw:shadow-lg">
+      <div className="tw:max-w-md tw:w-full tw:my-12 tw:space-y-8 tw:bg-[rgba(255,255,255)] tw:dark:bg-gray-800 tw:p-8 tw:rounded-lg tw:shadow-lg">
         <div className="tw:flex tw:justify-center">
           <img
             src={

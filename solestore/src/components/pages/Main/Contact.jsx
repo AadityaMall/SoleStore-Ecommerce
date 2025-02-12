@@ -108,7 +108,8 @@ const Contact = ({ mode }) => {
                 ></textarea>
                 <button 
                   type="submit"
-                  className="tw:bg-gray-800 tw:text-white tw:dark:bg-gray-700 tw:py-2 tw:px-4 tw:rounded-md tw:hover:bg-gray-700 tw:dark:hover:bg-gray-600 tw:transition-colors"
+                  className="tw:bg-gray-800 tw:text-white tw:dark:bg-gray-700 tw:py-2 tw:px-4 tw:rounded-md 
+                  tw:hover:bg-gray-700 tw:dark:hover:bg-gray-600 tw:transition-colors"
                 >
                   SUBMIT
                 </button>

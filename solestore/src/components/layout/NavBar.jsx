@@ -8,8 +8,15 @@ const NavBar = (props) => {
   const location = useLocation();
   const { isAuthenticated, user } = useSelector((state) => state.user);
 
+  const collapseNavbar = () => {
+    setExpanded(false);
+  }
   // Function to check if the link is active
   const isActive = (path) => location.pathname === path;
+
+  if(location.pathname === "/admin/dashboard"){
+    return null;
+  }
 
   return (
     <Navbar
@@ -39,6 +46,7 @@ const NavBar = (props) => {
               className={`tw:flex py-2 tw:md:py-0 tw:justify-center tw:text-[18px] tw:dark:text-white text-reset tw:no-underline ${
                 isActive("/") ? "tw:font-bold" : "tw:hover:font-semibold"
               }`}
+              onClick={collapseNavbar}
             >
               Home
             </Link>
@@ -49,6 +57,7 @@ const NavBar = (props) => {
                   ? "tw:font-bold"
                   : "tw:hover:font-semibold"
               }`}
+              onClick={collapseNavbar}
             >
               Shop
             </Link>
@@ -57,6 +66,7 @@ const NavBar = (props) => {
               className={`tw:flex py-2 tw:md:py-0 tw:justify-center tw:text-[18px] tw:dark:text-white text-reset tw:no-underline ${
                 isActive("/about") ? "tw:font-bold" : "tw:hover:font-semibold"
               }`}
+              onClick={collapseNavbar}
             >
               About Us
             </Link>
@@ -65,6 +75,7 @@ const NavBar = (props) => {
               className={`tw:flex py-2 tw:md:py-0 tw:justify-center tw:text-[18px] tw:dark:text-white text-reset tw:no-underline ${
                 isActive("/contact") ? "tw:font-bold" : "tw:hover:font-semibold"
               }`}
+              onClick={collapseNavbar}
             >
               Contact
             </Link>
@@ -83,6 +94,7 @@ const NavBar = (props) => {
                   ? "tw:font-bold"
                   : "tw:hover:font-semibold"
               }`}
+              onClick={collapseNavbar}
             >
               <i className="tw:flex py-2 tw:md:py-0 tw:items-center fa fa-heart"></i>
             </Link>
@@ -91,6 +103,8 @@ const NavBar = (props) => {
               className={`tw:flex py-2 tw:md:py-0 tw:no-underline text-reset tw:justify-center tw:text-[18px] tw:dark:text-white tw:align-center ${
                 isActive("/cart") ? "tw:font-bold" : "tw:hover:font-semibold"
               }`}
+              onClick={collapseNavbar}
+
             >
               <i className="tw:flex py-2 tw:md:py-0 tw:items-center fa fa-shopping-bag"></i>
             </Link>
@@ -103,7 +117,7 @@ const NavBar = (props) => {
                       ? "tw:font-bold"
                       : "tw:hover:font-semibold"
                   }`}
-                  
+                  onClick={collapseNavbar}
                 >
                   <img
                     src={user.avatar.url}
@@ -116,7 +130,7 @@ const NavBar = (props) => {
               <>
                 <Link
                   to="/login"
-
+                  onClick={collapseNavbar}
                   className={`tw:flex text-reset tw:no-underline py-2 tw:md:py-0 tw:justify-center tw:text-[18px] tw:dark:text-white tw:border tw:rounded-sm tw:px-[20px] ${
                     isActive("/login")
                       ? "tw:font-bold"

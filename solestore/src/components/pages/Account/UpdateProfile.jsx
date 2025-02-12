@@ -2,10 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { clearErrors, updateProfile, loadUser } from "../../redux/actions/userActions";
-import { USERUPDATE_RESET } from "../../redux/constants/userConstants";
+import {
+  clearErrors,
+  updateProfile,
+  loadUser,
+} from "../../redux/actions/userActions";
+import { USERUPDATE_RESET } from "../../redux/constants/userConstant";
 import Loader from "../../layout/Loader";
-
 
 const UpdateProfile = ({ mode }) => {
   const navigate = useNavigate();
@@ -16,7 +19,9 @@ const UpdateProfile = ({ mode }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [avatar, setAvatar] = useState("");
-  const [avatarPreview, setAvatarPreview] = useState("/images/defaultProfile.jpg");
+  const [avatarPreview, setAvatarPreview] = useState(
+    "/images/defaultProfile.jpg"
+  );
 
   useEffect(() => {
     if (user) {
@@ -60,16 +65,19 @@ const UpdateProfile = ({ mode }) => {
   if (loading) return <Loader />;
 
   return (
-    <div className={`tw:min-h-[70vh] tw:py-12 ${mode === "dark" ? "tw:bg-gray-900" : "tw:bg-gray-50"}`}>
+    <div
+      className={`tw:min-h-screen tw:py-12 tw:bg-[url(/images/loginpg_bg.png)] tw:bg-cover tw:bg-center`}
+      data-theme={mode}
+    >
       <div className="tw:max-w-md tw:mx-auto tw:px-4 tw:sm:px-6 tw:lg:px-8">
         <div className="tw:bg-white tw:dark:bg-gray-800 tw:shadow tw:rounded-lg tw:p-8">
           <div className="tw:flex tw:flex-col tw:items-center tw:space-y-6">
             <img
               src={avatarPreview}
               alt="Avatar Preview"
-              className="tw:w-32 tw:h-32 tw:rounded-full tw:object-cover tw:border-4 tw:border-gray-200 tw:dark:border-gray-700"
+              className="tw:w-32 tw:h-32 tw:rounded-full tw:object-contain tw:border-4 tw:border-gray-200 tw:dark:border-gray-700"
             />
-            
+
             <h2 className="tw:text-2xl tw:font-bold tw:text-gray-900 tw:dark:text-white">
               Update Profile
             </h2>
@@ -83,7 +91,7 @@ const UpdateProfile = ({ mode }) => {
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="tw:mt-1 tw:block tw:w-full tw:rounded-md tw:border-gray-300 tw:shadow-sm focus:tw:border-indigo-500 focus:tw:ring-indigo-500 tw:dark:bg-gray-700 tw:dark:border-gray-600 tw:dark:text-white"
+                  className="tw:mt-1 tw:block tw:w-full tw:rounded-md tw:border tw:border-gray-300 tw:shadow-sm focus:tw:border-indigo-500 focus:tw:ring-indigo-500 tw:dark:bg-gray-700 tw:dark:border-gray-600 tw:dark:text-white tw:p-2"
                 />
               </div>
 
@@ -95,7 +103,7 @@ const UpdateProfile = ({ mode }) => {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="tw:mt-1 tw:block tw:w-full tw:rounded-md tw:border-gray-300 tw:shadow-sm focus:tw:border-indigo-500 focus:tw:ring-indigo-500 tw:dark:bg-gray-700 tw:dark:border-gray-600 tw:dark:text-white"
+                  className="tw:mt-1 tw:block tw:w-full tw:rounded-md tw:border tw:border-gray-300 tw:shadow-sm focus:tw:border-indigo-500 focus:tw:ring-indigo-500 tw:dark:bg-gray-700 tw:dark:border-gray-600 tw:dark:text-white tw:p-2"
                 />
               </div>
 
@@ -107,7 +115,14 @@ const UpdateProfile = ({ mode }) => {
                   type="file"
                   accept="image/*"
                   onChange={updateDataChange}
-                  className="tw:mt-1 tw:block tw:w-full tw:text-sm tw:text-gray-500 tw:file:mr-4 tw:file:py-2 tw:file:px-4 tw:file:rounded-full tw:file:border-0 tw:file:text-sm tw:file:font-semibold tw:file:bg-violet-50 tw:file:text-violet-700 hover:tw:file:bg-violet-100"
+                  className="tw:block tw:w-full tw:text-sm 
+                      tw:text-gray-500 tw:dark:text-gray-400
+                      tw:file:mr-4 tw:file:py-2 tw:file:px-4 
+                      tw:file:rounded-full tw:file:border-0 
+                      tw:file:text-sm tw:file:font-semibold 
+                      tw:file:bg-gray-50 tw:file:text-gray-700 
+                      tw:hover:file:bg-indigo-100
+                      tw:transition-colors"
                 />
               </div>
 

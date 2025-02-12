@@ -3,9 +3,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { Pagination, Slider } from "@mui/material";
 import { toast } from "react-toastify";
-import { clearErrors, getProduct } from "../redux/actions/productAction";
-import Loader from "../layout/Loader";
-import ProductBox from "../layout/ProductBox";
+import { clearErrors, getProduct } from "../../redux/actions/productAction";
+import Loader from "../../layout/Loader";
+import ProductBox from "../../layout/ProductBox";
 
 const Shop = ({ mode }) => {
   const [isNavbarFixed, setIsNavbarFixed] = useState(false);
@@ -14,6 +14,7 @@ const Shop = ({ mode }) => {
   const [category, setCategory] = useState("");
   const [sort, setSort] = useState("");
   const [ratings, setRatings] = useState(0);
+  const [loadingTimeout, setLoadingTimeout] = useState(false);
 
   const dispatch = useDispatch();
   const location = useLocation();
@@ -38,8 +39,27 @@ const Shop = ({ mode }) => {
       toast.error(error);
       dispatch(clearErrors());
     }
-    dispatch(getProduct(currentPage, [0, 30000], homeFilter, 0));
+    try {
+      if(homeFilter){
+        setCategory(homeFilter);
+      }
+      dispatch(getProduct(currentPage, [0, 30000], homeFilter, 0));
+    } catch (err) {
+      console.error("Error loading products:", err);
+      toast.error("Failed to load products. Please try again.");
+    }
   }, [dispatch, error, homeFilter, currentPage]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (loading) {
+        setLoadingTimeout(true);
+        toast.error("Loading took too long. Please refresh the page.");
+      }
+    }, 10000); // 10 seconds timeout
+
+    return () => clearTimeout(timer);
+  }, [loading]);
 
   const applyFilters = () => {
     dispatch(getProduct(currentPage, price, category, ratings, sort));

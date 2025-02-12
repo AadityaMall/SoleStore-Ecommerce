@@ -2,9 +2,10 @@ import React, { useEffect } from "react";
 import { Carousel, Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { clearErrors, getProduct } from "../redux/actions/productAction";
+import { clearErrors, getProduct } from "../../redux/actions/productAction";
 import { toast } from "react-toastify";
-import ProductBox from "../layout/ProductBox";
+import ProductBox from "../../layout/ProductBox";
+import Loader from "../../layout/Loader";
 const Home = (props) => {
   const dispatch = useDispatch();
 
@@ -113,7 +114,10 @@ const Home = (props) => {
             <h1 className="tw:font-brand tw:text-center">
               Our Featured Products
             </h1>
-            <Row className="mt-5">
+            {loading ? (
+              <Loader />
+            ) : (
+              <Row className="mt-5">
               {products &&
                 products.slice(0, 3).map((product, index) => (
                   <>
@@ -125,7 +129,8 @@ const Home = (props) => {
                     </Col>
                   </>
                 ))}
-            </Row>
+              </Row>
+            )}
           </Row>
         </div>
       </Container>
