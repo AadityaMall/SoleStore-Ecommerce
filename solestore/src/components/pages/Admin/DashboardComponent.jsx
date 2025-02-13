@@ -106,11 +106,11 @@ const DashboardComponent = () => {
               </Col>
             </Row>
             <div className="tw:w-full tw:flex tw:flex-col tw:items-center tw:justify-center">
-              <div className="my-3">
-                <Line data={lineState} />
+              <div className="my-3 tw:w-full tw:flex tw:justify-center">
+                <Line data={lineState} className="tw:md:w-[60%] tw:w-full tw:h-auto"/>
               </div>
-              <div className="my-5">
-                <Doughnut data={doughnutState} />
+              <div className="my-5 tw:w-full tw:flex tw:justify-center">
+                <Doughnut data={doughnutState} className="tw:md:w-[40%] tw:w-full tw:h-auto"/>
               </div>
             </div>
         </Row>

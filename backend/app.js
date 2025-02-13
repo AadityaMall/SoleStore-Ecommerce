@@ -6,7 +6,7 @@ const bodyParser = require("body-parser");
 const cors = require('cors');
 
 app.use(cors({
-  origin: ['http://localhost:3000', 'https://sole-store.vercel.app'],
+  origin: ['*'],
   credentials: true // Allow cookies in requests
 }));
 
