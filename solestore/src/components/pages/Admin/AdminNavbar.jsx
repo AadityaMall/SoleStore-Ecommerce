@@ -28,7 +28,10 @@ import { useSelector } from "react-redux";
 import UsersList from "./UsersList";
 import ProductsList from "./ProductsList";
 import AllReviews from "./AllReviews";
-
+import AddProduct from "./AddProduct";
+import UpdateProduct from "./UpdateProduct";
+import UpdateUserRole from "./UpdateUserRole";
+import UpdateOrder from "./UpdateOrder";
 const drawerWidth = 240;
 
 const AdminNavbar = (props) => {
@@ -76,6 +79,7 @@ const AdminNavbar = (props) => {
           <Link
             to={`/admin/${item.path}`}
             className="tw:no-underline text-reset"
+            key={index}
           >
             <ListItem key={item.name} disablePadding>
               <ListItemButton>
@@ -92,6 +96,7 @@ const AdminNavbar = (props) => {
           <Link
             to={`/admin/${item.path}`}
             className="tw:no-underline text-reset"
+            key={index}
           >
             <ListItem key={item.name} disablePadding>
               <ListItemButton>
@@ -110,7 +115,7 @@ const AdminNavbar = (props) => {
     window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex" }} data-theme = "light">
       <CssBaseline />
       <AppBar
         position="fixed"
@@ -207,6 +212,11 @@ const AdminNavbar = (props) => {
             <Route path="users" element={<UsersList />} />
             <Route path="all-products" element={<ProductsList />} />
             <Route path="reviews" element={<AllReviews />} />
+            <Route path="add-product" element={<AddProduct />} />
+            <Route path="product/:id" element={<UpdateProduct />} />
+            <Route path="user/:id" element={<UpdateUserRole />} />
+            <Route path="order/:id" element={<UpdateOrder />} />
+
           </Routes>
         </div>
       </Box>

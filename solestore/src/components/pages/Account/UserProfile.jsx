@@ -97,7 +97,7 @@ const UserProfile = ({ mode }) => {
 
               {user.role === "admin" && (
                 <Link
-                  to="/admin/dashboard"
+                  to="/admin/"
                   className="tw:no-underline tw:p-4 tw:bg-white tw:dark:bg-gray-700 tw:rounded-lg tw:shadow-lg tw:flex tw:justify-between tw:items-center tw:hover:shadow-md tw:transition-shadow"
                 >
                   <span className="tw:text-gray-900 tw:dark:text-white">

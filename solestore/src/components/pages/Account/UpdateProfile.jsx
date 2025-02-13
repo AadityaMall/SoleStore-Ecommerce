@@ -128,7 +128,10 @@ const UpdateProfile = ({ mode }) => {
 
               <button
                 type="submit"
-                className="tw:w-full tw:flex tw:justify-center tw:py-2 tw:px-4 tw:border tw:border-transparent tw:rounded-md tw:shadow-sm tw:text-sm tw:font-medium tw:text-white tw:bg-black hover:tw:bg-gray-800 focus:tw:outline-none focus:tw:ring-2 focus:tw:ring-offset-2 focus:tw:ring-indigo-500"
+                className="tw:w-full tw:flex tw:justify-center tw:py-2 tw:px-4 
+                tw:border tw:border-transparent tw:rounded-md tw:shadow-sm tw:text-sm 
+                tw:font-medium tw:text-white tw:bg-black tw:hover:bg-gray-800 
+               "
                 disabled={loading}
               >
                 Update Profile

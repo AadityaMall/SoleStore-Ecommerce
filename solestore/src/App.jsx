@@ -39,7 +39,7 @@ const UpdatePassword = lazy(() =>
 
 const App = () => {
   const [mode, setMode] = useState("light");
-  const { isAuthenticated, user } = useSelector((state) => state.user);
+  const { isAuthenticated } = useSelector((state) => state.user);
   const location = useLocation();
 
   const toggleMode = () => {
@@ -74,7 +74,16 @@ const App = () => {
                 element={<ProductPage mode={mode} />}
               />
               <Route path="/cart" element={<Cart mode={mode} />} />
-              <Route path="/wishlist" element={<Wishlist mode={mode} />} />
+              {isAuthenticated ? (
+                <Route path="/wishlist" element={<Wishlist mode={mode} />} />
+              ) : (
+                <Route path="/wishlist" element={<Login mode={mode} />} />
+              )}
+              {isAuthenticated ? (
+                <Route path="/cart" element={<Cart mode={mode} />} />
+              ) : (
+                <Route path="/cart" element={<Login mode={mode} />} />
+              )}
               {isAuthenticated ? (
                 <Route path="/account" element={<UserProfile mode={mode} />} />
               ) : (
