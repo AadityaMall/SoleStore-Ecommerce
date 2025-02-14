@@ -10,7 +10,7 @@ const Home = lazy(() => import("./components/pages/Main/Home"));
 const Footer = lazy(() => import("./components/layout/Footer"));
 const About = lazy(() => import("./components/pages/Main/About"));
 const Contact = lazy(() => import("./components/pages/Main/Contact"));
-const Loader = lazy(() => import("./components/layout/Loader"));
+const Loader = lazy(() => import("./components/Layout/Loader"));
 const Shop = lazy(() => import("./components/pages/Main/Shop"));
 const Login = lazy(() => import("./components/layout/Login"));
 const AdminDashboard = lazy(() => import("./components/pages/Admin/AdminNavbar"));
@@ -36,6 +36,7 @@ const UpdateProfile = lazy(() =>
 const UpdatePassword = lazy(() =>
   import("./components/pages/Account/UpdatePassword")
 );
+const CheckoutMain = lazy(() => import("./components/pages/Checkout/CheckoutMain"));
 
 const App = () => {
   const [mode, setMode] = useState("light");
@@ -139,6 +140,7 @@ const App = () => {
               ) : (
                 <Route path="/admin/*" element={<Login mode={mode} />} />
               )}
+              <Route path="/checkout" element={<CheckoutMain mode={mode} />} />
             </Routes>
           </div>
           <Footer mode={mode} />

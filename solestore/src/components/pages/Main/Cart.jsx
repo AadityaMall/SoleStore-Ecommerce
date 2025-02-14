@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 import { addToCart, removeFromCart } from "../../redux/actions/cartAction";
 import { toast } from "react-toastify";
-import Loader from "../../layout/Loader";
+import Loader from "../../Layout/Loader";
 
 const Cart = ({ mode }) => {
   const dispatch = useDispatch();
@@ -44,7 +44,7 @@ const Cart = ({ mode }) => {
   ) || 0;
 
   const checkoutHandler = () => {
-    navigate("/login?redirect=shipping");
+    navigate("/login?redirect=checkout");
   };
 
   if (loading || !user || !user.cart) return <Loader />;

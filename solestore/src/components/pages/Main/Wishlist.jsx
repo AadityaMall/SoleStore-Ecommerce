@@ -1,10 +1,9 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { Container, Row, Col } from "react-bootstrap";
-import { toast } from "react-toastify";
-import Loader from "../../layout/Loader";
+import { Container } from "react-bootstrap";
 import { removeFromWishlist } from "../../redux/actions/wishlistAction";
+import Loader from "../../Layout/Loader";
 
 const Wishlist = ({ mode }) => {
   const dispatch = useDispatch();

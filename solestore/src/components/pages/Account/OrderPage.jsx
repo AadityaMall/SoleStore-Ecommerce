@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams, Link } from "react-router-dom";
 import { getOrderDetails, clearErrors } from "../../redux/actions/orderAction";
 import { toast } from "react-toastify";
-import Loader from "../../layout/Loader";
+import Loader from "../../Layout/Loader";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import { Row, Col, Container } from "react-bootstrap";

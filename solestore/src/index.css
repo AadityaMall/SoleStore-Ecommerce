@@ -4,6 +4,11 @@
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 @theme {
   --font-brand: 'Alata', sans-serif;
+  --shadow-card-light: 0px 5px 10px rgba(0, 0, 0, 1);
+  --shadow-card-dark: 0px 5px 10px rgba(255, 255, 255, 1);
+  --shadow-light: 0px 5px 10px rgba(0, 0, 0, 0.2);
+  --shadow-dark: 0px 5px 10px rgba(255, 255, 255, 0.2);
+  --color-dark: #212529;
 }
 @keyframes customSpin {
   100% {

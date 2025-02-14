@@ -110,7 +110,7 @@ const ProductsList = () => {
         <h1 className="tw:font-brand tw:font-bold tw:text-4xl tw:text-center my-5">
           All Products
         </h1>
-        <div>
+        <div className="tw:!max-w-full tw:!overflow-x-auto">
           <DataGrid
             rows={rows}
             columns={columns}
