@@ -26,6 +26,7 @@ import {
   updateOrdersReducer,
 } from "./components/redux/reducers/orderReducer";
 import { newsLetterReducer } from "./components/redux/reducers/newsLetterReducer";
+import { paymentReducer } from "./components/redux/reducers/paymentReducer";
 const reducers = combineReducers({
   products: productsReducer,
   productDetails: productDetailReducer,
@@ -46,6 +47,7 @@ const reducers = combineReducers({
   productReviews: productReviewsReducer,
   review: reviewReducer,
   newsLetter: newsLetterReducer,
+  payment: paymentReducer,
 });
 const middleware = (getDefaultMiddleware) =>
   getDefaultMiddleware().concat(thunk);

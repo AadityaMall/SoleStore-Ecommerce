@@ -20,6 +20,7 @@
     "mongoose": "^8.0.3",
     "nodemailer": "^6.9.7",
     "nodemon": "^3.0.2",
+    "razorpay": "^2.9.5",
     "validator": "^13.11.0"
   }
 }

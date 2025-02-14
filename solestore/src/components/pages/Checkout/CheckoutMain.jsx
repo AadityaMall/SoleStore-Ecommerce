@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Shipping from "./Shipping";
 import CheckoutSteps from "./CheckoutSteps";
 import OrderConfirm from "./ConfirmOrder";
+import FinalOrder from "./FinalOrder";
 const CheckoutMain = ({mode}) => {
   const [activeStep, setActiveStep] = useState(0);
   const incrementStep = () => {
@@ -10,6 +11,12 @@ const CheckoutMain = ({mode}) => {
   const decrementStep = () => {
     setActiveStep(activeStep - 1);
   };
+  useEffect(() => {
+    if(activeStep === 0){
+      sessionStorage.removeItem("shippingInfo");
+      sessionStorage.removeItem("orderInfo");
+    }
+  },[activeStep])
   React.useEffect(() => {
     const handleBeforeUnload = (event) => {
       event.preventDefault();
@@ -28,6 +35,7 @@ const CheckoutMain = ({mode}) => {
       <CheckoutSteps activeStep={activeStep} mode={mode} />
       {activeStep === 0 && <Shipping mode={mode} incrementStep={incrementStep}/>}
       {activeStep === 1 && <OrderConfirm mode={mode} incrementStep={incrementStep} decrementStep={decrementStep}/>}
+      {activeStep === 2 && <FinalOrder mode={mode} incrementStep={incrementStep} decrementStep={decrementStep}/>}
     </>
   );
 };

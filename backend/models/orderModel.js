@@ -1,10 +1,15 @@
 const mongoose = require("mongoose");
 
 const orderSchema = new mongoose.Schema({
+  paymentId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Payment",
+    required: true,
+  },
   shippingInfo: {
-    name:{
-      type:String,
-      required:true,
+    name: {
+      type: String,
+      required: true,
     },
     address: {
       type: String,
@@ -21,9 +26,9 @@ const orderSchema = new mongoose.Schema({
       required: true,
     },
 
-    country:{
-        type:String,
-        default:"India"
+    country: {
+      type: String,
+      default: "India",
     },
 
     pinCode: {
@@ -92,9 +97,9 @@ const orderSchema = new mongoose.Schema({
     required: true,
     default: 0,
   },
-  discount:{
-    type:Number,
-    default:0,
+  discount: {
+    type: Number,
+    default: 0,
   },
   orderStatus: {
     type: String,
@@ -108,4 +113,4 @@ const orderSchema = new mongoose.Schema({
   },
 });
 
-module.exports =  mongoose.model("Order",orderSchema);
+module.exports = mongoose.model("Order", orderSchema);

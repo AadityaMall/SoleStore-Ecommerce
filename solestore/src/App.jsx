@@ -26,6 +26,7 @@ const Cart = lazy(() => import("./components/pages/Main/Cart"));
 const Wishlist = lazy(() => import("./components/pages/Main/Wishlist"));
 const MyOrders = lazy(() => import("./components/pages/Account/MyOrders"));
 const OrderPage = lazy(() => import("./components/pages/Account/OrderPage"));
+const OrderPlaced = lazy(() => import("./components/pages/Checkout/OrderPlaced"));
 
 const UserProfile = lazy(() =>
   import("./components/pages/Account/UserProfile")
@@ -141,6 +142,11 @@ const App = () => {
                 <Route path="/admin/*" element={<Login mode={mode} />} />
               )}
               <Route path="/checkout" element={<CheckoutMain mode={mode} />} />
+              {isAuthenticated ? (
+                <Route path="/orderSuccessfull" element={<OrderPlaced mode={mode} />} />
+              ) : (
+                <Route path="/orderSuccessfull" element={<Login mode={mode} />} />
+              )}
             </Routes>
           </div>
           <Footer mode={mode} />

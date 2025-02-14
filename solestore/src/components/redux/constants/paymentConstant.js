@@ -1,0 +1,6 @@
+export const PAYMENT_SUCCESS = "PAYMENT_SUCCESS";
+export const PAYMENT_FAIL = "PAYMENT_FAIL";
+export const CLEAR_ERRORS = "CLEAR_ERRORS";
+
+
+

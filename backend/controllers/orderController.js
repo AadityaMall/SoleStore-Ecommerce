@@ -2,7 +2,7 @@ const Order = require("../models/orderModel");
 const Product = require("../models/productModel");
 const ErrorHandler = require("../utils/errorHandler");
 const asyncError = require("../middleware/asyncError");
-
+const Payment = require("../models/paymentsModel");
 //Create new order
 exports.newOrder = asyncError(async (req, res, next) => {
   try{
@@ -15,6 +15,7 @@ exports.newOrder = asyncError(async (req, res, next) => {
       discount,
       shippingPrice,
       totalPrice,
+      paymentId,
     } = req.body;
     const order = await Order.create({
       shippingInfo,
@@ -24,10 +25,11 @@ exports.newOrder = asyncError(async (req, res, next) => {
       shippingPrice,
       discount,
       totalPrice,
+      paymentId,
       paidAt: Date.now(),
       user: req.user.id,
     });
-  
+    await Payment.findByIdAndUpdate(paymentId, { orderId: order._id });
     res.status(201).json({
       success: true,
       order,
@@ -105,7 +107,6 @@ exports.updateOrder = asyncError(async (req, res, next) => {
     order,
   });
 });
-
 
 //Delete order -- admin only
 exports.deleteOrder = asyncError(async (req, res, next) => {
