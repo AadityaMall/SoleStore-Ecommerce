@@ -10,7 +10,7 @@ const Home = lazy(() => import("./components/pages/Main/Home"));
 const Footer = lazy(() => import("./components/layout/Footer"));
 const About = lazy(() => import("./components/pages/Main/About"));
 const Contact = lazy(() => import("./components/pages/Main/Contact"));
-const Loader = lazy(() => import("./components/Layout/Loader"));
+const Loader = lazy(() => import("./components/pages/Main/Loader"));
 const Shop = lazy(() => import("./components/pages/Main/Shop"));
 const Login = lazy(() => import("./components/layout/Login"));
 const AdminDashboard = lazy(() => import("./components/pages/Admin/AdminNavbar"));
