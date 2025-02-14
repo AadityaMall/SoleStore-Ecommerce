@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { clearErrors, login, register } from "../redux/actions/userActions";
 import { toast } from "react-toastify";
 import { Row, Col } from "react-bootstrap";
+import Loader from "../pages/Main/Loader";
 
 const Login = ({ mode }) => {
   const location = useLocation();
