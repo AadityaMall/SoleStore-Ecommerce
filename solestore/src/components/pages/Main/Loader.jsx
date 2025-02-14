@@ -1,6 +1,6 @@
 import React from "react";
 
-const Loader = () => {
+const Loader = () => {  
   return (
     <div className="tw:h-[90vh] tw:bg-white tw:flex tw:items-center tw:justify-center">
       <img

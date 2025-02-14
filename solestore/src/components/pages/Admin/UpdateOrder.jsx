@@ -10,7 +10,7 @@ import {
 import { AccountTree } from "@mui/icons-material";
 import { toast } from "react-toastify";
 
-import Loader from "../../Layout/Loader";
+import Loader from "../Main/Loader";
 import { UPDATE_ORDERS_RESET } from "../../redux/constants/orderConstant";
 
 const UpdateOrder = ({ mode }) => {

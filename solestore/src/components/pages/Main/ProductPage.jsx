@@ -15,7 +15,7 @@ import { addToCart } from "../../redux/actions/cartAction";
 import { addToWishList } from "../../redux/actions/wishlistAction";
 import { NEW_REVIEW_RESET } from "../../redux/constants/productConstants";
 import ReviewBox from "../../layout/ReviewBox";
-import Loader from "../../layout/Loader";
+import Loader from "./Loader";
 
 const ProductPage = ({ mode }) => {
   const navigate = useNavigate();

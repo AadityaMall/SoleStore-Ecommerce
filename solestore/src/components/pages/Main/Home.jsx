@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { clearErrors, getProduct } from "../../redux/actions/productAction";
 import { toast } from "react-toastify";
 import ProductBox from "../../layout/ProductBox";
-import Loader from "../../layout/Loader";
+import Loader from "./Loader";
 const Home = (props) => {
   const dispatch = useDispatch();
 

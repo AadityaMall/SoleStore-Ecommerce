@@ -8,7 +8,7 @@ import {
   loadUser,
 } from "../../redux/actions/userActions";
 import { UPDATE_PASSWORD_RESET } from "../../redux/constants/userConstant";
-import Loader from "../../layout/Loader";
+import Loader from "../Main/Loader";
 
 const UpdatePassword = ({ mode }) => {
   const navigate = useNavigate();

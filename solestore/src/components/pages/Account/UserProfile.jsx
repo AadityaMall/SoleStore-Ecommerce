@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../../redux/actions/userActions";
-import Loader from "../../layout/Loader";
+import Loader from "../Main/Loader";
 
 const UserProfile = ({ mode }) => {
   const { user, loading } = useSelector((state) => state.user);

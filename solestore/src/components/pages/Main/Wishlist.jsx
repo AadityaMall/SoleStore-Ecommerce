@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import { removeFromWishlist } from "../../redux/actions/wishlistAction";
-import Loader from "../../Layout/Loader";
+import Loader from "./Loader";
 
 const Wishlist = ({ mode }) => {
   const dispatch = useDispatch();

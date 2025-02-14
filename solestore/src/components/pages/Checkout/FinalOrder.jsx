@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 import { paymentVerification } from "../../redux/actions/paymentAction";
-import Loader from "../../Layout/Loader";
+import Loader from "../Main/Loader";
 
 function currentDate() {
   var today = new Date();

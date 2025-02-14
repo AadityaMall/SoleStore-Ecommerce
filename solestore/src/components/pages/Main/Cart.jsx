@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 import { addToCart, removeFromCart } from "../../redux/actions/cartAction";
 import { toast } from "react-toastify";
-import Loader from "../../Layout/Loader";
+import Loader from "./Loader";
 
 const Cart = ({ mode }) => {
   const dispatch = useDispatch();

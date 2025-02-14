@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { clearErrors, forgotPassword } from "../../redux/actions/userActions";
 import { toast } from "react-toastify";
-import Loader from "../../layout/Loader";
+import Loader from "../Main/Loader";
 
 const ForgotPassword = ({ mode }) => {
   const navigate = useNavigate();

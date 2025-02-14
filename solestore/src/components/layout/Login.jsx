@@ -3,7 +3,6 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { clearErrors, login, register } from "../redux/actions/userActions";
 import { toast } from "react-toastify";
-import Loader from "./Loader";
 import { Row, Col } from "react-bootstrap";
 
 const Login = ({ mode }) => {

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { useSelector, useDispatch } from "react-redux";
-import Loader from "../../layout/Loader";
+import Loader from "../Main/Loader";
 import { Link } from "react-router-dom";
 import { myOrders, clearErrors } from "../../redux/actions/orderAction";
 import { toast } from "react-toastify";

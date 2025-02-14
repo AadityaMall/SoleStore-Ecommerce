@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 import { Pagination, Slider } from "@mui/material";
 import { toast } from "react-toastify";
 import { clearErrors, getProduct } from "../../redux/actions/productAction";
-import Loader from "../../layout/Loader";
+import Loader from "./Loader";
 import ProductBox from "../../layout/ProductBox";
 
 const Shop = ({ mode }) => {

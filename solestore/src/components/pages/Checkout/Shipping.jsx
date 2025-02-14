@@ -9,7 +9,7 @@ import {
 } from "../../redux/actions/cartAction";
 import { Country, State } from "country-state-city";
 import { toast } from "react-toastify";
-import Loader from "../../Layout/Loader";
+import Loader from "../Main/Loader";
 import {
   AddCircleRounded,
   Edit,

@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
 import { VerifiedUser, Person, AlternateEmail } from "@mui/icons-material";
 import { ADMIN_USER_UPDATE_SUCCESS } from "../../redux/constants/userConstant";
-import Loader from "../../Layout/Loader";
+import Loader from "../Main/Loader";
 const UpdateUserRole = () => {
   const dispatch = useDispatch();
 
