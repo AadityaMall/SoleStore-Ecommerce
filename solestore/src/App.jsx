@@ -53,6 +53,7 @@ const App = () => {
       document.body.style.backgroundColor = "white";
     }
   };
+  console.log(isAuthenticated)
   React.useEffect(() => {
     store.dispatch(loadUser());
     store.dispatch(checkForSubscription());
@@ -75,7 +76,6 @@ const App = () => {
                 path="/product/:id"
                 element={<ProductPage mode={mode} />}
               />
-              <Route path="/cart" element={<Cart mode={mode} />} />
               {isAuthenticated ? (
                 <Route path="/wishlist" element={<Wishlist mode={mode} />} />
               ) : (

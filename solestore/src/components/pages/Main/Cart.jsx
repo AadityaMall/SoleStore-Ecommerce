@@ -38,16 +38,17 @@ const Cart = ({ mode }) => {
     dispatch(removeFromCart(id));
   };
 
-  const totalAmount = user?.cart?.reduce(
-    (acc, item) => acc + item.quantity * item.price,
-    0
-  ) || 0;
+  const totalAmount =
+    user?.cart?.reduce((acc, item) => acc + item.quantity * item.price, 0) || 0;
 
   const checkoutHandler = () => {
     navigate("/login?redirect=checkout");
   };
 
-  if (loading || !user || !user.cart) return <Loader />;
+  if (loading || !user || !user.cart) {
+    console.log("loading")
+    return <Loader />;
+  }
 
   return (
     <div data-theme={mode} className="">
