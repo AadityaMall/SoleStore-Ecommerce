@@ -13,7 +13,7 @@ exports.registerUser = asyncError(async (req, res, next) => {
     secure_url:
       "https://res.cloudinary.com/dqjeist4k/image/upload/v1715110893/soleStoreAvatars/defaultProfile_oggerf.jpg",
   };
-  if(req.body.avatar){
+  if (req.body.avatar) {
     mycloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
       folder: "soleStoreAvatars",
       width: 150,
@@ -65,6 +65,8 @@ exports.logout = asyncError(async (req, res, next) => {
   res.cookie("token", null, {
     expires: new Date(Date.now()),
     httpOnly: true,
+    secure: true, // Default to false in development
+    sameSite: "None",
   });
 
   res.status(200).json({
