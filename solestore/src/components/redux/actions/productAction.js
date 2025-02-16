@@ -116,8 +116,6 @@ export const newProduct = (productData) => async (dispatch) => {
     const config = {
       headers:{"Content-Type":"multipart/form-data"},
     }
-    console.log("control here");
-    console.log(productData)
     const { data } = await api.post(`/api/v1/admin/product/new`, productData,config);
     dispatch({
       type: NEW_PRODUCT_SUCCESS,
@@ -135,7 +133,6 @@ export const newProduct = (productData) => async (dispatch) => {
 export const deleteProduct = (id) => async (dispatch) => {
   try {
     dispatch({ type: DELETE_PRODUCT_REQUEST });
-    console.log(`/api/v1/admin/product/${id}`)
     const { data } = await api.delete(`/api/v1/admin/product/${id}`);
     dispatch({
       type: DELETE_PRODUCT_SUCCESS,

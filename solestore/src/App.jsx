@@ -53,7 +53,6 @@ const App = () => {
       document.body.style.backgroundColor = "white";
     }
   };
-  console.log(isAuthenticated)
   React.useEffect(() => {
     store.dispatch(loadUser());
     store.dispatch(checkForSubscription());

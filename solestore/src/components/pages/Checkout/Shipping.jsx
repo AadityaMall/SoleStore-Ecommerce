@@ -61,6 +61,7 @@ const ShippingDetailsComponent = (props) => {
       phone: phoneNo,
     };
     dispatch(addShippingInfo(data));
+    props.closeModal();
   };
   const updateShippingHandler = (e) => {
     e.preventDefault();
@@ -75,6 +76,7 @@ const ShippingDetailsComponent = (props) => {
       shippingAddressId: props.shippingInfo._id,
     };
     dispatch(updateShippingInfo(data));
+    props.closeModal();
   };
   useEffect(() => {
     const handleScrollToTop = () => {
@@ -218,7 +220,7 @@ const ShippingDetailsComponent = (props) => {
 
 const Shipping = ({ mode, incrementStep }) => {
   const { user, loading } = useSelector((state) => state.user);
-  const shippingAddress = user.shipping;
+  const [shippingAddress, setShippingAddress] = useState([]);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -260,16 +262,17 @@ const Shipping = ({ mode, incrementStep }) => {
     }
   }
   useEffect(() => {
-    if (user.cart.length === 0) {
-      navigate("/cart");
+    if(user && user.cart){
+      if (user.cart.length === 0) {
+        navigate("/cart");
+      }
     }
-  });
+  }, [user]);
   const deleteShippingAddressHandler = (id) => {
     dispatch(deleteShippingInfo(id));
   };
   const addShippingHandler = () => {
     window.scrollTo(0, 0);
-    setAddModalOpen(true);
   };
   const shippingSubmit = (e) => {
     e.preventDefault();
@@ -294,6 +297,11 @@ const Shipping = ({ mode, incrementStep }) => {
     setUpdateIndex(value);
     setOpen(true);
   };
+  useEffect(() => {
+    if(user && user.shipping){
+      setShippingAddress(user.shipping);
+    }
+  }, [user]);
   return (
     <>
       {loading || !shippingAddress ? (
@@ -412,9 +420,10 @@ const Shipping = ({ mode, incrementStep }) => {
                   {updateIndex !== null ? (
                     <ShippingDetailsComponent
                       shippingInfo={shippingAddress[updateIndex]}
+                      closeModal={handleClose}
                     />
                   ) : (
-                    <ShippingDetailsComponent />
+                    <ShippingDetailsComponent closeModal={handleClose} />
                   )}
                 </div>
               </Box>

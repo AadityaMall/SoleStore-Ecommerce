@@ -38,8 +38,11 @@ exports.getAllProducts = asyncError(async (req, res, next) => {
   const prodCount = await Product.countDocuments();
   const resultPerPage = 6;
   let apiFeature = new ApiFeatures(Product.find(), req.query).filter();
-  if(req.query.sort!==undefined){
-    apiFeature = new ApiFeatures(Product.find().sort(req.query.sort), req.query).filter();
+  if (req.query.sort !== undefined) {
+    apiFeature = new ApiFeatures(
+      Product.find().sort(req.query.sort),
+      req.query
+    ).filter();
   }
   let products = await apiFeature.query.clone();
 
@@ -97,7 +100,7 @@ exports.updateProduct = asyncError(async (req, res, next) => {
         url: result.secure_url,
       });
     }
-    req.body.images =  imagesLink;
+    req.body.images = imagesLink;
   }
   product = await Product.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
@@ -156,7 +159,6 @@ exports.createProductReview = asyncError(async (req, res, next) => {
     rating: Number(rating),
     comment,
   };
-
   const product = await Product.findById(productId);
 
   const isReviewed = product.reviews.find(
@@ -168,7 +170,7 @@ exports.createProductReview = asyncError(async (req, res, next) => {
       if (rev.user.toString() === req.user.id.toString()) {
         rev.rating = rating;
         rev.comment = comment;
-        rev.avatar =  req.user.avatar;
+        rev.avatar = req.user.avatar;
       }
     });
   } else {
@@ -204,16 +206,14 @@ exports.getProductReviews = asyncError(async (req, res, next) => {
 });
 
 exports.deleteReview = asyncError(async (req, res, next) => {
+  try{
   const product = await Product.findById(req.query.productId);
   if (!product) {
     return next(new ErrorHandler("Product not found", 404));
   }
-
   const reviews = product.reviews.filter(
     (rev) => rev._id.toString() !== req.query.id.toString()
   );
-
-  console.log(reviews)
 
   let avg = 0;
 
@@ -221,7 +221,7 @@ exports.deleteReview = asyncError(async (req, res, next) => {
     avg += rev.rating;
   });
   let ratings = 0;
-  if(reviews.length!==0){
+  if (reviews.length !== 0) {
     ratings = avg / reviews.length;
   }
   const numberOfReview = reviews.length;
@@ -242,4 +242,7 @@ exports.deleteReview = asyncError(async (req, res, next) => {
   res.status(200).json({
     success: true,
   });
+  }catch(err){
+    console.log(err)
+  }
 });
