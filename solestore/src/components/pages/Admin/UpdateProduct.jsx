@@ -110,7 +110,7 @@ const UpdateProduct = () => {
   return (
     <>
 <div className="row">
-          <h1 className="tw:font-brand tw:font-bold text-center">Create New Product</h1>
+          <h1 className="tw:font-brand tw:font-bold text-center">Update Product</h1>
           <div className="tw:w-full tw:flex tw:justify-center">
             <form
               className="tw:max-w-[50%] tw:mt-3"
@@ -197,7 +197,7 @@ const UpdateProduct = () => {
               </div>
               <input
                 type="submit"
-                value="Create"
+                value="Update"
                 className="tw:w-full tw:flex tw:justify-center tw:py-2 tw:px-4 
                 tw:border tw:border-transparent tw:rounded-md tw:shadow-sm tw:text-sm 
                 tw:font-medium tw:text-white tw:bg-black tw:hover:bg-gray-800"
