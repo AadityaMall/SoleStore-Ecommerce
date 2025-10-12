@@ -56,7 +56,7 @@ const About = ({ mode }) => {
             </Col>
           </Row>
         </Container>
-        <Container className="my-4 tw:dark:shadow-[0px_5px_10px_rgb(255,255,255)] tw:rounded-lg tw:dark:text-white tw:shadow-[0px_5px_10px_rgb(0,0,0)]">
+        {/* <Container className="my-4 tw:dark:shadow-[0px_5px_10px_rgb(255,255,255)] tw:rounded-lg tw:dark:text-white tw:shadow-[0px_5px_10px_rgb(0,0,0)]">
           <Row>
             <h1 className="text-center tw:font-brand p-4">
               Know About the Creater of this Project
@@ -75,7 +75,7 @@ const About = ({ mode }) => {
               className="my-3 tw:dark:text-white tw:flex tw:items-center tw:flex-col tw:md:items-start tw:justify-items-center"
             >
               <Link
-                to={"https://www.aadityamall.tech/"}
+                to={"https://aadityamall.vercel.app/"}
                 className="tw:font-brand tw:font-bold pb-2 py-1 text-reset tw:no-underline tw:flex tw:justify-items-center tw:items-center"
               >
                 Aaditya Mall <i class="fa fa-external-link tw:px-[10px]"></i>
@@ -116,7 +116,7 @@ const About = ({ mode }) => {
               </p>
             </Col>
           </Row>
-        </Container>
+        </Container> */}
       </div>
     </>
   );

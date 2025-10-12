@@ -36,11 +36,11 @@ const Contact = ({ mode }) => {
                 </div>
                 <div className="tw:flex tw:items-center tw:gap-3">
                   <i className="fa fa-envelope"></i>
-                  <span>aadityarmall@gmail.com</span>
+                  <span>vedantchitalia@gmail.com</span>
                 </div>
                 <div className="tw:flex tw:items-center tw:gap-3">
                   <i className="fa fa-phone"></i>
-                  <span>9326430750</span>
+                  <span>+91 98204 83068</span>
                 </div>
                 <div className="tw:flex tw:items-center tw:gap-3">
                   <i className="fa fa-clock-o"></i>
@@ -72,7 +72,7 @@ const Contact = ({ mode }) => {
             </div>
           </Row>
           <Row className="tw:p-4">
-            <Col md={8}>
+            <Col md={12}>
               <form
                 action="https://formspree.io/f/xvojerbo"
                 method="POST"
@@ -115,7 +115,7 @@ const Contact = ({ mode }) => {
                 </button>
               </form>
             </Col>
-
+{/* 
             <Col md={4} className="tw:flex tw:flex-col tw:justify-center tw:items-center">
               <div className="tw:flex tw:flex-col tw:items-center tw:gap-4">
                 <img
@@ -136,7 +136,7 @@ const Contact = ({ mode }) => {
                   </p>
                 </div>
               </div>
-            </Col>
+            </Col> */}
           </Row>
         </Container>
       </div>

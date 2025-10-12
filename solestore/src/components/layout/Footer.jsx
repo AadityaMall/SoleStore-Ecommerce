@@ -156,10 +156,10 @@ const Footer = (props) => {
                 <div className="tw:flex tw:flex-col tw:justify-items-center tw:items-center mt-3">
                   <p>
                     <i className="fa fa-envelope me-3"></i>
-                    aadityarmall@gmail.com
+                    keyasahah@gmail.com
                   </p>
                   <p>
-                    <i className="fa fa-phone me-3 my-4"></i>+91 9326430750
+                    <i className="fa fa-phone me-3 my-4"></i>+91 98204 83068
                   </p>
                 </div>
               </div>
@@ -167,7 +167,7 @@ const Footer = (props) => {
           </Row>
         </Container>
         <div className="text-center tw:w-full tw:dark:bg-[#343a40] p-4 copyright">
-          © 2024 Copyright: Aaditya Rajesh Mall
+          © 2025 Copyright: AKV Softwares
         </div>
       </footer>
     </div>
